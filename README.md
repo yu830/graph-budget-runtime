@@ -13,6 +13,12 @@ changes the allocator nor recaptures/resizes graphs or KV during service.
 [technical report](docs/TECHNICAL_REPORT.md) for implementation, CPU checks,
 model correctness, native execution paths, and performance separately.
 
+**2026-10-26 result:** 57 CPU checks passed; strict model validation and clean
+Git GPU replay passed in the pinned deterministic mode. Five paired rounds per
+held-out load established no benefit over the strong static plan. Keep native
+dispatch. The measured plan, profile and round data are in
+[results/2026-10-26](results/2026-10-26/README.md).
+
 ## Install and reproduce
 
 The CPU package has no runtime dependencies:
@@ -36,7 +42,11 @@ Create a dedicated upstream checkout, then apply the packaged patch:
 git clone --branch v0.5.9 --single-branch https://github.com/sgl-project/sglang.git "$SGLANG_SOURCE"
 git -C "$SGLANG_SOURCE" checkout bbe9c7eeb520b0a67e92d133dfc137a3688dc7f2
 python -m graphbudget.cli apply-patch "$SGLANG_SOURCE"
+GRAPHBUDGET_SGLANG_SOURCE="$SGLANG_SOURCE" python -m unittest discover -s tests -v
 ~~~
+
+The reported 57 checks include all five pinned-source control-flow checks;
+those five are skipped when GRAPHBUDGET_SGLANG_SOURCE is not set.
 
 The patch command rejects the wrong base and dirty trees. Startup verifies the
 loaded patched files and the full SGLang runtime source tree. The package also

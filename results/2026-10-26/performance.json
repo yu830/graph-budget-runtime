@@ -1,0 +1,5603 @@
+{
+  "schema_version": 1,
+  "kind": "graphbudget_performance_summary",
+  "status": "ok",
+  "rounds": 5,
+  "aa_scope": "heldout_boundary",
+  "exploratory_single_runs": [
+    {
+      "variant": "U",
+      "workload": "heldout_normal",
+      "raw_directory": "${RUN}/performance/attempt-001/exploratory/heldout_normal/U",
+      "status": "ok",
+      "reason": "",
+      "path_evidence": {
+        "status": "not_attributable",
+        "reason": "case is not a cost-policy run",
+        "policy_mode": "native",
+        "policy_status": "disabled",
+        "timed_path_counts": [
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 1,
+            "actual_capture_size": 1,
+            "reason": "policy_missing",
+            "count": 108
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 2,
+            "actual_capture_size": 2,
+            "reason": "policy_missing",
+            "count": 32
+          }
+        ],
+        "used_paths": [
+          "graph"
+        ]
+      },
+      "benchmark": {
+        "run": {
+          "run_id": "4a7df8bfd8d045bd90947d910448cee3",
+          "url": "http://127.0.0.1:30150/generate",
+          "started_at_utc": "2026-10-26T13:25:09.836512+00:00",
+          "finished_at_utc": "2026-10-26T13:25:12.688163+00:00",
+          "timeout_s": 120.0,
+          "schedule_mode": "open_loop",
+          "max_workers": 16,
+          "reset_cache_requested": true
+        },
+        "summary": {
+          "planned_requests": 16,
+          "actual_send_requests": 16,
+          "not_started_requests": 0,
+          "completed_requests": 16,
+          "failed_requests": 0,
+          "timed_out_requests": 0,
+          "successful_output_tokens": 188,
+          "effective_output_tokens_per_s": 65.92671290904502,
+          "makespan_s": 2.85165135200009,
+          "max_backlog_at_send": 1,
+          "max_client_queue_delay_s": 0.003817621000071103,
+          "ttft_s": {
+            "sample_count": 16,
+            "p50": 0.03392722600005982,
+            "p95": 0.04695859700012761,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "request_tpot_s": {
+            "sample_count": 16,
+            "p50": 0.018211755666667766,
+            "p95": 0.01898367693181833,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "token_itl_s": {
+            "sample_count": 172,
+            "p50": 0.016449443000055908,
+            "p95": 0.040303411999889245,
+            "p99": 0.04326379983014249,
+            "p99_status": "reported"
+          },
+          "token_itl_request_count": 16,
+          "token_itl_unavailable_request_count": 0,
+          "p99_min_samples": 100,
+          "max_client_backlog": 1
+        },
+        "workload_id": "heldout_normal-tokenized-v1"
+      }
+    },
+    {
+      "variant": "E",
+      "workload": "heldout_normal",
+      "raw_directory": "${RUN}/performance/attempt-001/exploratory/heldout_normal/E",
+      "status": "ok",
+      "reason": "",
+      "path_evidence": {
+        "status": "not_attributable",
+        "reason": "case is not a cost-policy run",
+        "policy_mode": "native",
+        "policy_status": "disabled",
+        "timed_path_counts": [
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 1,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 50
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 2,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 58
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 3,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 2
+          }
+        ],
+        "used_paths": [
+          "eager"
+        ]
+      },
+      "benchmark": {
+        "run": {
+          "run_id": "faed82c213bf42f18608daa0a5272e80",
+          "url": "http://127.0.0.1:30150/generate",
+          "started_at_utc": "2026-10-26T13:25:48.232133+00:00",
+          "finished_at_utc": "2026-10-26T13:25:50.358273+00:00",
+          "timeout_s": 120.0,
+          "schedule_mode": "open_loop",
+          "max_workers": 16,
+          "reset_cache_requested": true
+        },
+        "summary": {
+          "planned_requests": 16,
+          "actual_send_requests": 16,
+          "not_started_requests": 0,
+          "completed_requests": 16,
+          "failed_requests": 0,
+          "timed_out_requests": 0,
+          "successful_output_tokens": 188,
+          "effective_output_tokens_per_s": 63.56555209698098,
+          "makespan_s": 2.957576766000102,
+          "max_backlog_at_send": 1,
+          "max_client_queue_delay_s": 0.0019423710000683325,
+          "ttft_s": {
+            "sample_count": 16,
+            "p50": 0.040159701999982644,
+            "p95": 0.0574502997500872,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "request_tpot_s": {
+            "sample_count": 16,
+            "p50": 0.025781501590918434,
+            "p95": 0.028979476909082473,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "token_itl_s": {
+            "sample_count": 172,
+            "p50": 0.02172395900004176,
+            "p95": 0.04660151500004303,
+            "p99": 0.05882635902004486,
+            "p99_status": "reported"
+          },
+          "token_itl_request_count": 16,
+          "token_itl_unavailable_request_count": 0,
+          "p99_min_samples": 100,
+          "max_client_backlog": 1
+        },
+        "workload_id": "heldout_normal-tokenized-v1"
+      }
+    },
+    {
+      "variant": "P",
+      "workload": "heldout_normal",
+      "raw_directory": "${RUN}/performance/attempt-001/exploratory/heldout_normal/P",
+      "status": "ok",
+      "reason": "",
+      "path_evidence": {
+        "status": "not_attributable",
+        "reason": "case is not a cost-policy run",
+        "policy_mode": "native",
+        "policy_status": "disabled",
+        "timed_path_counts": [
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 1,
+            "actual_capture_size": 1,
+            "reason": "policy_missing",
+            "count": 104
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 2,
+            "actual_capture_size": 2,
+            "reason": "policy_missing",
+            "count": 34
+          }
+        ],
+        "used_paths": [
+          "graph"
+        ]
+      },
+      "benchmark": {
+        "run": {
+          "run_id": "3cb41f9c38444156a3cf1d912cf787b0",
+          "url": "http://127.0.0.1:30150/generate",
+          "started_at_utc": "2026-10-26T13:26:26.257729+00:00",
+          "finished_at_utc": "2026-10-26T13:26:29.117575+00:00",
+          "timeout_s": 120.0,
+          "schedule_mode": "open_loop",
+          "max_workers": 16,
+          "reset_cache_requested": true
+        },
+        "summary": {
+          "planned_requests": 16,
+          "actual_send_requests": 16,
+          "not_started_requests": 0,
+          "completed_requests": 16,
+          "failed_requests": 0,
+          "timed_out_requests": 0,
+          "successful_output_tokens": 188,
+          "effective_output_tokens_per_s": 65.7381144020576,
+          "makespan_s": 2.859832559999859,
+          "max_backlog_at_send": 1,
+          "max_client_queue_delay_s": 0.0009146009998767246,
+          "ttft_s": {
+            "sample_count": 16,
+            "p50": 0.03179264200002763,
+            "p95": 0.060822341000005054,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "request_tpot_s": {
+            "sample_count": 16,
+            "p50": 0.017890587066661585,
+            "p95": 0.020291717999999615,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "token_itl_s": {
+            "sample_count": 172,
+            "p50": 0.0162925740000901,
+            "p95": 0.0394001687000582,
+            "p99": 0.05500130472996931,
+            "p99_status": "reported"
+          },
+          "token_itl_request_count": 16,
+          "token_itl_unavailable_request_count": 0,
+          "p99_min_samples": 100,
+          "max_client_backlog": 1
+        },
+        "workload_id": "heldout_normal-tokenized-v1"
+      }
+    },
+    {
+      "variant": "U",
+      "workload": "heldout_boundary",
+      "raw_directory": "${RUN}/performance/attempt-001/exploratory/heldout_boundary/U",
+      "status": "ok",
+      "reason": "",
+      "path_evidence": {
+        "status": "not_attributable",
+        "reason": "case is not a cost-policy run",
+        "policy_mode": "native",
+        "policy_status": "disabled",
+        "timed_path_counts": [
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 1,
+            "actual_capture_size": 1,
+            "reason": "policy_missing",
+            "count": 2
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 3,
+            "actual_capture_size": 4,
+            "reason": "policy_missing",
+            "count": 7
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 10,
+            "actual_capture_size": null,
+            "reason": "capture_ceiling",
+            "count": 7
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 9,
+            "actual_capture_size": null,
+            "reason": "capture_ceiling",
+            "count": 1
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 8,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 6
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 5,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 2
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 13,
+            "actual_capture_size": null,
+            "reason": "capture_ceiling",
+            "count": 11
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 12,
+            "actual_capture_size": null,
+            "reason": "capture_ceiling",
+            "count": 4
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 16,
+            "actual_capture_size": null,
+            "reason": "capture_ceiling",
+            "count": 14
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 4,
+            "actual_capture_size": 4,
+            "reason": "policy_missing",
+            "count": 4
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 2,
+            "actual_capture_size": 2,
+            "reason": "policy_missing",
+            "count": 3
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 7,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 4
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 14,
+            "actual_capture_size": null,
+            "reason": "capture_ceiling",
+            "count": 9
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 15,
+            "actual_capture_size": null,
+            "reason": "capture_ceiling",
+            "count": 1
+          }
+        ],
+        "used_paths": [
+          "eager",
+          "graph"
+        ]
+      },
+      "benchmark": {
+        "run": {
+          "run_id": "66bc0509d8b3454890666fe6b160aa6b",
+          "url": "http://127.0.0.1:30150/generate",
+          "started_at_utc": "2026-10-26T13:27:04.847303+00:00",
+          "finished_at_utc": "2026-10-26T13:27:07.266914+00:00",
+          "timeout_s": 120.0,
+          "schedule_mode": "open_loop",
+          "max_workers": 70,
+          "reset_cache_requested": true
+        },
+        "summary": {
+          "planned_requests": 70,
+          "actual_send_requests": 70,
+          "not_started_requests": 0,
+          "completed_requests": 70,
+          "failed_requests": 0,
+          "timed_out_requests": 0,
+          "successful_output_tokens": 836,
+          "effective_output_tokens_per_s": 345.50909520146496,
+          "makespan_s": 2.4196179250000114,
+          "max_backlog_at_send": 11,
+          "max_client_queue_delay_s": 0.020657398000194005,
+          "ttft_s": {
+            "sample_count": 70,
+            "p50": 0.14526622749997387,
+            "p95": 0.6980761084499931,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "request_tpot_s": {
+            "sample_count": 70,
+            "p50": 0.03479855407143922,
+            "p95": 0.04182102423970609,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "token_itl_s": {
+            "sample_count": 766,
+            "p50": 0.025209626000105345,
+            "p95": 0.06573593100000608,
+            "p99": 0.07725900430008323,
+            "p99_status": "reported"
+          },
+          "token_itl_request_count": 70,
+          "token_itl_unavailable_request_count": 0,
+          "p99_min_samples": 100,
+          "max_client_backlog": 11
+        },
+        "workload_id": "heldout_boundary-tokenized-v1"
+      }
+    },
+    {
+      "variant": "E",
+      "workload": "heldout_boundary",
+      "raw_directory": "${RUN}/performance/attempt-001/exploratory/heldout_boundary/E",
+      "status": "ok",
+      "reason": "",
+      "path_evidence": {
+        "status": "not_attributable",
+        "reason": "case is not a cost-policy run",
+        "policy_mode": "native",
+        "policy_status": "disabled",
+        "timed_path_counts": [
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 3,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 10
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 10,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 3
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 9,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 4
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 16,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 18
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 14,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 7
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 15,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 5
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 11,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 2
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 7,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 3
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 12,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 4
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 2,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 1
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 13,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 8
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 8,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 1
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 4,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 1
+          }
+        ],
+        "used_paths": [
+          "eager"
+        ]
+      },
+      "benchmark": {
+        "run": {
+          "run_id": "2b563f224f2a4217be6b9f3026888fcb",
+          "url": "http://127.0.0.1:30150/generate",
+          "started_at_utc": "2026-10-26T13:27:43.561008+00:00",
+          "finished_at_utc": "2026-10-26T13:27:46.382550+00:00",
+          "timeout_s": 120.0,
+          "schedule_mode": "open_loop",
+          "max_workers": 70,
+          "reset_cache_requested": true
+        },
+        "summary": {
+          "planned_requests": 70,
+          "actual_send_requests": 70,
+          "not_started_requests": 0,
+          "completed_requests": 70,
+          "failed_requests": 0,
+          "timed_out_requests": 0,
+          "successful_output_tokens": 836,
+          "effective_output_tokens_per_s": 296.2917455953112,
+          "makespan_s": 2.821543335000115,
+          "max_backlog_at_send": 7,
+          "max_client_queue_delay_s": 0.023453833000012247,
+          "ttft_s": {
+            "sample_count": 70,
+            "p50": 0.4893981584999665,
+            "p95": 1.0160833957500015,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "request_tpot_s": {
+            "sample_count": 70,
+            "p50": 0.03713434326363327,
+            "p95": 0.05697254127272593,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "token_itl_s": {
+            "sample_count": 766,
+            "p50": 0.026063390999979674,
+            "p95": 0.09567679775011584,
+            "p99": 0.13469882055004517,
+            "p99_status": "reported"
+          },
+          "token_itl_request_count": 70,
+          "token_itl_unavailable_request_count": 0,
+          "p99_min_samples": 100,
+          "max_client_backlog": 7
+        },
+        "workload_id": "heldout_boundary-tokenized-v1"
+      }
+    },
+    {
+      "variant": "P",
+      "workload": "heldout_boundary",
+      "raw_directory": "${RUN}/performance/attempt-001/exploratory/heldout_boundary/P",
+      "status": "ok",
+      "reason": "",
+      "path_evidence": {
+        "status": "not_attributable",
+        "reason": "case is not a cost-policy run",
+        "policy_mode": "native",
+        "policy_status": "disabled",
+        "timed_path_counts": [
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 1,
+            "actual_capture_size": 1,
+            "reason": "policy_missing",
+            "count": 4
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 3,
+            "actual_capture_size": 4,
+            "reason": "policy_missing",
+            "count": 15
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 10,
+            "actual_capture_size": 12,
+            "reason": "policy_missing",
+            "count": 3
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 9,
+            "actual_capture_size": 12,
+            "reason": "policy_missing",
+            "count": 9
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 8,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 11
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 6,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 6
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 5,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 10
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 2,
+            "actual_capture_size": 2,
+            "reason": "policy_missing",
+            "count": 12
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 11,
+            "actual_capture_size": 12,
+            "reason": "policy_missing",
+            "count": 1
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 7,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 7
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 4,
+            "actual_capture_size": 4,
+            "reason": "policy_missing",
+            "count": 3
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 16,
+            "actual_capture_size": 16,
+            "reason": "policy_missing",
+            "count": 5
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 12,
+            "actual_capture_size": 12,
+            "reason": "policy_missing",
+            "count": 9
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 15,
+            "actual_capture_size": 16,
+            "reason": "policy_missing",
+            "count": 8
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 14,
+            "actual_capture_size": 16,
+            "reason": "policy_missing",
+            "count": 2
+          }
+        ],
+        "used_paths": [
+          "graph"
+        ]
+      },
+      "benchmark": {
+        "run": {
+          "run_id": "a308b768a58647bd96703e65b1512eea",
+          "url": "http://127.0.0.1:30150/generate",
+          "started_at_utc": "2026-10-26T13:28:55.356224+00:00",
+          "finished_at_utc": "2026-10-26T13:28:57.262590+00:00",
+          "timeout_s": 120.0,
+          "schedule_mode": "open_loop",
+          "max_workers": 70,
+          "reset_cache_requested": true
+        },
+        "summary": {
+          "planned_requests": 70,
+          "actual_send_requests": 70,
+          "not_started_requests": 0,
+          "completed_requests": 70,
+          "failed_requests": 0,
+          "timed_out_requests": 0,
+          "successful_output_tokens": 836,
+          "effective_output_tokens_per_s": 438.5299189224836,
+          "makespan_s": 1.9063693579998926,
+          "max_backlog_at_send": 10,
+          "max_client_queue_delay_s": 0.015317627999984262,
+          "ttft_s": {
+            "sample_count": 70,
+            "p50": 0.060136226000054194,
+            "p95": 0.291048616400019,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "request_tpot_s": {
+            "sample_count": 70,
+            "p50": 0.01516105618484358,
+            "p95": 0.028325078286966482,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "token_itl_s": {
+            "sample_count": 766,
+            "p50": 0.01120109850000972,
+            "p95": 0.04565198000005921,
+            "p99": 0.04947397059983133,
+            "p99_status": "reported"
+          },
+          "token_itl_request_count": 70,
+          "token_itl_unavailable_request_count": 0,
+          "p99_min_samples": 100,
+          "max_client_backlog": 10
+        },
+        "workload_id": "heldout_boundary-tokenized-v1"
+      }
+    },
+    {
+      "variant": "U",
+      "workload": "heldout_mixed",
+      "raw_directory": "${RUN}/performance/attempt-001/exploratory/heldout_mixed/U",
+      "status": "ok",
+      "reason": "",
+      "path_evidence": {
+        "status": "not_attributable",
+        "reason": "case is not a cost-policy run",
+        "policy_mode": "native",
+        "policy_status": "disabled",
+        "timed_path_counts": [
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 1,
+            "actual_capture_size": 1,
+            "reason": "policy_missing",
+            "count": 18
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 2,
+            "actual_capture_size": 2,
+            "reason": "policy_missing",
+            "count": 4
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 4,
+            "actual_capture_size": 4,
+            "reason": "policy_missing",
+            "count": 28
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 3,
+            "actual_capture_size": 4,
+            "reason": "policy_missing",
+            "count": 14
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 5,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 8
+          }
+        ],
+        "used_paths": [
+          "graph"
+        ]
+      },
+      "benchmark": {
+        "run": {
+          "run_id": "577b067ca1774c52a3dfce4349ae9db2",
+          "url": "http://127.0.0.1:30150/generate",
+          "started_at_utc": "2026-10-26T13:29:33.624473+00:00",
+          "finished_at_utc": "2026-10-26T13:29:35.337547+00:00",
+          "timeout_s": 120.0,
+          "schedule_mode": "open_loop",
+          "max_workers": 20,
+          "reset_cache_requested": true
+        },
+        "summary": {
+          "planned_requests": 20,
+          "actual_send_requests": 20,
+          "not_started_requests": 0,
+          "completed_requests": 20,
+          "failed_requests": 0,
+          "timed_out_requests": 0,
+          "successful_output_tokens": 240,
+          "effective_output_tokens_per_s": 140.0988502579326,
+          "makespan_s": 1.7130761570001596,
+          "max_backlog_at_send": 1,
+          "max_client_queue_delay_s": 0.002304960000037659,
+          "ttft_s": {
+            "sample_count": 20,
+            "p50": 0.04335658299999068,
+            "p95": 0.05714663174991302,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "request_tpot_s": {
+            "sample_count": 20,
+            "p50": 0.0244126108666608,
+            "p95": 0.027916112541579986,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "token_itl_s": {
+            "sample_count": 220,
+            "p50": 0.017215139500081023,
+            "p95": 0.04936598170004344,
+            "p99": 0.05840671230998851,
+            "p99_status": "reported"
+          },
+          "token_itl_request_count": 20,
+          "token_itl_unavailable_request_count": 0,
+          "p99_min_samples": 100,
+          "max_client_backlog": 1
+        },
+        "workload_id": "heldout_mixed-tokenized-v1"
+      }
+    },
+    {
+      "variant": "E",
+      "workload": "heldout_mixed",
+      "raw_directory": "${RUN}/performance/attempt-001/exploratory/heldout_mixed/E",
+      "status": "ok",
+      "reason": "",
+      "path_evidence": {
+        "status": "not_attributable",
+        "reason": "case is not a cost-policy run",
+        "policy_mode": "native",
+        "policy_status": "disabled",
+        "timed_path_counts": [
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 1,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 3
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 2,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 6
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 4,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 2
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 7,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 3
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 6,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 3
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 9,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 3
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 8,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 2
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 12,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 1
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 11,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 2
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 3,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 7
+          },
+          {
+            "eligible": false,
+            "selected_path": "eager",
+            "used_path": "eager",
+            "batch_size": 10,
+            "actual_capture_size": null,
+            "reason": "graph_disabled",
+            "count": 6
+          }
+        ],
+        "used_paths": [
+          "eager"
+        ]
+      },
+      "benchmark": {
+        "run": {
+          "run_id": "ea6d33ef06804875bbe94c90034bde64",
+          "url": "http://127.0.0.1:30150/generate",
+          "started_at_utc": "2026-10-26T13:30:07.227805+00:00",
+          "finished_at_utc": "2026-10-26T13:30:09.129367+00:00",
+          "timeout_s": 120.0,
+          "schedule_mode": "open_loop",
+          "max_workers": 20,
+          "reset_cache_requested": true
+        },
+        "summary": {
+          "planned_requests": 20,
+          "actual_send_requests": 20,
+          "not_started_requests": 0,
+          "completed_requests": 20,
+          "failed_requests": 0,
+          "timed_out_requests": 0,
+          "successful_output_tokens": 240,
+          "effective_output_tokens_per_s": 126.21227070069375,
+          "makespan_s": 1.9015583719997267,
+          "max_backlog_at_send": 1,
+          "max_client_queue_delay_s": 0.0021151949999875796,
+          "ttft_s": {
+            "sample_count": 20,
+            "p50": 0.0756712489999245,
+            "p95": 0.38922615299979957,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "request_tpot_s": {
+            "sample_count": 20,
+            "p50": 0.06682060939608293,
+            "p95": 0.08851630373001713,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "token_itl_s": {
+            "sample_count": 220,
+            "p50": 0.02305940050018762,
+            "p95": 0.19794689340035346,
+            "p99": 0.32818863792971115,
+            "p99_status": "reported"
+          },
+          "token_itl_request_count": 20,
+          "token_itl_unavailable_request_count": 0,
+          "p99_min_samples": 100,
+          "max_client_backlog": 1
+        },
+        "workload_id": "heldout_mixed-tokenized-v1"
+      }
+    },
+    {
+      "variant": "P",
+      "workload": "heldout_mixed",
+      "raw_directory": "${RUN}/performance/attempt-001/exploratory/heldout_mixed/P",
+      "status": "ok",
+      "reason": "",
+      "path_evidence": {
+        "status": "not_attributable",
+        "reason": "case is not a cost-policy run",
+        "policy_mode": "native",
+        "policy_status": "disabled",
+        "timed_path_counts": [
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 1,
+            "actual_capture_size": 1,
+            "reason": "policy_missing",
+            "count": 11
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 2,
+            "actual_capture_size": 2,
+            "reason": "policy_missing",
+            "count": 6
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 3,
+            "actual_capture_size": 4,
+            "reason": "policy_missing",
+            "count": 6
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 4,
+            "actual_capture_size": 4,
+            "reason": "policy_missing",
+            "count": 12
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 5,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 20
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 6,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 4
+          },
+          {
+            "eligible": true,
+            "selected_path": "graph",
+            "used_path": "graph",
+            "batch_size": 7,
+            "actual_capture_size": 8,
+            "reason": "policy_missing",
+            "count": 1
+          }
+        ],
+        "used_paths": [
+          "graph"
+        ]
+      },
+      "benchmark": {
+        "run": {
+          "run_id": "dbbe622473d5458faa601e6a3001b0ad",
+          "url": "http://127.0.0.1:30150/generate",
+          "started_at_utc": "2026-10-26T13:30:43.822339+00:00",
+          "finished_at_utc": "2026-10-26T13:30:45.534500+00:00",
+          "timeout_s": 120.0,
+          "schedule_mode": "open_loop",
+          "max_workers": 20,
+          "reset_cache_requested": true
+        },
+        "summary": {
+          "planned_requests": 20,
+          "actual_send_requests": 20,
+          "not_started_requests": 0,
+          "completed_requests": 20,
+          "failed_requests": 0,
+          "timed_out_requests": 0,
+          "successful_output_tokens": 240,
+          "effective_output_tokens_per_s": 140.1734444174595,
+          "makespan_s": 1.71216453299985,
+          "max_backlog_at_send": 1,
+          "max_client_queue_delay_s": 0.001742535999801481,
+          "ttft_s": {
+            "sample_count": 20,
+            "p50": 0.037423820000185515,
+            "p95": 0.08875840969994897,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "request_tpot_s": {
+            "sample_count": 20,
+            "p50": 0.028580225399991832,
+            "p95": 0.03733143042013256,
+            "p99": null,
+            "p99_status": "NOT_REPORTED_INSUFFICIENT_SAMPLE"
+          },
+          "token_itl_s": {
+            "sample_count": 220,
+            "p50": 0.017397132000041893,
+            "p95": 0.1123544734001598,
+            "p99": 0.11359816330991179,
+            "p99_status": "reported"
+          },
+          "token_itl_request_count": 20,
+          "token_itl_unavailable_request_count": 0,
+          "p99_min_samples": 100,
+          "max_client_backlog": 1
+        },
+        "workload_id": "heldout_mixed-tokenized-v1"
+      }
+    }
+  ],
+  "workloads": {
+    "heldout_normal": {
+      "paired_round_count": 5,
+      "aa_round_count": 0,
+      "aa_scope": false,
+      "summary": {
+        "schema_version": 1,
+        "kind": "graphbudget_paired_round_summary",
+        "status": "OK",
+        "minimum_rounds": 5,
+        "round_count": 5,
+        "metrics": [
+          {
+            "metric": "effective_output_tokens_per_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 65.54123072239095,
+                "candidate": 65.37818163920831,
+                "delta_candidate_minus_baseline": -0.1630490831826421,
+                "relative_delta": -0.0024877330099774796
+              },
+              {
+                "round": 2,
+                "baseline": 64.95716735613348,
+                "candidate": 65.64265981879429,
+                "delta_candidate_minus_baseline": 0.6854924626608039,
+                "relative_delta": 0.010552991926241644
+              },
+              {
+                "round": 3,
+                "baseline": 64.67452798190415,
+                "candidate": 64.47732490092847,
+                "delta_candidate_minus_baseline": -0.19720308097568306,
+                "relative_delta": -0.0030491615034416676
+              },
+              {
+                "round": 4,
+                "baseline": 65.53397025104162,
+                "candidate": 65.67830120787434,
+                "delta_candidate_minus_baseline": 0.14433095683271802,
+                "relative_delta": 0.0022023838366549134
+              },
+              {
+                "round": 5,
+                "baseline": 65.75906159098548,
+                "candidate": 65.49216195832739,
+                "delta_candidate_minus_baseline": -0.26689963265809524,
+                "relative_delta": -0.004058750629961589
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": 0.040534324535420295,
+            "median_delta": -0.1630490831826421,
+            "mean_relative_delta": 0.0006319461239031642
+          },
+          {
+            "metric": "makespan_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 2.8684234020001895,
+                "candidate": 2.875577069999963,
+                "delta_candidate_minus_baseline": 0.007153667999773461,
+                "relative_delta": 0.002493937260024135
+              },
+              {
+                "round": 2,
+                "baseline": 2.894214875000216,
+                "candidate": 2.8639911990003384,
+                "delta_candidate_minus_baseline": -0.03022367599987774,
+                "relative_delta": -0.010442789255540498
+              },
+              {
+                "round": 3,
+                "baseline": 2.9068631170002845,
+                "candidate": 2.9157537209998736,
+                "delta_candidate_minus_baseline": 0.008890603999589075,
+                "relative_delta": 0.003058487325252407
+              },
+              {
+                "round": 4,
+                "baseline": 2.8687411930000053,
+                "candidate": 2.8624370080001427,
+                "delta_candidate_minus_baseline": -0.006304184999862628,
+                "relative_delta": -0.002197544001266278
+              },
+              {
+                "round": 5,
+                "baseline": 2.8589215760002844,
+                "candidate": 2.870572513999832,
+                "delta_candidate_minus_baseline": 0.01165093799954775,
+                "relative_delta": 0.00407529122077135
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": -0.0017665302001660167,
+            "median_delta": 0.007153667999773461,
+            "mean_relative_delta": -0.0006025234901517768
+          },
+          {
+            "metric": "ttft_p50_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 0.047035190999849874,
+                "candidate": 0.04402923100019507,
+                "delta_candidate_minus_baseline": -0.003005959999654806,
+                "relative_delta": -0.06390874440510724
+              },
+              {
+                "round": 2,
+                "baseline": 0.07792177050009741,
+                "candidate": 0.03594984400001522,
+                "delta_candidate_minus_baseline": -0.04197192650008219,
+                "relative_delta": -0.5386418484938009
+              },
+              {
+                "round": 3,
+                "baseline": 0.037428747499916426,
+                "candidate": 0.0352408319999995,
+                "delta_candidate_minus_baseline": -0.002187915499916926,
+                "relative_delta": -0.05845548264530656
+              },
+              {
+                "round": 4,
+                "baseline": 0.07317858199985494,
+                "candidate": 0.03517180600010761,
+                "delta_candidate_minus_baseline": -0.03800677599974733,
+                "relative_delta": -0.5193702168186679
+              },
+              {
+                "round": 5,
+                "baseline": 0.037090817000034804,
+                "candidate": 0.03573542499998439,
+                "delta_candidate_minus_baseline": -0.001355392000050415,
+                "relative_delta": -0.03654252210322418
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": -0.017305593999890335,
+            "median_delta": -0.003005959999654806,
+            "mean_relative_delta": -0.24338376289322133
+          },
+          {
+            "metric": "request_tpot_p50_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 0.018613786287899833,
+                "candidate": 0.01905413245151866,
+                "delta_candidate_minus_baseline": 0.000440346163618828,
+                "relative_delta": 0.023656990405282644
+              },
+              {
+                "round": 2,
+                "baseline": 0.01991635759998947,
+                "candidate": 0.017879340133337487,
+                "delta_candidate_minus_baseline": -0.002037017466651983,
+                "relative_delta": -0.10227861477306774
+              },
+              {
+                "round": 3,
+                "baseline": 0.01855042845454591,
+                "candidate": 0.018450333863641144,
+                "delta_candidate_minus_baseline": -0.00010009459090476458,
+                "relative_delta": -0.005395810191124492
+              },
+              {
+                "round": 4,
+                "baseline": 0.018952502263638246,
+                "candidate": 0.018432798051496016,
+                "delta_candidate_minus_baseline": -0.0005197042121422302,
+                "relative_delta": -0.02742140351247025
+              },
+              {
+                "round": 5,
+                "baseline": 0.018204519233328637,
+                "candidate": 0.01813075223334029,
+                "delta_candidate_minus_baseline": -7.376699998834502e-05,
+                "relative_delta": -0.004052125686093
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": -0.00045804742121369896,
+            "median_delta": -0.00010009459090476458,
+            "mean_relative_delta": -0.023098192751494568
+          },
+          {
+            "metric": "token_itl_p50_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 0.01659728200002064,
+                "candidate": 0.017084729500083995,
+                "delta_candidate_minus_baseline": 0.0004874475000633538,
+                "relative_delta": 0.02936911598313191
+              },
+              {
+                "round": 2,
+                "baseline": 0.015560302499807221,
+                "candidate": 0.016529149000007237,
+                "delta_candidate_minus_baseline": 0.0009688465002000157,
+                "relative_delta": 0.06226398877605489
+              },
+              {
+                "round": 3,
+                "baseline": 0.016859166000131154,
+                "candidate": 0.016755737000039517,
+                "delta_candidate_minus_baseline": -0.00010342900009163714,
+                "relative_delta": -0.006134882359591959
+              },
+              {
+                "round": 4,
+                "baseline": 0.0173587484998734,
+                "candidate": 0.016762660500035054,
+                "delta_candidate_minus_baseline": -0.0005960879998383461,
+                "relative_delta": -0.03433934190835782
+              },
+              {
+                "round": 5,
+                "baseline": 0.01660302900017996,
+                "candidate": 0.01660880100007489,
+                "delta_candidate_minus_baseline": 5.771999894932378e-06,
+                "relative_delta": 0.00034764740186081803
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": 0.00015250980004566372,
+            "median_delta": 5.771999894932378e-06,
+            "mean_relative_delta": 0.010301305578619569
+          }
+        ],
+        "aa_noise": {
+          "status": "NOT_PROVIDED",
+          "metrics": [],
+          "note": "Run explicit A/A pairs before treating a delta as beyond noise."
+        },
+        "adoption_claim": "REQUIRES_AA_AND_TARGET_REVIEW"
+      },
+      "exact_token_comparisons": [
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "ae2b863deb6247bcafe588b6da116d2f",
+          "candidate_run_id": "a2bde486b4644b46beeb860cc6938d59",
+          "request_count": 16,
+          "matched_request_count": 16,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "normal-000",
+            "normal-001",
+            "normal-002",
+            "normal-003",
+            "normal-004",
+            "normal-005",
+            "normal-006",
+            "normal-007",
+            "normal-008",
+            "normal-009",
+            "normal-010",
+            "normal-011",
+            "normal-012",
+            "normal-013",
+            "normal-014",
+            "normal-015"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "ae04b6cd847d443c9f88861bd4f4a00a",
+          "candidate_run_id": "a60af7697dba402ea0d266adaa5cdadc",
+          "request_count": 16,
+          "matched_request_count": 16,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "normal-000",
+            "normal-001",
+            "normal-002",
+            "normal-003",
+            "normal-004",
+            "normal-005",
+            "normal-006",
+            "normal-007",
+            "normal-008",
+            "normal-009",
+            "normal-010",
+            "normal-011",
+            "normal-012",
+            "normal-013",
+            "normal-014",
+            "normal-015"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "d521088e96f14b58966e044831f61e23",
+          "candidate_run_id": "1fdf0daf3a1c48de9d695bc162872342",
+          "request_count": 16,
+          "matched_request_count": 16,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "normal-000",
+            "normal-001",
+            "normal-002",
+            "normal-003",
+            "normal-004",
+            "normal-005",
+            "normal-006",
+            "normal-007",
+            "normal-008",
+            "normal-009",
+            "normal-010",
+            "normal-011",
+            "normal-012",
+            "normal-013",
+            "normal-014",
+            "normal-015"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "ea206910a75747b5a57077b9010e12e9",
+          "candidate_run_id": "eea95e544fed47c881833724d44d3d41",
+          "request_count": 16,
+          "matched_request_count": 16,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "normal-000",
+            "normal-001",
+            "normal-002",
+            "normal-003",
+            "normal-004",
+            "normal-005",
+            "normal-006",
+            "normal-007",
+            "normal-008",
+            "normal-009",
+            "normal-010",
+            "normal-011",
+            "normal-012",
+            "normal-013",
+            "normal-014",
+            "normal-015"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "1e7b602f0b7f4a6bb45d958cee267c2c",
+          "candidate_run_id": "0c0dd8f74ae44ff79a1febb20dd94d5f",
+          "request_count": 16,
+          "matched_request_count": 16,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "normal-000",
+            "normal-001",
+            "normal-002",
+            "normal-003",
+            "normal-004",
+            "normal-005",
+            "normal-006",
+            "normal-007",
+            "normal-008",
+            "normal-009",
+            "normal-010",
+            "normal-011",
+            "normal-012",
+            "normal-013",
+            "normal-014",
+            "normal-015"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        }
+      ],
+      "path_evidence": [
+        {
+          "round": 1,
+          "cases": {
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 86
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 43
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 69
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "graph_not_slower_beyond_noise",
+                  "count": 17
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 40
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 2,
+          "cases": {
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 80
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "graph_not_slower_beyond_noise",
+                  "count": 24
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 34
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 70
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 51
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 3,
+          "cases": {
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 94
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 39
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 81
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "graph_not_slower_beyond_noise",
+                  "count": 25
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 33
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 4,
+          "cases": {
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 64
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "graph_not_slower_beyond_noise",
+                  "count": 20
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 38
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 52
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 60
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 5,
+          "cases": {
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 106
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 33
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 74
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "graph_not_slower_beyond_noise",
+                  "count": 24
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 37
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        }
+      ],
+      "cost_attribution": {
+        "status": "not_attributable",
+        "reason": "at least one C case lacked loaded/eager timed-path evidence"
+      },
+      "raw_directory": "${RUN}/performance/attempt-001"
+    },
+    "heldout_boundary": {
+      "paired_round_count": 5,
+      "aa_round_count": 5,
+      "aa_scope": true,
+      "summary": {
+        "schema_version": 1,
+        "kind": "graphbudget_paired_round_summary",
+        "status": "OK",
+        "minimum_rounds": 5,
+        "round_count": 5,
+        "metrics": [
+          {
+            "metric": "effective_output_tokens_per_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 430.13279798579777,
+                "candidate": 420.75843317131,
+                "delta_candidate_minus_baseline": -9.374364814487762,
+                "relative_delta": -0.02179411767339185
+              },
+              {
+                "round": 2,
+                "baseline": 323.0994758960135,
+                "candidate": 363.2250857203179,
+                "delta_candidate_minus_baseline": 40.12560982430443,
+                "relative_delta": 0.12418964689753469
+              },
+              {
+                "round": 3,
+                "baseline": 522.0117249140903,
+                "candidate": 385.0970262598504,
+                "delta_candidate_minus_baseline": -136.91469865423994,
+                "relative_delta": -0.2622828034691607
+              },
+              {
+                "round": 4,
+                "baseline": 424.1894896747466,
+                "candidate": 354.0570510430596,
+                "delta_candidate_minus_baseline": -70.13243863168702,
+                "relative_delta": -0.16533280606613351
+              },
+              {
+                "round": 5,
+                "baseline": 386.57901481982526,
+                "candidate": 411.1649133078445,
+                "delta_candidate_minus_baseline": 24.58589848801921,
+                "relative_delta": 0.0635986371362607
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": -30.341998757618217,
+            "median_delta": -9.374364814487762,
+            "mean_relative_delta": -0.05232428863497814
+          },
+          {
+            "metric": "makespan_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 1.9435858040000085,
+                "candidate": 1.986888281000006,
+                "delta_candidate_minus_baseline": 0.04330247699999745,
+                "relative_delta": 0.022279683722158564
+              },
+              {
+                "round": 2,
+                "baseline": 2.5874384279999845,
+                "candidate": 2.301603145999991,
+                "delta_candidate_minus_baseline": -0.28583528199999364,
+                "relative_delta": -0.11047037058228129
+              },
+              {
+                "round": 3,
+                "baseline": 1.6014965950000146,
+                "candidate": 2.170881473999998,
+                "delta_candidate_minus_baseline": 0.5693848789999834,
+                "relative_delta": 0.3555329938119401
+              },
+              {
+                "round": 4,
+                "baseline": 1.9708173360000387,
+                "candidate": 2.361201386999994,
+                "delta_candidate_minus_baseline": 0.39038405099995543,
+                "relative_delta": 0.19808231025219059
+              },
+              {
+                "round": 5,
+                "baseline": 2.1625591869999425,
+                "candidate": 2.0332474219999312,
+                "delta_candidate_minus_baseline": -0.1293117650000113,
+                "relative_delta": -0.0597957113855468
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": 0.11758487199998627,
+            "median_delta": 0.04330247699999745,
+            "mean_relative_delta": 0.08112578116369223
+          },
+          {
+            "metric": "ttft_p50_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 0.07476434349999295,
+                "candidate": 0.06322690450001289,
+                "delta_candidate_minus_baseline": -0.011537438999980054,
+                "relative_delta": -0.1543173986404514
+              },
+              {
+                "round": 2,
+                "baseline": 0.37274437199999966,
+                "candidate": 0.1259681319999686,
+                "delta_candidate_minus_baseline": -0.24677624000003107,
+                "relative_delta": -0.6620522227496739
+              },
+              {
+                "round": 3,
+                "baseline": 0.06132256300000449,
+                "candidate": 0.06577872850002109,
+                "delta_candidate_minus_baseline": 0.004456165500016596,
+                "relative_delta": 0.07266763295618073
+              },
+              {
+                "round": 4,
+                "baseline": 0.07231526649999864,
+                "candidate": 0.11986523100000568,
+                "delta_candidate_minus_baseline": 0.047549964500007036,
+                "relative_delta": 0.6575370153687801
+              },
+              {
+                "round": 5,
+                "baseline": 0.13304915500003744,
+                "candidate": 0.07123448049992476,
+                "delta_candidate_minus_baseline": -0.06181467450011269,
+                "relative_delta": -0.4646002787473193
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": -0.053624444700020035,
+            "median_delta": -0.011537438999980054,
+            "mean_relative_delta": -0.11015305036249676
+          },
+          {
+            "metric": "request_tpot_p50_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 0.021492366935064323,
+                "candidate": 0.022411435921211684,
+                "delta_candidate_minus_baseline": 0.0009190689861473603,
+                "relative_delta": 0.042762576542833886
+              },
+              {
+                "round": 2,
+                "baseline": 0.03531981078571432,
+                "candidate": 0.028273249474027165,
+                "delta_candidate_minus_baseline": -0.007046561311687155,
+                "relative_delta": -0.19950733469210014
+              },
+              {
+                "round": 3,
+                "baseline": 0.011124429163636547,
+                "candidate": 0.02543982369090913,
+                "delta_candidate_minus_baseline": 0.014315394527272582,
+                "relative_delta": 1.28684306553604
+              },
+              {
+                "round": 4,
+                "baseline": 0.023033469714286117,
+                "candidate": 0.030559226227274527,
+                "delta_candidate_minus_baseline": 0.00752575651298841,
+                "relative_delta": 0.32673134383747177
+              },
+              {
+                "round": 5,
+                "baseline": 0.025777728896966064,
+                "candidate": 0.024298619130302016,
+                "delta_candidate_minus_baseline": -0.0014791097666640475,
+                "relative_delta": -0.05737936699451179
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": 0.00284690978961143,
+            "median_delta": 0.0009190689861473603,
+            "mean_relative_delta": 0.27989005684594676
+          },
+          {
+            "metric": "token_itl_p50_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 0.016407463000007283,
+                "candidate": 0.016917971999987458,
+                "delta_candidate_minus_baseline": 0.0005105089999801748,
+                "relative_delta": 0.031114438592971274
+              },
+              {
+                "round": 2,
+                "baseline": 0.020893384499999,
+                "candidate": 0.01938293650002265,
+                "delta_candidate_minus_baseline": -0.0015104479999763498,
+                "relative_delta": -0.07229312225486599
+              },
+              {
+                "round": 3,
+                "baseline": 0.010617617000008295,
+                "candidate": 0.01992645400000015,
+                "delta_candidate_minus_baseline": 0.009308836999991854,
+                "relative_delta": 0.8767350526944588
+              },
+              {
+                "round": 4,
+                "baseline": 0.01761212649998356,
+                "candidate": 0.021258891000002222,
+                "delta_candidate_minus_baseline": 0.003646764500018662,
+                "relative_delta": 0.20705986298826926
+              },
+              {
+                "round": 5,
+                "baseline": 0.018074724000030074,
+                "candidate": 0.017814012500025456,
+                "delta_candidate_minus_baseline": -0.00026071150000461785,
+                "relative_delta": -0.01442409300436256
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": 0.0023389902000019447,
+            "median_delta": 0.0005105089999801748,
+            "mean_relative_delta": 0.20563842780329417
+          }
+        ],
+        "aa_noise": {
+          "status": "OK",
+          "round_count": 5,
+          "metrics": [
+            {
+              "metric": "effective_output_tokens_per_s",
+              "rounds": [
+                {
+                  "round": 1,
+                  "baseline": 362.31681415193475,
+                  "candidate": 393.02188015760896,
+                  "delta_candidate_minus_baseline": 30.70506600567421,
+                  "relative_delta": 0.08474645615756127
+                },
+                {
+                  "round": 2,
+                  "baseline": 404.7975427169951,
+                  "candidate": 428.2894304272166,
+                  "delta_candidate_minus_baseline": 23.491887710221476,
+                  "relative_delta": 0.0580336717277093
+                },
+                {
+                  "round": 3,
+                  "baseline": 402.8682967864443,
+                  "candidate": 385.2377019519726,
+                  "delta_candidate_minus_baseline": -17.630594834471708,
+                  "relative_delta": -0.04376267622720752
+                },
+                {
+                  "round": 4,
+                  "baseline": 385.1219301605336,
+                  "candidate": 423.39021019155894,
+                  "delta_candidate_minus_baseline": 38.26828003102531,
+                  "relative_delta": 0.09936666035889886
+                },
+                {
+                  "round": 5,
+                  "baseline": 416.4300138732455,
+                  "candidate": 348.8977309460183,
+                  "delta_candidate_minus_baseline": -67.53228292722719,
+                  "relative_delta": -0.16216958595060083
+                }
+              ],
+              "paired_sample_count": 5,
+              "mean_delta": 1.4604711970444213,
+              "median_delta": 23.491887710221476,
+              "mean_relative_delta": 0.007242905213272218,
+              "absolute_relative_delta_p95": 0.14960900083226042
+            },
+            {
+              "metric": "makespan_s",
+              "rounds": [
+                {
+                  "round": 1,
+                  "baseline": 2.3073729049997382,
+                  "candidate": 2.1271080369997435,
+                  "delta_candidate_minus_baseline": -0.18026486799999475,
+                  "relative_delta": -0.07812558932688654
+                },
+                {
+                  "round": 2,
+                  "baseline": 2.065229928000008,
+                  "candidate": 1.9519510420000188,
+                  "delta_candidate_minus_baseline": -0.11327888599998914,
+                  "relative_delta": -0.05485049604606965
+                },
+                {
+                  "round": 3,
+                  "baseline": 2.0751198509997266,
+                  "candidate": 2.170088742000189,
+                  "delta_candidate_minus_baseline": 0.09496889100046246,
+                  "relative_delta": 0.04576549684815047
+                },
+                {
+                  "round": 4,
+                  "baseline": 2.1707410939998226,
+                  "candidate": 1.9745378610000444,
+                  "delta_candidate_minus_baseline": -0.19620323299977827,
+                  "relative_delta": -0.09038536817776496
+                },
+                {
+                  "round": 5,
+                  "baseline": 2.007540216000052,
+                  "candidate": 2.396117618000062,
+                  "delta_candidate_minus_baseline": 0.3885774020000099,
+                  "relative_delta": 0.19355896280585386
+                }
+              ],
+              "paired_sample_count": 5,
+              "mean_delta": -0.0012401387998579594,
+              "median_delta": -0.11327888599998914,
+              "mean_relative_delta": 0.003192601220656635,
+              "absolute_relative_delta_p95": 0.17292424388023606
+            },
+            {
+              "metric": "ttft_p50_s",
+              "rounds": [
+                {
+                  "round": 1,
+                  "baseline": 0.06457069049974962,
+                  "candidate": 0.07813899950019731,
+                  "delta_candidate_minus_baseline": 0.013568309000447698,
+                  "relative_delta": 0.21013108107462955
+                },
+                {
+                  "round": 2,
+                  "baseline": 0.0979126360000464,
+                  "candidate": 0.0710344350000014,
+                  "delta_candidate_minus_baseline": -0.02687820100004501,
+                  "relative_delta": -0.27451207625573754
+                },
+                {
+                  "round": 3,
+                  "baseline": 0.09803283749988623,
+                  "candidate": 0.06876615199985281,
+                  "delta_candidate_minus_baseline": -0.029266685500033418,
+                  "relative_delta": -0.29853961434164733
+                },
+                {
+                  "round": 4,
+                  "baseline": 0.1247083420000763,
+                  "candidate": 0.062258776000135185,
+                  "delta_candidate_minus_baseline": -0.062449565999941115,
+                  "relative_delta": -0.5007649448174277
+                },
+                {
+                  "round": 5,
+                  "baseline": 0.07869072599987703,
+                  "candidate": 0.16042932599998494,
+                  "delta_candidate_minus_baseline": 0.08173860000010791,
+                  "relative_delta": 1.0387323151680623
+                }
+              ],
+              "paired_sample_count": 5,
+              "mean_delta": -0.004657508699892787,
+              "median_delta": -0.02687820100004501,
+              "mean_relative_delta": 0.03500935216557585,
+              "absolute_relative_delta_p95": 0.9311388410979353
+            },
+            {
+              "metric": "request_tpot_p50_s",
+              "rounds": [
+                {
+                  "round": 1,
+                  "baseline": 0.0232439429155981,
+                  "candidate": 0.02317705745456971,
+                  "delta_candidate_minus_baseline": -6.688546102839171e-05,
+                  "relative_delta": -0.0028775436797131133
+                },
+                {
+                  "round": 2,
+                  "baseline": 0.022241309590931273,
+                  "candidate": 0.02200382042122218,
+                  "delta_candidate_minus_baseline": -0.00023748916970909445,
+                  "relative_delta": -0.010677841101853502
+                },
+                {
+                  "round": 3,
+                  "baseline": 0.024582431571415528,
+                  "candidate": 0.024419393331146393,
+                  "delta_candidate_minus_baseline": -0.00016303824026913522,
+                  "relative_delta": -0.006632307296187747
+                },
+                {
+                  "round": 4,
+                  "baseline": 0.026999208061886833,
+                  "candidate": 0.02177986390000418,
+                  "delta_candidate_minus_baseline": -0.005219344161882654,
+                  "relative_delta": -0.19331471315451249
+                },
+                {
+                  "round": 5,
+                  "baseline": 0.024707734545452033,
+                  "candidate": 0.03534344258183189,
+                  "delta_candidate_minus_baseline": 0.010635708036379858,
+                  "relative_delta": 0.43046067282350575
+                }
+              ],
+              "paired_sample_count": 5,
+              "mean_delta": 0.0009897902006981165,
+              "median_delta": -0.00016303824026913522,
+              "mean_relative_delta": 0.04339165351824778,
+              "absolute_relative_delta_p95": 0.38303148088970707
+            },
+            {
+              "metric": "token_itl_p50_s",
+              "rounds": [
+                {
+                  "round": 1,
+                  "baseline": 0.01844972499998221,
+                  "candidate": 0.018094455999971615,
+                  "delta_candidate_minus_baseline": -0.00035526900001059403,
+                  "relative_delta": -0.019256059372751443
+                },
+                {
+                  "round": 2,
+                  "baseline": 0.017670187500016254,
+                  "candidate": 0.017197341999917626,
+                  "delta_candidate_minus_baseline": -0.0004728455000986287,
+                  "relative_delta": -0.026759506660480752
+                },
+                {
+                  "round": 3,
+                  "baseline": 0.0175286104999941,
+                  "candidate": 0.017577134500015745,
+                  "delta_candidate_minus_baseline": 4.852400002164359e-05,
+                  "relative_delta": 0.002768274189312377
+                },
+                {
+                  "round": 4,
+                  "baseline": 0.018817156500290366,
+                  "candidate": 0.017919000000119922,
+                  "delta_candidate_minus_baseline": -0.0008981565001704439,
+                  "relative_delta": -0.047730723829425795
+                },
+                {
+                  "round": 5,
+                  "baseline": 0.01735438649984644,
+                  "candidate": 0.01929845299991939,
+                  "delta_candidate_minus_baseline": 0.0019440665000729496,
+                  "relative_delta": 0.1120216205908605
+                }
+              ],
+              "paired_sample_count": 5,
+              "mean_delta": 5.326389996298531e-05,
+              "median_delta": -0.00035526900001059403,
+              "mean_relative_delta": 0.004208720983502978,
+              "absolute_relative_delta_p95": 0.09916344123857355
+            }
+          ]
+        },
+        "adoption_claim": "REQUIRES_AA_AND_TARGET_REVIEW"
+      },
+      "exact_token_comparisons": [
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "d32c77ae2480459f9094262c4774bd29",
+          "candidate_run_id": "081a3ad837c548598b88367e892674a2",
+          "request_count": 70,
+          "matched_request_count": 70,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "boundary-000",
+            "boundary-001",
+            "boundary-002",
+            "boundary-003",
+            "boundary-004",
+            "boundary-005",
+            "boundary-006",
+            "boundary-007",
+            "boundary-008",
+            "boundary-009",
+            "boundary-010",
+            "boundary-011",
+            "boundary-012",
+            "boundary-013",
+            "boundary-014",
+            "boundary-015",
+            "boundary-016",
+            "boundary-017",
+            "boundary-018",
+            "boundary-019",
+            "boundary-020",
+            "boundary-021",
+            "boundary-022",
+            "boundary-023",
+            "boundary-024",
+            "boundary-025",
+            "boundary-026",
+            "boundary-027",
+            "boundary-028",
+            "boundary-029",
+            "boundary-030",
+            "boundary-031",
+            "boundary-032",
+            "boundary-033",
+            "boundary-034",
+            "boundary-035",
+            "boundary-036",
+            "boundary-037",
+            "boundary-038",
+            "boundary-039",
+            "boundary-040",
+            "boundary-041",
+            "boundary-042",
+            "boundary-043",
+            "boundary-044",
+            "boundary-045",
+            "boundary-046",
+            "boundary-047",
+            "boundary-048",
+            "boundary-049",
+            "boundary-050",
+            "boundary-051",
+            "boundary-052",
+            "boundary-053",
+            "boundary-054",
+            "boundary-055",
+            "boundary-056",
+            "boundary-057",
+            "boundary-058",
+            "boundary-059",
+            "boundary-060",
+            "boundary-061",
+            "boundary-062",
+            "boundary-063",
+            "boundary-064",
+            "boundary-065",
+            "boundary-066",
+            "boundary-067",
+            "boundary-068",
+            "boundary-069"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "f553140474e845f6a8e35c4025b01b2d",
+          "candidate_run_id": "841e7885ff6f4dba957a733a3a02469c",
+          "request_count": 70,
+          "matched_request_count": 70,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "boundary-000",
+            "boundary-001",
+            "boundary-002",
+            "boundary-003",
+            "boundary-004",
+            "boundary-005",
+            "boundary-006",
+            "boundary-007",
+            "boundary-008",
+            "boundary-009",
+            "boundary-010",
+            "boundary-011",
+            "boundary-012",
+            "boundary-013",
+            "boundary-014",
+            "boundary-015",
+            "boundary-016",
+            "boundary-017",
+            "boundary-018",
+            "boundary-019",
+            "boundary-020",
+            "boundary-021",
+            "boundary-022",
+            "boundary-023",
+            "boundary-024",
+            "boundary-025",
+            "boundary-026",
+            "boundary-027",
+            "boundary-028",
+            "boundary-029",
+            "boundary-030",
+            "boundary-031",
+            "boundary-032",
+            "boundary-033",
+            "boundary-034",
+            "boundary-035",
+            "boundary-036",
+            "boundary-037",
+            "boundary-038",
+            "boundary-039",
+            "boundary-040",
+            "boundary-041",
+            "boundary-042",
+            "boundary-043",
+            "boundary-044",
+            "boundary-045",
+            "boundary-046",
+            "boundary-047",
+            "boundary-048",
+            "boundary-049",
+            "boundary-050",
+            "boundary-051",
+            "boundary-052",
+            "boundary-053",
+            "boundary-054",
+            "boundary-055",
+            "boundary-056",
+            "boundary-057",
+            "boundary-058",
+            "boundary-059",
+            "boundary-060",
+            "boundary-061",
+            "boundary-062",
+            "boundary-063",
+            "boundary-064",
+            "boundary-065",
+            "boundary-066",
+            "boundary-067",
+            "boundary-068",
+            "boundary-069"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "7f9776930ffe4d50b161f8e7d066f401",
+          "candidate_run_id": "fdb26cfd900a46f3bce66724f8a67750",
+          "request_count": 70,
+          "matched_request_count": 70,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "boundary-000",
+            "boundary-001",
+            "boundary-002",
+            "boundary-003",
+            "boundary-004",
+            "boundary-005",
+            "boundary-006",
+            "boundary-007",
+            "boundary-008",
+            "boundary-009",
+            "boundary-010",
+            "boundary-011",
+            "boundary-012",
+            "boundary-013",
+            "boundary-014",
+            "boundary-015",
+            "boundary-016",
+            "boundary-017",
+            "boundary-018",
+            "boundary-019",
+            "boundary-020",
+            "boundary-021",
+            "boundary-022",
+            "boundary-023",
+            "boundary-024",
+            "boundary-025",
+            "boundary-026",
+            "boundary-027",
+            "boundary-028",
+            "boundary-029",
+            "boundary-030",
+            "boundary-031",
+            "boundary-032",
+            "boundary-033",
+            "boundary-034",
+            "boundary-035",
+            "boundary-036",
+            "boundary-037",
+            "boundary-038",
+            "boundary-039",
+            "boundary-040",
+            "boundary-041",
+            "boundary-042",
+            "boundary-043",
+            "boundary-044",
+            "boundary-045",
+            "boundary-046",
+            "boundary-047",
+            "boundary-048",
+            "boundary-049",
+            "boundary-050",
+            "boundary-051",
+            "boundary-052",
+            "boundary-053",
+            "boundary-054",
+            "boundary-055",
+            "boundary-056",
+            "boundary-057",
+            "boundary-058",
+            "boundary-059",
+            "boundary-060",
+            "boundary-061",
+            "boundary-062",
+            "boundary-063",
+            "boundary-064",
+            "boundary-065",
+            "boundary-066",
+            "boundary-067",
+            "boundary-068",
+            "boundary-069"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "8d8b02798013416ba6f0dfe052478eb0",
+          "candidate_run_id": "630fbf4a7b87491c82e5711a4a9ae321",
+          "request_count": 70,
+          "matched_request_count": 70,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "boundary-000",
+            "boundary-001",
+            "boundary-002",
+            "boundary-003",
+            "boundary-004",
+            "boundary-005",
+            "boundary-006",
+            "boundary-007",
+            "boundary-008",
+            "boundary-009",
+            "boundary-010",
+            "boundary-011",
+            "boundary-012",
+            "boundary-013",
+            "boundary-014",
+            "boundary-015",
+            "boundary-016",
+            "boundary-017",
+            "boundary-018",
+            "boundary-019",
+            "boundary-020",
+            "boundary-021",
+            "boundary-022",
+            "boundary-023",
+            "boundary-024",
+            "boundary-025",
+            "boundary-026",
+            "boundary-027",
+            "boundary-028",
+            "boundary-029",
+            "boundary-030",
+            "boundary-031",
+            "boundary-032",
+            "boundary-033",
+            "boundary-034",
+            "boundary-035",
+            "boundary-036",
+            "boundary-037",
+            "boundary-038",
+            "boundary-039",
+            "boundary-040",
+            "boundary-041",
+            "boundary-042",
+            "boundary-043",
+            "boundary-044",
+            "boundary-045",
+            "boundary-046",
+            "boundary-047",
+            "boundary-048",
+            "boundary-049",
+            "boundary-050",
+            "boundary-051",
+            "boundary-052",
+            "boundary-053",
+            "boundary-054",
+            "boundary-055",
+            "boundary-056",
+            "boundary-057",
+            "boundary-058",
+            "boundary-059",
+            "boundary-060",
+            "boundary-061",
+            "boundary-062",
+            "boundary-063",
+            "boundary-064",
+            "boundary-065",
+            "boundary-066",
+            "boundary-067",
+            "boundary-068",
+            "boundary-069"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "8af11169625647559c2cf83ccbb824d0",
+          "candidate_run_id": "b21b7ef6cc114ff6a7c4344cc46ac176",
+          "request_count": 70,
+          "matched_request_count": 70,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "boundary-000",
+            "boundary-001",
+            "boundary-002",
+            "boundary-003",
+            "boundary-004",
+            "boundary-005",
+            "boundary-006",
+            "boundary-007",
+            "boundary-008",
+            "boundary-009",
+            "boundary-010",
+            "boundary-011",
+            "boundary-012",
+            "boundary-013",
+            "boundary-014",
+            "boundary-015",
+            "boundary-016",
+            "boundary-017",
+            "boundary-018",
+            "boundary-019",
+            "boundary-020",
+            "boundary-021",
+            "boundary-022",
+            "boundary-023",
+            "boundary-024",
+            "boundary-025",
+            "boundary-026",
+            "boundary-027",
+            "boundary-028",
+            "boundary-029",
+            "boundary-030",
+            "boundary-031",
+            "boundary-032",
+            "boundary-033",
+            "boundary-034",
+            "boundary-035",
+            "boundary-036",
+            "boundary-037",
+            "boundary-038",
+            "boundary-039",
+            "boundary-040",
+            "boundary-041",
+            "boundary-042",
+            "boundary-043",
+            "boundary-044",
+            "boundary-045",
+            "boundary-046",
+            "boundary-047",
+            "boundary-048",
+            "boundary-049",
+            "boundary-050",
+            "boundary-051",
+            "boundary-052",
+            "boundary-053",
+            "boundary-054",
+            "boundary-055",
+            "boundary-056",
+            "boundary-057",
+            "boundary-058",
+            "boundary-059",
+            "boundary-060",
+            "boundary-061",
+            "boundary-062",
+            "boundary-063",
+            "boundary-064",
+            "boundary-065",
+            "boundary-066",
+            "boundary-067",
+            "boundary-068",
+            "boundary-069"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        }
+      ],
+      "path_evidence": [
+        {
+          "round": 1,
+          "cases": {
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 18
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 9
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 10
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 13,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 14,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 15,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 3
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 11
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 11
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 10
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 11,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 15,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 13,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 9
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 2,
+          "cases": {
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 11,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 13
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 13,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 14,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 15,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 14,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 18
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 11,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 13,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 9
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 3,
+          "cases": {
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 15
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 11
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 11
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 11
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 11,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 15,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 10
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 4
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 9
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 14
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 15,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 13,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 14,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 11,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 4,
+          "cases": {
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 13,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 17
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 15,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 11,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 14,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 14,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 17
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 13,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 15,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 4
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 5,
+          "cases": {
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 15,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 11,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 16
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 13,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 14,
+                  "actual_capture_size": 16,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "policy_missing",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 1
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 9
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 16,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 13
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 14,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 12,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 11
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 13,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 15,
+                  "actual_capture_size": 16,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        }
+      ],
+      "cost_attribution": {
+        "status": "not_attributable",
+        "reason": "at least one C case lacked loaded/eager timed-path evidence"
+      },
+      "raw_directory": "${RUN}/performance/attempt-001"
+    },
+    "heldout_mixed": {
+      "paired_round_count": 5,
+      "aa_round_count": 0,
+      "aa_scope": false,
+      "summary": {
+        "schema_version": 1,
+        "kind": "graphbudget_paired_round_summary",
+        "status": "OK",
+        "minimum_rounds": 5,
+        "round_count": 5,
+        "metrics": [
+          {
+            "metric": "effective_output_tokens_per_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 136.65985335111878,
+                "candidate": 136.50535964064778,
+                "delta_candidate_minus_baseline": -0.15449371047100158,
+                "relative_delta": -0.0011304981432554478
+              },
+              {
+                "round": 2,
+                "baseline": 136.97950282382104,
+                "candidate": 136.94354379671066,
+                "delta_candidate_minus_baseline": -0.03595902711037979,
+                "relative_delta": -0.0002625139263107797
+              },
+              {
+                "round": 3,
+                "baseline": 136.47006812913375,
+                "candidate": 124.4641154078271,
+                "delta_candidate_minus_baseline": -12.005952721306656,
+                "relative_delta": -0.08797498884477815
+              },
+              {
+                "round": 4,
+                "baseline": 136.83826595352085,
+                "candidate": 137.3006080095368,
+                "delta_candidate_minus_baseline": 0.4623420560159559,
+                "relative_delta": 0.003378748282099667
+              },
+              {
+                "round": 5,
+                "baseline": 138.7613099096803,
+                "candidate": 137.42035084256838,
+                "delta_candidate_minus_baseline": -1.3409590671119247,
+                "relative_delta": -0.009663782130514295
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": -2.615004493996801,
+            "median_delta": -0.15449371047100158,
+            "mean_relative_delta": -0.019130606952551803
+          },
+          {
+            "metric": "makespan_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 1.756185113000015,
+                "candidate": 1.7581727240000191,
+                "delta_candidate_minus_baseline": 0.001987611000004108,
+                "relative_delta": 0.0011317776157484664
+              },
+              {
+                "round": 2,
+                "baseline": 1.7520869549999816,
+                "candidate": 1.7525470230000337,
+                "delta_candidate_minus_baseline": 0.00046006800005216064,
+                "relative_delta": 0.00026258285796789435
+              },
+              {
+                "round": 3,
+                "baseline": 1.758627391999994,
+                "candidate": 1.9282666270000846,
+                "delta_candidate_minus_baseline": 0.1696392350000906,
+                "relative_delta": 0.09646115815765206
+              },
+              {
+                "round": 4,
+                "baseline": 1.7538953619999802,
+                "candidate": 1.747989346000054,
+                "delta_candidate_minus_baseline": -0.00590601599992624,
+                "relative_delta": -0.003367370783848567
+              },
+              {
+                "round": 5,
+                "baseline": 1.7295887459999904,
+                "candidate": 1.746466215000055,
+                "delta_candidate_minus_baseline": 0.016877469000064593,
+                "relative_delta": 0.009758082110037439
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": 0.03661167340005704,
+            "median_delta": 0.001987611000004108,
+            "mean_relative_delta": 0.02084924599151146
+          },
+          {
+            "metric": "ttft_p50_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 0.06012234949997719,
+                "candidate": 0.053625800999952844,
+                "delta_candidate_minus_baseline": -0.006496548500024346,
+                "relative_delta": -0.10805546612955987
+              },
+              {
+                "round": 2,
+                "baseline": 0.04803099150001344,
+                "candidate": 0.04664896349999026,
+                "delta_candidate_minus_baseline": -0.0013820280000231833,
+                "relative_delta": -0.028773672099248596
+              },
+              {
+                "round": 3,
+                "baseline": 0.058850532000008116,
+                "candidate": 0.0872737320000283,
+                "delta_candidate_minus_baseline": 0.028423200000020188,
+                "relative_delta": 0.4829726942828022
+              },
+              {
+                "round": 4,
+                "baseline": 0.04087864999996782,
+                "candidate": 0.05849225450003814,
+                "delta_candidate_minus_baseline": 0.017613604500070323,
+                "relative_delta": 0.4308753958382723
+              },
+              {
+                "round": 5,
+                "baseline": 0.04436320349998368,
+                "candidate": 0.05088890250010536,
+                "delta_candidate_minus_baseline": 0.006525699000121676,
+                "relative_delta": 0.14709710943494142
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": 0.008936785400032931,
+            "median_delta": 0.006525699000121676,
+            "mean_relative_delta": 0.1848232122654415
+          },
+          {
+            "metric": "request_tpot_p50_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 0.031075465837653617,
+                "candidate": 0.03431379590908922,
+                "delta_candidate_minus_baseline": 0.003238330071435605,
+                "relative_delta": 0.10420857689965102
+              },
+              {
+                "round": 2,
+                "baseline": 0.02754035103333763,
+                "candidate": 0.030925114469696244,
+                "delta_candidate_minus_baseline": 0.003384763436358615,
+                "relative_delta": 0.12290197144768977
+              },
+              {
+                "round": 3,
+                "baseline": 0.03487877349999735,
+                "candidate": 0.02132313639696914,
+                "delta_candidate_minus_baseline": -0.01355563710302821,
+                "relative_delta": -0.3886500510985353
+              },
+              {
+                "round": 4,
+                "baseline": 0.027284739442857895,
+                "candidate": 0.04729937513029964,
+                "delta_candidate_minus_baseline": 0.020014635687441742,
+                "relative_delta": 0.733546887239226
+              },
+              {
+                "round": 5,
+                "baseline": 0.027392253666668392,
+                "candidate": 0.02709295432120846,
+                "delta_candidate_minus_baseline": -0.0002992993454599309,
+                "relative_delta": -0.010926422816539777
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": 0.002556558549349564,
+            "median_delta": 0.003238330071435605,
+            "mean_relative_delta": 0.11221619233429833
+          },
+          {
+            "metric": "token_itl_p50_s",
+            "rounds": [
+              {
+                "round": 1,
+                "baseline": 0.019013246499980596,
+                "candidate": 0.0190603439999677,
+                "delta_candidate_minus_baseline": 4.709749998710322e-05,
+                "relative_delta": 0.002477088801596891
+              },
+              {
+                "round": 2,
+                "baseline": 0.018324867000046652,
+                "candidate": 0.0201103184999738,
+                "delta_candidate_minus_baseline": 0.0017854514999271487,
+                "relative_delta": 0.09743325831082994
+              },
+              {
+                "round": 3,
+                "baseline": 0.02019782799999348,
+                "candidate": 0.010419936499999949,
+                "delta_candidate_minus_baseline": -0.00977789149999353,
+                "relative_delta": -0.48410608804058963
+              },
+              {
+                "round": 4,
+                "baseline": 0.018041670500053897,
+                "candidate": 0.018828568999992967,
+                "delta_candidate_minus_baseline": 0.0007868984999390705,
+                "relative_delta": 0.04361561197654728
+              },
+              {
+                "round": 5,
+                "baseline": 0.01793406749999349,
+                "candidate": 0.017935968000074354,
+                "delta_candidate_minus_baseline": 1.900500080864731e-06,
+                "relative_delta": 0.00010597150260895477
+              }
+            ],
+            "paired_sample_count": 5,
+            "mean_delta": -0.0014313087000118684,
+            "median_delta": 4.709749998710322e-05,
+            "mean_relative_delta": -0.0680948314898013
+          }
+        ],
+        "aa_noise": {
+          "status": "NOT_PROVIDED",
+          "metrics": [],
+          "note": "Run explicit A/A pairs before treating a delta as beyond noise."
+        },
+        "adoption_claim": "REQUIRES_AA_AND_TARGET_REVIEW"
+      },
+      "exact_token_comparisons": [
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "3e631aec82a149c1b15e91355c385868",
+          "candidate_run_id": "8db220acebc74cf79f86ad002f13910a",
+          "request_count": 20,
+          "matched_request_count": 20,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "mixed-000",
+            "mixed-001",
+            "mixed-002",
+            "mixed-003",
+            "mixed-004",
+            "mixed-005",
+            "mixed-006",
+            "mixed-007",
+            "mixed-008",
+            "mixed-009",
+            "mixed-010",
+            "mixed-011",
+            "mixed-012",
+            "mixed-013",
+            "mixed-014",
+            "mixed-015",
+            "mixed-016",
+            "mixed-017",
+            "mixed-018",
+            "mixed-019"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "ea5479c17ace44f887384decbfdf2fd9",
+          "candidate_run_id": "7f327c1401a84fddb1a8679ae87366a8",
+          "request_count": 20,
+          "matched_request_count": 20,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "mixed-000",
+            "mixed-001",
+            "mixed-002",
+            "mixed-003",
+            "mixed-004",
+            "mixed-005",
+            "mixed-006",
+            "mixed-007",
+            "mixed-008",
+            "mixed-009",
+            "mixed-010",
+            "mixed-011",
+            "mixed-012",
+            "mixed-013",
+            "mixed-014",
+            "mixed-015",
+            "mixed-016",
+            "mixed-017",
+            "mixed-018",
+            "mixed-019"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "39b1cee70d5c40b99ef23dd75eca552d",
+          "candidate_run_id": "103249219fef46a7bb11ca46a4dd057f",
+          "request_count": 20,
+          "matched_request_count": 20,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "mixed-000",
+            "mixed-001",
+            "mixed-002",
+            "mixed-003",
+            "mixed-004",
+            "mixed-005",
+            "mixed-006",
+            "mixed-007",
+            "mixed-008",
+            "mixed-009",
+            "mixed-010",
+            "mixed-011",
+            "mixed-012",
+            "mixed-013",
+            "mixed-014",
+            "mixed-015",
+            "mixed-016",
+            "mixed-017",
+            "mixed-018",
+            "mixed-019"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "f8923535321e4556bbb7c69fbdecc5c7",
+          "candidate_run_id": "cfe26fb578514fbfb6544f19bae9715d",
+          "request_count": 20,
+          "matched_request_count": 20,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "mixed-000",
+            "mixed-001",
+            "mixed-002",
+            "mixed-003",
+            "mixed-004",
+            "mixed-005",
+            "mixed-006",
+            "mixed-007",
+            "mixed-008",
+            "mixed-009",
+            "mixed-010",
+            "mixed-011",
+            "mixed-012",
+            "mixed-013",
+            "mixed-014",
+            "mixed-015",
+            "mixed-016",
+            "mixed-017",
+            "mixed-018",
+            "mixed-019"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        },
+        {
+          "schema_version": 1,
+          "kind": "graphbudget_exact_token_comparison",
+          "baseline_run_id": "763b0b124a0747f796958cecfbdd36c9",
+          "candidate_run_id": "98ccab59af5d47acb994e3074063dfe9",
+          "request_count": 20,
+          "matched_request_count": 20,
+          "mismatched_request_count": 0,
+          "matched_workload_request_ids": [
+            "mixed-000",
+            "mixed-001",
+            "mixed-002",
+            "mixed-003",
+            "mixed-004",
+            "mixed-005",
+            "mixed-006",
+            "mixed-007",
+            "mixed-008",
+            "mixed-009",
+            "mixed-010",
+            "mixed-011",
+            "mixed-012",
+            "mixed-013",
+            "mixed-014",
+            "mixed-015",
+            "mixed-016",
+            "mixed-017",
+            "mixed-018",
+            "mixed-019"
+          ],
+          "mismatches": [],
+          "equivalent": true
+        }
+      ],
+      "path_evidence": [
+        {
+          "round": 1,
+          "cases": {
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 10
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 13
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 6
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 18
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "graph_not_slower_beyond_noise",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 13
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 2,
+          "cases": {
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 15
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 10
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "graph_not_slower_beyond_noise",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 20
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 16
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 8
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 3,
+          "cases": {
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 10
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 13
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 14
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 3
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 13
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 9
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 22
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 16
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "profile_entry_missing",
+                  "count": 4
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 4,
+          "cases": {
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 13
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "graph_not_slower_beyond_noise",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 9
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 11,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 12
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 6
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 22
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 7
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 15
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 2
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        },
+        {
+          "round": 5,
+          "cases": {
+            "T": {
+              "status": "not_attributable",
+              "reason": "case is not a cost-policy run",
+              "policy_mode": "native",
+              "policy_status": "disabled",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "policy_missing",
+                  "count": 8
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "policy_missing",
+                  "count": 21
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 17
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "policy_missing",
+                  "count": 4
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "policy_missing",
+                  "count": 5
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            },
+            "C": {
+              "status": "not_attributable",
+              "reason": "no measured cost rejection of an eligible graph; overflow is upstream fallback",
+              "policy_mode": "cost",
+              "policy_status": "loaded",
+              "timed_path_counts": [
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 1,
+                  "actual_capture_size": 1,
+                  "reason": "profile_entry_missing",
+                  "count": 9
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 2,
+                  "actual_capture_size": 2,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 15
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 7,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 5
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 6,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 3
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 8,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 5,
+                  "actual_capture_size": 8,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 1
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 3,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 17
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 4,
+                  "actual_capture_size": 4,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 10,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 2
+                },
+                {
+                  "eligible": true,
+                  "selected_path": "graph",
+                  "used_path": "graph",
+                  "batch_size": 9,
+                  "actual_capture_size": 12,
+                  "reason": "missing_or_heterogeneous_context",
+                  "count": 4
+                }
+              ],
+              "used_paths": [
+                "graph"
+              ]
+            }
+          }
+        }
+      ],
+      "cost_attribution": {
+        "status": "not_attributable",
+        "reason": "at least one C case lacked loaded/eager timed-path evidence"
+      },
+      "raw_directory": "${RUN}/performance/attempt-001"
+    }
+  },
+  "notes": [
+    "A/A noise was collected before T/C paired rounds.",
+    "Raw case directories remain the authority for request events and paths.",
+    "No P99 or adoption claim is made by this orchestration layer."
+  ]
+}

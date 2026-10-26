@@ -1,0 +1,159 @@
+{
+  "status": "PASS",
+  "project_commit": "9340ee0b3f6e7d6054b4062540ece46c5f087c42",
+  "sglang_base": "bbe9c7eeb520b0a67e92d133dfc137a3688dc7f2",
+  "patch_sha256": "3146afe85bcd1e687dcdd3b1ba656a70687dabacfbed3301e4579205962fecec",
+  "runtime_fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b",
+  "completed_requests": 43,
+  "exact_token_matches": 43,
+  "output_tokens": 520,
+  "actual_capture_sizes": [
+    1,
+    2,
+    4,
+    8,
+    12,
+    16
+  ],
+  "kv_tokens": 4096,
+  "missing_cost_profile_native_fallback": "OBSERVED",
+  "loaded_from_clean_project_and_upstream_checkouts": true,
+  "timed_decode_counts": [
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 1,
+      "actual_capture_size": 1,
+      "reason": "policy_missing",
+      "count": 11
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 2,
+      "actual_capture_size": 2,
+      "reason": "policy_missing",
+      "count": 10
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 6,
+      "actual_capture_size": 8,
+      "reason": "policy_missing",
+      "count": 1
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 5,
+      "actual_capture_size": 8,
+      "reason": "policy_missing",
+      "count": 9
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 4,
+      "actual_capture_size": 4,
+      "reason": "policy_missing",
+      "count": 3
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 3,
+      "actual_capture_size": 4,
+      "reason": "policy_missing",
+      "count": 4
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 8,
+      "actual_capture_size": 8,
+      "reason": "policy_missing",
+      "count": 3
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 14,
+      "actual_capture_size": 16,
+      "reason": "policy_missing",
+      "count": 3
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 12,
+      "actual_capture_size": 12,
+      "reason": "policy_missing",
+      "count": 4
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 16,
+      "actual_capture_size": 16,
+      "reason": "policy_missing",
+      "count": 7
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 10,
+      "actual_capture_size": 12,
+      "reason": "policy_missing",
+      "count": 4
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 7,
+      "actual_capture_size": 8,
+      "reason": "policy_missing",
+      "count": 1
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 13,
+      "actual_capture_size": 16,
+      "reason": "policy_missing",
+      "count": 2
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 15,
+      "actual_capture_size": 16,
+      "reason": "policy_missing",
+      "count": 3
+    },
+    {
+      "eligible": true,
+      "selected_path": "graph",
+      "used_path": "graph",
+      "batch_size": 9,
+      "actual_capture_size": 12,
+      "reason": "policy_missing",
+      "count": 3
+    }
+  ],
+  "raw_case_sha256": "142bb7bb390659ec29125c67b65dcce4f91a16ebb1a50383aa4543969765d065"
+}

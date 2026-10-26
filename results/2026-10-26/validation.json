@@ -1,0 +1,3568 @@
+{
+  "schema_version": 1,
+  "kind": "graphbudget_validation_suite",
+  "status": "ok",
+  "variants": [
+    "U",
+    "E",
+    "P",
+    "T",
+    "C"
+  ],
+  "cases": {
+    "U": {
+      "calibration": "${RUN}/validate/attempt-001/U/calibration",
+      "heldout_normal": "${RUN}/validate/attempt-001/U/heldout_normal",
+      "heldout_boundary": "${RUN}/validate/attempt-001/U/heldout_boundary",
+      "heldout_mixed": "${RUN}/validate/attempt-001/U/heldout_mixed"
+    },
+    "E": {
+      "calibration": "${RUN}/validate/attempt-001/E/calibration",
+      "heldout_normal": "${RUN}/validate/attempt-001/E/heldout_normal",
+      "heldout_boundary": "${RUN}/validate/attempt-001/E/heldout_boundary",
+      "heldout_mixed": "${RUN}/validate/attempt-001/E/heldout_mixed"
+    },
+    "P": {
+      "calibration": "${RUN}/validate/attempt-001/P/calibration",
+      "heldout_normal": "${RUN}/validate/attempt-001/P/heldout_normal",
+      "heldout_boundary": "${RUN}/validate/attempt-001/P/heldout_boundary",
+      "heldout_mixed": "${RUN}/validate/attempt-001/P/heldout_mixed"
+    },
+    "T": {
+      "calibration": "${RUN}/validate/attempt-001/T/calibration",
+      "heldout_normal": "${RUN}/validate/attempt-001/T/heldout_normal",
+      "heldout_boundary": "${RUN}/validate/attempt-001/T/heldout_boundary",
+      "heldout_mixed": "${RUN}/validate/attempt-001/T/heldout_mixed"
+    },
+    "C": {
+      "calibration": "${RUN}/validate/attempt-001/C/calibration",
+      "heldout_normal": "${RUN}/validate/attempt-001/C/heldout_normal",
+      "heldout_boundary": "${RUN}/validate/attempt-001/C/heldout_boundary",
+      "heldout_mixed": "${RUN}/validate/attempt-001/C/heldout_mixed"
+    }
+  },
+  "control_cases": {
+    "overflow_cap4_native": "${RUN}/validate/attempt-001/overflow-control/heldout_boundary"
+  },
+  "coverage": {
+    "U/calibration": {
+      "workload": "calibration",
+      "observed_step_count": 74,
+      "observed_count_rows": 13,
+      "timed_completed_request_count": 43,
+      "observed_reasons": [
+        "capture_ceiling",
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "eager",
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "U/heldout_normal": {
+      "workload": "heldout_normal",
+      "observed_step_count": 135,
+      "observed_count_rows": 2,
+      "timed_completed_request_count": 16,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2
+      ],
+      "observed_padded_sizes": [
+        1,
+        2
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "U/heldout_boundary": {
+      "workload": "heldout_boundary",
+      "observed_step_count": 93,
+      "observed_count_rows": 14,
+      "timed_completed_request_count": 70,
+      "observed_reasons": [
+        "capture_ceiling",
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "eager",
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          8
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "U/heldout_mixed": {
+      "workload": "heldout_mixed",
+      "observed_step_count": 68,
+      "observed_count_rows": 5,
+      "timed_completed_request_count": 20,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "E/calibration": {
+      "workload": "calibration",
+      "observed_step_count": 56,
+      "observed_count_rows": 14,
+      "timed_completed_request_count": 43,
+      "observed_reasons": [
+        "graph_disabled"
+      ],
+      "observed_used_paths": [
+        "eager"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "observed_padded_sizes": [],
+      "observed_batch_padded_pairs": [],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "E/heldout_normal": {
+      "workload": "heldout_normal",
+      "observed_step_count": 118,
+      "observed_count_rows": 2,
+      "timed_completed_request_count": 16,
+      "observed_reasons": [
+        "graph_disabled"
+      ],
+      "observed_used_paths": [
+        "eager"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2
+      ],
+      "observed_padded_sizes": [],
+      "observed_batch_padded_pairs": [],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "E/heldout_boundary": {
+      "workload": "heldout_boundary",
+      "observed_step_count": 76,
+      "observed_count_rows": 13,
+      "timed_completed_request_count": 70,
+      "observed_reasons": [
+        "graph_disabled"
+      ],
+      "observed_used_paths": [
+        "eager"
+      ],
+      "observed_batch_sizes": [
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "observed_padded_sizes": [],
+      "observed_batch_padded_pairs": [],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "E/heldout_mixed": {
+      "workload": "heldout_mixed",
+      "observed_step_count": 68,
+      "observed_count_rows": 5,
+      "timed_completed_request_count": 20,
+      "observed_reasons": [
+        "graph_disabled"
+      ],
+      "observed_used_paths": [
+        "eager"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "observed_padded_sizes": [],
+      "observed_batch_padded_pairs": [],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "P/calibration": {
+      "workload": "calibration",
+      "observed_step_count": 75,
+      "observed_count_rows": 13,
+      "timed_completed_request_count": 43,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "P/heldout_normal": {
+      "workload": "heldout_normal",
+      "observed_step_count": 145,
+      "observed_count_rows": 2,
+      "timed_completed_request_count": 16,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2
+      ],
+      "observed_padded_sizes": [
+        1,
+        2
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "P/heldout_boundary": {
+      "workload": "heldout_boundary",
+      "observed_step_count": 94,
+      "observed_count_rows": 16,
+      "timed_completed_request_count": 70,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "P/heldout_mixed": {
+      "workload": "heldout_mixed",
+      "observed_step_count": 78,
+      "observed_count_rows": 5,
+      "timed_completed_request_count": 20,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "T/calibration": {
+      "workload": "calibration",
+      "observed_step_count": 71,
+      "observed_count_rows": 12,
+      "timed_completed_request_count": 43,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "T/heldout_normal": {
+      "workload": "heldout_normal",
+      "observed_step_count": 142,
+      "observed_count_rows": 2,
+      "timed_completed_request_count": 16,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2
+      ],
+      "observed_padded_sizes": [
+        1,
+        2
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "T/heldout_boundary": {
+      "workload": "heldout_boundary",
+      "observed_step_count": 77,
+      "observed_count_rows": 11,
+      "timed_completed_request_count": 70,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        2,
+        3,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        16
+      ],
+      "observed_padded_sizes": [
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "T/heldout_mixed": {
+      "workload": "heldout_mixed",
+      "observed_step_count": 61,
+      "observed_count_rows": 7,
+      "timed_completed_request_count": 20,
+      "observed_reasons": [
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          7,
+          8
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "C/calibration": {
+      "workload": "calibration",
+      "observed_step_count": 70,
+      "observed_count_rows": 13,
+      "timed_completed_request_count": 43,
+      "observed_reasons": [
+        "graph_not_slower_beyond_noise",
+        "missing_or_heterogeneous_context",
+        "profile_entry_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "C/heldout_normal": {
+      "workload": "heldout_normal",
+      "observed_step_count": 114,
+      "observed_count_rows": 5,
+      "timed_completed_request_count": 16,
+      "observed_reasons": [
+        "graph_not_slower_beyond_noise",
+        "missing_or_heterogeneous_context",
+        "profile_entry_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "C/heldout_boundary": {
+      "workload": "heldout_boundary",
+      "observed_step_count": 72,
+      "observed_count_rows": 13,
+      "timed_completed_request_count": 70,
+      "observed_reasons": [
+        "missing_or_heterogeneous_context",
+        "profile_entry_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          13,
+          16
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "C/heldout_mixed": {
+      "workload": "heldout_mixed",
+      "observed_step_count": 70,
+      "observed_count_rows": 6,
+      "timed_completed_request_count": 20,
+      "observed_reasons": [
+        "graph_not_slower_beyond_noise",
+        "missing_or_heterogeneous_context",
+        "profile_entry_missing"
+      ],
+      "observed_used_paths": [
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          8
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    },
+    "overflow-control/heldout_boundary": {
+      "workload": "heldout_boundary",
+      "observed_step_count": 82,
+      "observed_count_rows": 15,
+      "timed_completed_request_count": 70,
+      "observed_reasons": [
+        "capture_ceiling",
+        "policy_missing"
+      ],
+      "observed_used_paths": [
+        "eager",
+        "graph"
+      ],
+      "observed_batch_sizes": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "observed_padded_sizes": [
+        1,
+        2,
+        4
+      ],
+      "observed_batch_padded_pairs": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "dropped_steps": 0,
+      "coverage_is_observed": true
+    }
+  },
+  "exact_token_comparisons": [
+    {
+      "workload": "calibration",
+      "left": "U",
+      "right": "E",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "701171facfc14581b842724a1abb5922",
+        "candidate_run_id": "120d75b5c37d4e6ea94c3904bd2ccf55",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "calibration",
+      "left": "U",
+      "right": "P",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "701171facfc14581b842724a1abb5922",
+        "candidate_run_id": "4e0da18d44fd47cea4cb0dddcfa58150",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "calibration",
+      "left": "U",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "701171facfc14581b842724a1abb5922",
+        "candidate_run_id": "02713390b5b74d85b89cf39f5bf48e94",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "calibration",
+      "left": "U",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "701171facfc14581b842724a1abb5922",
+        "candidate_run_id": "40ca86591ab0421eb2ad0a2711dd8031",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "calibration",
+      "left": "E",
+      "right": "P",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "120d75b5c37d4e6ea94c3904bd2ccf55",
+        "candidate_run_id": "4e0da18d44fd47cea4cb0dddcfa58150",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "calibration",
+      "left": "E",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "120d75b5c37d4e6ea94c3904bd2ccf55",
+        "candidate_run_id": "02713390b5b74d85b89cf39f5bf48e94",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "calibration",
+      "left": "E",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "120d75b5c37d4e6ea94c3904bd2ccf55",
+        "candidate_run_id": "40ca86591ab0421eb2ad0a2711dd8031",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "calibration",
+      "left": "P",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "4e0da18d44fd47cea4cb0dddcfa58150",
+        "candidate_run_id": "02713390b5b74d85b89cf39f5bf48e94",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "calibration",
+      "left": "P",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "4e0da18d44fd47cea4cb0dddcfa58150",
+        "candidate_run_id": "40ca86591ab0421eb2ad0a2711dd8031",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "calibration",
+      "left": "T",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "02713390b5b74d85b89cf39f5bf48e94",
+        "candidate_run_id": "40ca86591ab0421eb2ad0a2711dd8031",
+        "request_count": 43,
+        "matched_request_count": 43,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "cal-000",
+          "cal-001",
+          "cal-002",
+          "cal-003",
+          "cal-004",
+          "cal-005",
+          "cal-006",
+          "cal-007",
+          "cal-008",
+          "cal-009",
+          "cal-010",
+          "cal-011",
+          "cal-012",
+          "cal-013",
+          "cal-014",
+          "cal-015",
+          "cal-016",
+          "cal-017",
+          "cal-018",
+          "cal-019",
+          "cal-020",
+          "cal-021",
+          "cal-022",
+          "cal-023",
+          "cal-024",
+          "cal-025",
+          "cal-026",
+          "cal-027",
+          "cal-028",
+          "cal-029",
+          "cal-030",
+          "cal-031",
+          "cal-032",
+          "cal-033",
+          "cal-034",
+          "cal-035",
+          "cal-036",
+          "cal-037",
+          "cal-038",
+          "cal-039",
+          "cal-040",
+          "cal-041",
+          "cal-042"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "U",
+      "right": "E",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "670ed28c5d084d07b53e8b101385af08",
+        "candidate_run_id": "f0c7ee3647974ff5a3744d2c4efbef93",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "U",
+      "right": "P",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "670ed28c5d084d07b53e8b101385af08",
+        "candidate_run_id": "5134ba697fb94dedab4f7146dd4a2a23",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "U",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "670ed28c5d084d07b53e8b101385af08",
+        "candidate_run_id": "0c5cb517e609473fbb2dd24f3a023aa3",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "U",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "670ed28c5d084d07b53e8b101385af08",
+        "candidate_run_id": "03bf0d7bdabc419687c6e4300189d78b",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "E",
+      "right": "P",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "f0c7ee3647974ff5a3744d2c4efbef93",
+        "candidate_run_id": "5134ba697fb94dedab4f7146dd4a2a23",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "E",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "f0c7ee3647974ff5a3744d2c4efbef93",
+        "candidate_run_id": "0c5cb517e609473fbb2dd24f3a023aa3",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "E",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "f0c7ee3647974ff5a3744d2c4efbef93",
+        "candidate_run_id": "03bf0d7bdabc419687c6e4300189d78b",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "P",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "5134ba697fb94dedab4f7146dd4a2a23",
+        "candidate_run_id": "0c5cb517e609473fbb2dd24f3a023aa3",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "P",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "5134ba697fb94dedab4f7146dd4a2a23",
+        "candidate_run_id": "03bf0d7bdabc419687c6e4300189d78b",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_normal",
+      "left": "T",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "0c5cb517e609473fbb2dd24f3a023aa3",
+        "candidate_run_id": "03bf0d7bdabc419687c6e4300189d78b",
+        "request_count": 16,
+        "matched_request_count": 16,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "normal-000",
+          "normal-001",
+          "normal-002",
+          "normal-003",
+          "normal-004",
+          "normal-005",
+          "normal-006",
+          "normal-007",
+          "normal-008",
+          "normal-009",
+          "normal-010",
+          "normal-011",
+          "normal-012",
+          "normal-013",
+          "normal-014",
+          "normal-015"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "U",
+      "right": "E",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "b382471dd2fb4eda8dcc255b073a571d",
+        "candidate_run_id": "a80b292faac54a309d22d47ce3b8d05e",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "U",
+      "right": "P",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "b382471dd2fb4eda8dcc255b073a571d",
+        "candidate_run_id": "c6cd89aeab79464bba69b660f16680fd",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "U",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "b382471dd2fb4eda8dcc255b073a571d",
+        "candidate_run_id": "f00c2e3e642244eb96ac700a00b88920",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "U",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "b382471dd2fb4eda8dcc255b073a571d",
+        "candidate_run_id": "07e8b6f82158409a980b3e2299cbf3e6",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "E",
+      "right": "P",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "a80b292faac54a309d22d47ce3b8d05e",
+        "candidate_run_id": "c6cd89aeab79464bba69b660f16680fd",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "E",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "a80b292faac54a309d22d47ce3b8d05e",
+        "candidate_run_id": "f00c2e3e642244eb96ac700a00b88920",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "E",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "a80b292faac54a309d22d47ce3b8d05e",
+        "candidate_run_id": "07e8b6f82158409a980b3e2299cbf3e6",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "P",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "c6cd89aeab79464bba69b660f16680fd",
+        "candidate_run_id": "f00c2e3e642244eb96ac700a00b88920",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "P",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "c6cd89aeab79464bba69b660f16680fd",
+        "candidate_run_id": "07e8b6f82158409a980b3e2299cbf3e6",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_boundary",
+      "left": "T",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "f00c2e3e642244eb96ac700a00b88920",
+        "candidate_run_id": "07e8b6f82158409a980b3e2299cbf3e6",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "U",
+      "right": "E",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "db58ef31923a4278a33f2af73ea40917",
+        "candidate_run_id": "bb53ba2d7d98476c96db6a7155197895",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "U",
+      "right": "P",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "db58ef31923a4278a33f2af73ea40917",
+        "candidate_run_id": "1e1679c73be54e64ae116b468277d5ea",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "U",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "db58ef31923a4278a33f2af73ea40917",
+        "candidate_run_id": "80848c0e712d4e58bc6335ce0c94d964",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "U",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "db58ef31923a4278a33f2af73ea40917",
+        "candidate_run_id": "c0e0e679a5ef4cdeab4a58ad6ef4ab2b",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "E",
+      "right": "P",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "bb53ba2d7d98476c96db6a7155197895",
+        "candidate_run_id": "1e1679c73be54e64ae116b468277d5ea",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "E",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "bb53ba2d7d98476c96db6a7155197895",
+        "candidate_run_id": "80848c0e712d4e58bc6335ce0c94d964",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "E",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "bb53ba2d7d98476c96db6a7155197895",
+        "candidate_run_id": "c0e0e679a5ef4cdeab4a58ad6ef4ab2b",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "P",
+      "right": "T",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "1e1679c73be54e64ae116b468277d5ea",
+        "candidate_run_id": "80848c0e712d4e58bc6335ce0c94d964",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "P",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "1e1679c73be54e64ae116b468277d5ea",
+        "candidate_run_id": "c0e0e679a5ef4cdeab4a58ad6ef4ab2b",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    },
+    {
+      "workload": "heldout_mixed",
+      "left": "T",
+      "right": "C",
+      "equivalent": true,
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "80848c0e712d4e58bc6335ce0c94d964",
+        "candidate_run_id": "c0e0e679a5ef4cdeab4a58ad6ef4ab2b",
+        "request_count": 20,
+        "matched_request_count": 20,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "mixed-000",
+          "mixed-001",
+          "mixed-002",
+          "mixed-003",
+          "mixed-004",
+          "mixed-005",
+          "mixed-006",
+          "mixed-007",
+          "mixed-008",
+          "mixed-009",
+          "mixed-010",
+          "mixed-011",
+          "mixed-012",
+          "mixed-013",
+          "mixed-014",
+          "mixed-015",
+          "mixed-016",
+          "mixed-017",
+          "mixed-018",
+          "mixed-019"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    }
+  ],
+  "control_exact_token_comparisons": [
+    {
+      "left": "P",
+      "right": "overflow-control-cap4-native",
+      "workload": "heldout_boundary",
+      "comparison": {
+        "schema_version": 1,
+        "kind": "graphbudget_exact_token_comparison",
+        "baseline_run_id": "c6cd89aeab79464bba69b660f16680fd",
+        "candidate_run_id": "f18280840ce84977b06fcc0c9e403501",
+        "request_count": 70,
+        "matched_request_count": 70,
+        "mismatched_request_count": 0,
+        "matched_workload_request_ids": [
+          "boundary-000",
+          "boundary-001",
+          "boundary-002",
+          "boundary-003",
+          "boundary-004",
+          "boundary-005",
+          "boundary-006",
+          "boundary-007",
+          "boundary-008",
+          "boundary-009",
+          "boundary-010",
+          "boundary-011",
+          "boundary-012",
+          "boundary-013",
+          "boundary-014",
+          "boundary-015",
+          "boundary-016",
+          "boundary-017",
+          "boundary-018",
+          "boundary-019",
+          "boundary-020",
+          "boundary-021",
+          "boundary-022",
+          "boundary-023",
+          "boundary-024",
+          "boundary-025",
+          "boundary-026",
+          "boundary-027",
+          "boundary-028",
+          "boundary-029",
+          "boundary-030",
+          "boundary-031",
+          "boundary-032",
+          "boundary-033",
+          "boundary-034",
+          "boundary-035",
+          "boundary-036",
+          "boundary-037",
+          "boundary-038",
+          "boundary-039",
+          "boundary-040",
+          "boundary-041",
+          "boundary-042",
+          "boundary-043",
+          "boundary-044",
+          "boundary-045",
+          "boundary-046",
+          "boundary-047",
+          "boundary-048",
+          "boundary-049",
+          "boundary-050",
+          "boundary-051",
+          "boundary-052",
+          "boundary-053",
+          "boundary-054",
+          "boundary-055",
+          "boundary-056",
+          "boundary-057",
+          "boundary-058",
+          "boundary-059",
+          "boundary-060",
+          "boundary-061",
+          "boundary-062",
+          "boundary-063",
+          "boundary-064",
+          "boundary-065",
+          "boundary-066",
+          "boundary-067",
+          "boundary-068",
+          "boundary-069"
+        ],
+        "mismatches": [],
+        "equivalent": true
+      }
+    }
+  ],
+  "coverage_assertion": "derived only from observed paths_after.json; missing boundary/padding evidence fails validation"
+}

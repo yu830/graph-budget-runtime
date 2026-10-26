@@ -14,6 +14,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from graphbudget.benchmark import compare_exact_tokens
+from graphbudget.identity import code_digest, digest
 
 
 def read(path):
@@ -71,6 +72,16 @@ def main():
     profile_dir, profile = stage(run, "profile", "profile.json")
     validation_dir, validation = stage(run, "validate", "validation.json")
     performance_dir, performance = stage(run, "performance", "performance.json")
+    modules = {p.name: code_digest(p) for p in sorted((ROOT / "src/graphbudget").glob("*.py"))}
+    if digest(modules) != plan["fingerprint"]["identity"]["graphbudget_sha256"]:
+        raise ValueError("Current runtime source differs from the measured identity")
+    for name, expected in modules.items():
+        committed = subprocess.check_output(["git", "show", f"HEAD:src/graphbudget/{name}"], cwd=ROOT)
+        if hashlib.sha256(committed.replace(b"\r\n", b"\n")).hexdigest() != expected:
+            raise ValueError("Runtime source is not represented by the reported Git commit")
+    manifest = read(ROOT / "src/graphbudget/patches/manifest.json")
+    if manifest["patch_sha256"] != plan["fingerprint"]["identity"]["sglang"]["patch_sha256"]:
+        raise ValueError("Packaged upstream patch differs from the measured version")
     if any(not c["equivalent"] for c in validation["exact_token_comparisons"]):
         raise ValueError("Exact-token validation failed")
     rows = {}
@@ -139,6 +150,12 @@ def main():
         for file in sorted(directory.rglob("*")):
             if file.is_file() and file.suffix in (".json", ".csv", ".log"):
                 source_hashes[file.relative_to(run).as_posix()] = sha(file)
+    performance = json.loads(json.dumps(performance))
+    performance["kind"] = "graphbudget_performance_summary"
+    for row in performance["exploratory_single_runs"]:
+        bench = row["benchmark"]
+        row["benchmark"] = {"run": bench["run"], "summary": bench["summary"],
+                            "workload_id": bench["workload"]["workload_id"]}
     def redact(value):
         if isinstance(value, dict):
             return {k: redact(v) for k, v in value.items()}
@@ -152,8 +169,8 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     for name, data in (("summary.json", summary), ("plan.json", plan), ("profile.json", profile),
                        ("validation.json", validation), ("performance.json", performance)):
-        (output / name).write_text(json.dumps(redact(data), indent=2) + "\n", encoding="utf-8")
-    (output / "RAW_MANIFEST.json").write_text(json.dumps(source_hashes, indent=2) + "\n", encoding="utf-8")
+        (output / name).write_text(json.dumps(redact(data), indent=2) + "\n", encoding="utf-8", newline="\n")
+    (output / "RAW_MANIFEST.json").write_text(json.dumps(source_hashes, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(json.dumps(summary, indent=2))
 
 

@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "fingerprint": {
+    "identity": {
+      "attention_backend": "triton",
+      "config": {
+        "chunked_prefill_size": 2048,
+        "context_length": 4096,
+        "disable_cuda_graph_padding": false,
+        "disable_overlap_schedule": true,
+        "disable_radix_cache": false,
+        "enable_deterministic_inference": true,
+        "kv_cache_dtype": "auto",
+        "max_prefill_tokens": 16384,
+        "max_running_requests": 16,
+        "max_total_tokens": 4096,
+        "mem_fraction_static": 0.85,
+        "page_size": 1,
+        "random_seed": 0,
+        "sampling_backend": "pytorch",
+        "schedule_policy": "fcfs",
+        "stream_interval": 1,
+        "stream_output": true
+      },
+      "cuda": "12.8",
+      "decode_attention_backend": null,
+      "dependencies": {
+        "compressed-tensors": "0.15.0.1",
+        "flashinfer-cubin": "0.6.3",
+        "flashinfer-python": "0.6.3",
+        "sgl-kernel": "0.3.21",
+        "sglang": "0.5.9",
+        "torch": "2.9.1+cu128",
+        "transformers": "4.57.1",
+        "triton": "3.5.1"
+      },
+      "dtype": "bfloat16",
+      "gpu": {
+        "compute_capability": [
+          12,
+          0
+        ],
+        "driver": "617.42",
+        "name": "NVIDIA GeForce RTX 5070 Laptop GPU",
+        "total_bytes": 8518041600,
+        "uuid_sha256": "fe652dace62bf04e1eec41e675a1f50e67a24b1d4af1183ae05cdc50cda68d46"
+      },
+      "graphbudget_sha256": "6657a18f971f8f4d1dad20a8c7c1eda198826ec59b5e387794f7b8fcd1edef3b",
+      "model": {
+        "files_sha256": {
+          "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+          "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "manifest_sha256": "74bf6dd08049d862b3bd56ac2a84a8e1980ae93acfad71612a9ea00548e887b7",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      },
+      "prefill_attention_backend": null,
+      "python": "3.12.13",
+      "runtime_env": {
+        "CUDA_MODULE_LOADING": "AUTO",
+        "CUDA_VISIBLE_DEVICES": null,
+        "MKL_NUM_THREADS": null,
+        "NVIDIA_TF32_OVERRIDE": null,
+        "OMP_NUM_THREADS": null,
+        "PYTORCH_CUDA_ALLOC_CONF": null,
+        "SGLANG_BATCH_INVARIANT_OPS_ENABLE_MM_DEEPGEMM": "0",
+        "SGLANG_BATCH_INVARIANT_OPS_ENABLE_MM_FALLBACK_VARIANT": null,
+        "SGLANG_ENABLE_DETERMINISTIC_INFERENCE": "1"
+      },
+      "sglang": {
+        "base_commit": "bbe9c7eeb520b0a67e92d133dfc137a3688dc7f2",
+        "patch_sha256": "3146afe85bcd1e687dcdd3b1ba656a70687dabacfbed3301e4579205962fecec",
+        "patched_files": {
+          "srt/managers/scheduler.py": "74beb3b407c31585978427441f360b17f5b27ff9b3448cf3f40ab9b62800087c",
+          "srt/model_executor/cuda_graph_runner.py": "b2704929c6b42ae4546c3422b7bcda2f40bae389563a2e6fcfd270b883f12019",
+          "srt/model_executor/forward_batch_info.py": "af598ab63b9053007b43314ecadd3531f32ff3492bbef4087f3f0b119f13a623",
+          "srt/model_executor/model_runner.py": "5af6f2dc59d08e8ca385b046dbca006e65fa52b0f3d0d7531959eebeb648079f",
+          "srt/server_args.py": "cc09a3d5c3c79804cbcf39ccce018d8777b8948c28b781b93a5bdd052603c212"
+        },
+        "srt_tree_sha256": "74d0efae3315d7b19d645734f5244e3600d433a9441ee24617e5c9ce3977240f"
+      },
+      "tp_size": 1
+    },
+    "sha256": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b"
+  },
+  "budget": {
+    "allowed_device_bytes": 7516192768,
+    "min_kv_tokens": 1296,
+    "max_startup_seconds": 600.0
+  },
+  "selected": {
+    "id": "cap-1-2-4-8-12-16",
+    "capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      12,
+      16
+    ],
+    "server_args": {
+      "mem_fraction_static": 0.85,
+      "max_total_tokens": 4096,
+      "max_running_requests": 16,
+      "context_length": 4096
+    },
+    "status": "ok",
+    "reason": "",
+    "evidence": {
+      "provenance": "measured",
+      "run_id": "1d11b2d0fa974f51a32659faf56973e7",
+      "case_sha256": "6d4a50a4f73e97193356f6f88c66decdfc69b6fc7a6599bff7a804b5bef9c7b9",
+      "raw_directory": "${RUN}/measure/attempt-003/candidate-2",
+      "fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b",
+      "actual_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "requested_capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ]
+    },
+    "ready": {
+      "device_total_bytes": 8518041600,
+      "device_free_bytes": 6166675456,
+      "device_used_bytes": 2351366144,
+      "torch_allocated_bytes": 1072908288,
+      "torch_reserved_bytes": 1117782016,
+      "torch_peak_allocated_bytes": 1077798912,
+      "torch_peak_reserved_bytes": 1138753536,
+      "kv_tokens": 4096,
+      "startup_seconds": 29.956893772000058,
+      "capture_seconds": 1.5782012689999192
+    },
+    "calibration_seconds": 1.673352232999946,
+    "runtime_peak_device_used_bytes": 2428502016
+  },
+  "candidates": [
+    {
+      "id": "cap-1-2-4",
+      "capture_sizes": [
+        1,
+        2,
+        4
+      ],
+      "server_args": {
+        "mem_fraction_static": 0.85,
+        "max_total_tokens": 4096,
+        "max_running_requests": 16,
+        "context_length": 4096
+      },
+      "status": "ok",
+      "reason": "",
+      "evidence": {
+        "provenance": "measured",
+        "run_id": "8eb1632725e54c9aab26be9699c1ff67",
+        "case_sha256": "bdb2c94dc5b02b072370433ed12ab6ad3a01aa4a7ec2c984b6a37dcd5a6ae95b",
+        "raw_directory": "${RUN}/measure/attempt-003/candidate-0",
+        "fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b",
+        "actual_capture_sizes": [
+          1,
+          2,
+          4
+        ],
+        "requested_capture_sizes": [
+          1,
+          2,
+          4
+        ]
+      },
+      "ready": {
+        "device_total_bytes": 8518041600,
+        "device_free_bytes": 6196035584,
+        "device_used_bytes": 2322006016,
+        "torch_allocated_bytes": 1064452608,
+        "torch_reserved_bytes": 1096810496,
+        "torch_peak_allocated_bytes": 1065675264,
+        "torch_peak_reserved_bytes": 1096810496,
+        "kv_tokens": 4096,
+        "startup_seconds": 34.26801342699997,
+        "capture_seconds": 1.5066163269999606
+      },
+      "calibration_seconds": 1.9579234139999926,
+      "runtime_peak_device_used_bytes": 2440036352
+    },
+    {
+      "id": "cap-1-2-4-8",
+      "capture_sizes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "server_args": {
+        "mem_fraction_static": 0.85,
+        "max_total_tokens": 4096,
+        "max_running_requests": 16,
+        "context_length": 4096
+      },
+      "status": "ok",
+      "reason": "",
+      "evidence": {
+        "provenance": "measured",
+        "run_id": "069ffce12dca41c79deae304a584d61a",
+        "case_sha256": "2b784cd2a897ea0aeeeadcaf0bf9d7d31605d0716f5d572a2041b0a6bea76d9f",
+        "raw_directory": "${RUN}/measure/attempt-003/candidate-1",
+        "fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b",
+        "actual_capture_sizes": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "requested_capture_sizes": [
+          1,
+          2,
+          4,
+          8
+        ]
+      },
+      "ready": {
+        "device_total_bytes": 8518041600,
+        "device_free_bytes": 6193938432,
+        "device_used_bytes": 2324103168,
+        "torch_allocated_bytes": 1067271168,
+        "torch_reserved_bytes": 1096810496,
+        "torch_peak_allocated_bytes": 1069716480,
+        "torch_peak_reserved_bytes": 1117782016,
+        "kv_tokens": 4096,
+        "startup_seconds": 30.293809772999907,
+        "capture_seconds": 2.1801006419999567
+      },
+      "calibration_seconds": 1.8282069940000838,
+      "runtime_peak_device_used_bytes": 2455764992
+    },
+    {
+      "id": "cap-1-2-4-8-12-16",
+      "capture_sizes": [
+        1,
+        2,
+        4,
+        8,
+        12,
+        16
+      ],
+      "server_args": {
+        "mem_fraction_static": 0.85,
+        "max_total_tokens": 4096,
+        "max_running_requests": 16,
+        "context_length": 4096
+      },
+      "status": "ok",
+      "reason": "",
+      "evidence": {
+        "provenance": "measured",
+        "run_id": "1d11b2d0fa974f51a32659faf56973e7",
+        "case_sha256": "6d4a50a4f73e97193356f6f88c66decdfc69b6fc7a6599bff7a804b5bef9c7b9",
+        "raw_directory": "${RUN}/measure/attempt-003/candidate-2",
+        "fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b",
+        "actual_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          12,
+          16
+        ],
+        "requested_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          12,
+          16
+        ]
+      },
+      "ready": {
+        "device_total_bytes": 8518041600,
+        "device_free_bytes": 6166675456,
+        "device_used_bytes": 2351366144,
+        "torch_allocated_bytes": 1072908288,
+        "torch_reserved_bytes": 1117782016,
+        "torch_peak_allocated_bytes": 1077798912,
+        "torch_peak_reserved_bytes": 1138753536,
+        "kv_tokens": 4096,
+        "startup_seconds": 29.956893772000058,
+        "capture_seconds": 1.5782012689999192
+      },
+      "calibration_seconds": 1.673352232999946,
+      "runtime_peak_device_used_bytes": 2428502016
+    }
+  ],
+  "feasible_ids": [
+    "cap-1-2-4",
+    "cap-1-2-4-8",
+    "cap-1-2-4-8-12-16"
+  ],
+  "pareto_ids": [
+    "cap-1-2-4",
+    "cap-1-2-4-8",
+    "cap-1-2-4-8-12-16"
+  ],
+  "rejections": []
+}

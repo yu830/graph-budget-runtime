@@ -43,10 +43,11 @@
       "uuid_sha256": "fe652dace62bf04e1eec41e675a1f50e67a24b1d4af1183ae05cdc50cda68d46"
     }
   },
-  "gpu_validation": "IN_PROGRESS",
+  "gpu_validation": "PASS_IN_PINNED_DETERMINISTIC_CONFIGURATION",
   "benchmark_results": {
-    "status": "IN_PROGRESS",
-    "evidence_root": "work/core-deterministic"
+    "status": "COMPLETE_NO_PERFORMANCE_ADOPTION",
+    "summary": "results/2026-10-26/summary.json",
+    "runtime_fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b"
   },
   "source_files": [
     {

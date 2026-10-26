@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-26",
+  "status": "CORE_COMPLETE_NO_PERFORMANCE_ADOPTION",
+  "implementation_commit": "9340ee0b3f6e7d6054b4062540ece46c5f087c42",
+  "branch": "codex/core-v1",
+  "runtime_fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b",
+  "sglang_base": "bbe9c7eeb520b0a67e92d133dfc137a3688dc7f2",
+  "sglang_patch_sha256": "3146afe85bcd1e687dcdd3b1ba656a70687dabacfbed3301e4579205962fecec",
+  "model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "dtype": "bfloat16",
+    "tp_size": 1,
+    "attention_backend": "triton",
+    "deterministic_inference": true,
+    "batch_invariant_deepgemm": false
+  },
+  "core_implementation": "COMPLETE",
+  "cpu_checks": {
+    "status": "PASS",
+    "tests": 57,
+    "skipped": 0,
+    "clean_install_replay": true
+  },
+  "model_correctness": {
+    "validated_mode": "PASS_EXACT_TOKENS",
+    "validation_cases": 21,
+    "validation_requests": 815,
+    "pairwise_comparisons": 40,
+    "default_mode": "FAILED_STRICT_TOKEN_COMPARISON_2_OF_43",
+    "tolerance_relaxed": false
+  },
+  "actual_paths": {
+    "graph_replay": "OBSERVED",
+    "padding_3_to_4": "OBSERVED",
+    "capture_ceiling_eager": "OBSERVED",
+    "forced_test_eager": "OBSERVED",
+    "selected_used_consistency": "PASS",
+    "learned_eager_switches": 0
+  },
+  "plan": {
+    "capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      12,
+      16
+    ],
+    "kv_tokens": 4096,
+    "budget": {
+      "allowed_device_bytes": 7516192768,
+      "min_kv_tokens": 1296,
+      "max_startup_seconds": 600.0
+    },
+    "profile_keys": 7,
+    "P_and_T_configuration_equivalent": true
+  },
+  "performance": {
+    "status": "NO_INCREMENTAL_GAIN_ESTABLISHED",
+    "decision": "KEEP_NATIVE_DISPATCH",
+    "paired_rounds_per_workload": 5,
+    "aa_pairs": 5,
+    "aa_scope": "heldout_boundary",
+    "completed_requests": 2078,
+    "failed_requests": 0,
+    "timed_out_requests": 0,
+    "resource_violations": [],
+    "median_paired_throughput_delta_percent": {
+      "heldout_normal": -0.24877330099775108,
+      "heldout_boundary": -2.17941176733919,
+      "heldout_mixed": -0.11304981432554984
+    }
+  },
+  "clean_gpu_replay": {
+    "status": "PASS",
+    "project_commit": "9340ee0b3f6e7d6054b4062540ece46c5f087c42",
+    "sglang_base": "bbe9c7eeb520b0a67e92d133dfc137a3688dc7f2",
+    "patch_sha256": "3146afe85bcd1e687dcdd3b1ba656a70687dabacfbed3301e4579205962fecec",
+    "runtime_fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b",
+    "completed_requests": 43,
+    "exact_token_matches": 43,
+    "output_tokens": 520,
+    "actual_capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      12,
+      16
+    ],
+    "kv_tokens": 4096,
+    "missing_cost_profile_native_fallback": "OBSERVED",
+    "loaded_from_clean_project_and_upstream_checkouts": true,
+    "timed_decode_counts": [
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 1,
+        "actual_capture_size": 1,
+        "reason": "policy_missing",
+        "count": 11
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 2,
+        "actual_capture_size": 2,
+        "reason": "policy_missing",
+        "count": 10
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 6,
+        "actual_capture_size": 8,
+        "reason": "policy_missing",
+        "count": 1
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 5,
+        "actual_capture_size": 8,
+        "reason": "policy_missing",
+        "count": 9
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 4,
+        "actual_capture_size": 4,
+        "reason": "policy_missing",
+        "count": 3
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 3,
+        "actual_capture_size": 4,
+        "reason": "policy_missing",
+        "count": 4
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 8,
+        "actual_capture_size": 8,
+        "reason": "policy_missing",
+        "count": 3
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 14,
+        "actual_capture_size": 16,
+        "reason": "policy_missing",
+        "count": 3
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 12,
+        "actual_capture_size": 12,
+        "reason": "policy_missing",
+        "count": 4
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 16,
+        "actual_capture_size": 16,
+        "reason": "policy_missing",
+        "count": 7
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 10,
+        "actual_capture_size": 12,
+        "reason": "policy_missing",
+        "count": 4
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 7,
+        "actual_capture_size": 8,
+        "reason": "policy_missing",
+        "count": 1
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 13,
+        "actual_capture_size": 16,
+        "reason": "policy_missing",
+        "count": 2
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 15,
+        "actual_capture_size": 16,
+        "reason": "policy_missing",
+        "count": 3
+      },
+      {
+        "eligible": true,
+        "selected_path": "graph",
+        "used_path": "graph",
+        "batch_size": 9,
+        "actual_capture_size": 12,
+        "reason": "policy_missing",
+        "count": 3
+      }
+    ],
+    "raw_case_sha256": "142bb7bb390659ec29125c67b65dcce4f91a16ebb1a50383aa4543969765d065"
+  },
+  "limitations": [
+    "Only one dense model, one SM120 laptop and this pinned deterministic configuration.",
+    "Seven cost keys cover homogeneous batch-size-one contexts; other contexts retain native dispatch.",
+    "Default-mode token variability remains unaccepted; no relaxed numerical tolerance is claimed.",
+    "A/A noise was measured on the boundary workload only; desktop conditions were not hardware-isolated.",
+    "Compute Sanitizer NOT_RUN: executable unavailable; no global memory-safety claim.",
+    "No multi-GPU, online graph/KV resizing, or production-load acceptance."
+  ],
+  "delivery": {
+    "report": "docs/TECHNICAL_REPORT.md",
+    "results": "results/2026-10-26",
+    "private_raw_bundle": "work/deliverables/graphbudget-private-raw-20261026.zip",
+    "remote_push": "NOT_RUN",
+    "upstream_pr": "NOT_CREATED",
+    "drive_transfer": "NOT_REQUESTED",
+    "source_archive": "work/deliverables/graphbudget-core-v0.1.0.zip",
+    "raw_archive_sha256": "14cf06626a7dfebecc563e9020b83123fa51458ebf6f01628ca6ef3248a665c4",
+    "raw_archive_verified_file_count": 1352,
+    "remote_main_observed": "ce5a41cc069302dd14f671cce2473e040b9aa430"
+  },
+  "next_replay_command": "bash scripts/environment/with_runtime.sh scripts/run_core.py --model-path \"$MODEL_PATH\" --revision \"$MODEL_REVISION\" --backend triton --sglang-checkout \"$SGLANG_SOURCE\" --deterministic --output work/new-run --phase all",
+  "local_resume_entry": "work/RESUME.ps1"
+}

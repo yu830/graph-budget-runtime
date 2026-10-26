@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b",
+  "capture_sizes": [
+    1,
+    2,
+    4,
+    8,
+    12,
+    16
+  ],
+  "enabled": true,
+  "entries": [
+    {
+      "batch_size": 1,
+      "padded_size": 1,
+      "context_length": 32,
+      "graph_ns": 15419875,
+      "eager_ns": 20060131,
+      "noise_ns": 26263220,
+      "samples": 3,
+      "provenance": "measured"
+    },
+    {
+      "batch_size": 1,
+      "padded_size": 1,
+      "context_length": 33,
+      "graph_ns": 15238206,
+      "eager_ns": 19370598,
+      "noise_ns": 19395476,
+      "samples": 3,
+      "provenance": "measured"
+    },
+    {
+      "batch_size": 1,
+      "padded_size": 1,
+      "context_length": 34,
+      "graph_ns": 15821038,
+      "eager_ns": 19496702,
+      "noise_ns": 8822967,
+      "samples": 3,
+      "provenance": "measured"
+    },
+    {
+      "batch_size": 1,
+      "padded_size": 1,
+      "context_length": 35,
+      "graph_ns": 15029583,
+      "eager_ns": 24671645,
+      "noise_ns": 15775501,
+      "samples": 3,
+      "provenance": "measured"
+    },
+    {
+      "batch_size": 1,
+      "padded_size": 1,
+      "context_length": 36,
+      "graph_ns": 15701207,
+      "eager_ns": 22768940,
+      "noise_ns": 12879941,
+      "samples": 3,
+      "provenance": "measured"
+    },
+    {
+      "batch_size": 1,
+      "padded_size": 1,
+      "context_length": 37,
+      "graph_ns": 15834423,
+      "eager_ns": 17670630,
+      "noise_ns": 7573767,
+      "samples": 3,
+      "provenance": "measured"
+    },
+    {
+      "batch_size": 1,
+      "padded_size": 1,
+      "context_length": 38,
+      "graph_ns": 15415292,
+      "eager_ns": 19695885,
+      "noise_ns": 7652723,
+      "samples": 3,
+      "provenance": "measured"
+    }
+  ],
+  "sources": [
+    {
+      "case_sha256": "310b74b23bb0dc5900aa58f50851e36487943f219d6706c7a084859456de108e",
+      "paths_sha256": "cbaa77460f6414f08b89d9f2024613991d258b76a5626cbf9b833961e00ff9b6",
+      "run_id": "1048c1c40462411f866262c82b3fa6dd"
+    },
+    {
+      "case_sha256": "87e2d883ba62567d884003b11c8f53ed0f4f1bccd4293dadd89264f255248fd4",
+      "paths_sha256": "a854122add27d0a5e8c1a02aacd0c4b7510ee851e1c0cc5abfd3ddc245b479f0",
+      "run_id": "a5cfe784168544169e69417870062e51"
+    },
+    {
+      "case_sha256": "42943ed39e2a01fd87e6c0d368c60a1081ddd9c86c4f6793e2a69acf98ae7d34",
+      "paths_sha256": "1540cd5b112f47336365d7a846e079838c4413482a2d959994353d955f3d2af9",
+      "run_id": "cc54e71633234ec1b7d40df19c4504ef"
+    },
+    {
+      "case_sha256": "6dbbd8a3f7fe0653c682ee10921ee0bdb406fb0727673fa1ade95f712318fb94",
+      "paths_sha256": "df03639ac989e073d876233014533fb5f88ab744c4779a9405a399b2bfbcb8d8",
+      "run_id": "babe3ebd22554880a175ac5b05a71435"
+    },
+    {
+      "case_sha256": "f7753862cad01658a3f86380cacbda90605064e6aa2163cb38dc5a784bcb4cf9",
+      "paths_sha256": "2cd3e57b2587d1d68e43195c9465a5ac4728f1fa8bbc283b6348630944223827",
+      "run_id": "e9c9d7793ea6445db843768d554bc767"
+    },
+    {
+      "case_sha256": "8a2520cccba41510957fcf670ec5e69c5b3f2e792a3e53971b1895ba3ed776e0",
+      "paths_sha256": "2d8ae4db5ed7b1cc3c97ca883625a7f881add943acebc7b0e89d1e9e2e57457e",
+      "run_id": "e8c8b06397c64001a233a86840e16e3f"
+    }
+  ],
+  "timing_scope": "synchronized complete _forward_raw incl padding/copy/metadata; diagnostic only",
+  "noise_rule": "max(full graph range, full eager range, 2 percent of slower median)"
+}
