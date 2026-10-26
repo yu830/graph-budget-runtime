@@ -1,5 +1,28 @@
 # Source index
 
+## Executed development revision
+
+The implementation uses SGLang `v0.5.9`, base
+`bbe9c7eeb520b0a67e92d133dfc137a3688dc7f2`, with the exact patch and normalized
+runtime-tree hashes in `src/graphbudget/patches/manifest.json`.
+
+| Owning source in v0.5.9 | Responsibility |
+|---|---|
+| `python/sglang/srt/server_args.py`, `ServerArgs.__post_init__` | Plan application before argument normalization and capacity decisions. |
+| `python/sglang/srt/model_executor/model_runner.py`, `ModelRunner.__init__`, `initialize`, `_forward_raw` | Source/identity checks before weights and KV, actual pre-capture KV order, and path choice before dedicated preparation. |
+| `python/sglang/srt/model_executor/cuda_graph_runner.py`, `CudaGraphRunner.replay` | Actual `self.graphs[graph_key].replay()` call and its post-call observation. |
+| `python/sglang/srt/model_executor/forward_batch_info.py`, `ForwardBatch.init_new` | CPU request-ID attribution for diagnostics. |
+| `python/sglang/srt/managers/scheduler.py`, `Scheduler.flush_cache` | Synchronous export only at the existing idle management barrier. KV backing tensors remain alive. |
+| `python/sglang/srt/batch_invariant_ops/batch_invariant_ops.py`, `matmul_persistent` | Existing upstream deterministic Triton fallback selected by `SGLANG_BATCH_INVARIANT_OPS_ENABLE_MM_DEEPGEMM=0`. |
+
+This release was selected to reuse the functioning Torch 2.9.1+cu128 stack.
+Its KV allocation precedes graph capture; the research revision's conditional
+post-capture sizing is not used. Both revisions retain the low-memory default
+graph cap of 8 relevant to this device. Static cap tuning is upstream behavior;
+the main T baseline receives the same chosen capture configuration as P.
+
+## Preserved design research
+
 读取日期：2026-10-26。所有以下链接固定到 SGLang 研究 commit `c00e7e12b64b587da336c4350b1d2484c7dffcd6`；未使用当前 main 替代研究版本。Blob SHA 同时记录于 [upstream.lock.json](../upstream.lock.json)。
 
 ## 1. model_runner.py

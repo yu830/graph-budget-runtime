@@ -323,6 +323,37 @@ class SuiteScriptTests(unittest.TestCase):
         }
         self.assertTrue(run_core._source_matches(identity, current))
 
+    def test_completed_case_reuse_checks_workload_source_and_flags(self) -> None:
+        # Synthetic receipt validates recovery guards only, never GPU execution.
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            workload = root / "workload.json"
+            workload.write_text(json.dumps({"workload_id":"cpu", "purpose":"test",
+                "requests":[{"request_id":"one", "input_ids":[1,2], "max_new_tokens":2}]}))
+            frozen = run_core.load_workload(workload).to_dict()
+            output = root / "case"
+            output.mkdir()
+            (output / "case.json").write_text(json.dumps({"status":"ok", "run_id":"r",
+                "ready":{"fingerprint":"a"*64},
+                "benchmark":{"workload":frozen,"run":{"run_id":"r"}}}))
+            (output / "warmup.json").write_text('{"synthetic_cpu_fixture":true}')
+            (output / "invocation.json").write_text(json.dumps({"run_id":"r", "command":[
+                "python","-m","graphbudget.cli","launch","--policy","native","--observe","counts",
+                "--","--fixture","--host","127.0.0.1","--port","30150"]}))
+            experiment = {"server_args":["--fixture"],"port":30150,
+                          "_expected_runtime_fingerprint":"a"*64}
+            with patch.object(run_core, "gpu_lease", side_effect=AssertionError("recovery is read-only")):
+                self.assertEqual(run_core._run_case(experiment,workload=workload,output=output)["status"],"ok")
+                with self.assertRaises(run_core.SuiteError):
+                    run_core._run_case({**experiment,"_expected_runtime_fingerprint":"b"*64},workload=workload,output=output)
+                with self.assertRaises(run_core.SuiteError):
+                    run_core._run_case(experiment,workload=workload,output=output,policy="cost")
+                changed = json.loads(workload.read_text())
+                changed["requests"][0]["input_ids"] = [3,4]
+                workload.write_text(json.dumps(changed))
+                with self.assertRaises(run_core.SuiteError):
+                    run_core._run_case(experiment,workload=workload,output=output)
+
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()

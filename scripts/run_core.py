@@ -58,6 +58,7 @@ from graphbudget.experiment import (  # noqa: E402
     build_cost_profile,
     measure_candidates,
     run_case,
+    gpu_lease,
 )
 from graphbudget.identity import model_identity, code_digest, source_identity  # noqa: E402
 from graphbudget.plan import select_plan  # noqa: E402
@@ -959,10 +960,50 @@ def _run_case(
     calibrate: bool = False,
     warmup: bool = True,
 ) -> dict[str, Any]:
+    effective_args = list(server_args) if server_args is not None else experiment["server_args"]
     if output.exists():
-        raise SuiteError(f"Refusing to reuse case directory: {output}")
+        case_path = output / "case.json"
+        invocation = _read_json(output / "invocation.json")
+        if case_path.is_file():
+            case = _read_json(case_path)
+            command = invocation["command"]
+            split = command.index("--")
+            head, tail = command[:split], command[split + 1:]
+            expected_tail = [*effective_args, "--host", "127.0.0.1", "--port", str(experiment["port"])]
+            if capture_sizes is not None:
+                expected_tail += ["--cuda-graph-bs", *map(str, capture_sizes)]
+            expected = {"--policy": policy, "--observe": "diagnostic" if diagnostic else "counts"}
+            for name, value in (("--plan", plan), ("--profile", profile)):
+                expected[name] = str(Path(value).resolve()) if value is not None else None
+            actual = {name: head[head.index(name) + 1] if name in head else None for name in expected}
+            ready = case.get("ready", {})
+            if (case.get("status") != "ok" or tail != expected_tail or actual != expected
+                    or ("--calibrate" in head) != calibrate
+                    or (output / "warmup.json").is_file() != warmup
+                    or ready.get("fingerprint") != experiment.get("_expected_runtime_fingerprint")
+                    or case.get("benchmark", {}).get("workload") != load_workload(workload).to_dict()
+                    or case.get("run_id") != invocation.get("run_id")
+                    or case.get("benchmark", {}).get("run", {}).get("run_id") != case.get("run_id")):
+                raise SuiteError(f"Existing case does not match the frozen requested run: {output}")
+            return case
+        # A refused lease creates only invocation.json, before any process or
+        # measurement is started. Preserve that command and use a fresh path.
+        if output.is_symlink() or {p.name for p in output.iterdir()} != {"invocation.json"}:
+            raise SuiteError(f"Incomplete executed case requires a new attempt: {output}")
+        archived = output.with_name(output.name + f".lease-rejected-{time.time_ns()}")
+        output.rename(archived)
+    deadline = time.monotonic() + 60
+    while True:
+        try:
+            with gpu_lease():
+                pass
+            break
+        except RuntimeError as error:
+            if "owns the lease" not in str(error) or time.monotonic() >= deadline:
+                raise
+            time.sleep(0.25)
     return run_case(
-        list(server_args) if server_args is not None else experiment["server_args"],
+        effective_args,
         workload,
         output,
         capture_sizes=capture_sizes,
@@ -1461,6 +1502,12 @@ def _phase_performance(
         raise SuiteError("profile phase is not complete")
     profile_path = profile_stage / "profile.json"
     attempt = _new_attempt(stage)
+    prior = _stage_state(stage)
+    if (prior and prior.get("status") == "failed"
+            and "owns the lease" in prior.get("error", "")
+            and re.fullmatch(r"attempt-\d+", prior.get("attempt", ""))):
+        attempt = stage / prior["attempt"]
+    experiment = {**experiment, "_expected_runtime_fingerprint": _read_json(plan_path)["fingerprint"]["sha256"]}
     _mark_stage(stage, status="running", attempt=attempt)
     try:
         workloads = {
