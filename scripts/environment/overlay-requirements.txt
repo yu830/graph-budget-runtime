@@ -1,0 +1,15 @@
+# Task-local repair set for the pinned SGLang 0.5.9 route.
+# Install into GRAPHBUDGET_ENV with --no-deps --only-binary=:all:.
+# Torch/Triton/CUDA/FlashInfer/SGLang remain inherited from their pinned envs.
+compressed-tensors==0.15.0.1
+gguf==0.19.0
+einops==0.8.2
+cuda-python==12.9.4
+cuda-bindings==12.9.10
+cuda-pathfinder==1.8.4
+jsonschema==4.26.0
+jsonschema-specifications==2025.9.1
+referencing==0.37.0
+rpds-py==2026.9.1
+loguru==0.7.3
+xgrammar==0.1.27

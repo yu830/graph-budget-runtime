@@ -1,5 +1,9 @@
 # GraphBudget：显存预算约束下的 LLM CUDA Graph 执行规划
 
+> Historical design input. Implementation was explicitly authorized on
+> 2026-10-26. See STATUS.md and TECHNICAL_REPORT.md for executed results;
+> the design-phase restrictions below do not govern the active implementation.
+
 设计日期：2026-10-25；文档建仓及来源复核：2026-10-26。状态：**设计完成；Runtime 尚未实现；目标 GPU 尚未验证；性能收益未知。**
 
 仓库：`yu830/graph-budget-runtime`。工程底座：SGLang。初版只支持单 GPU、TP=1、dense 小模型、普通 decode；不实现通用推理引擎。

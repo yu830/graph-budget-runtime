@@ -1,5 +1,19 @@
 # Project status
 
+Implementation phase activated on 2026-10-26. The design-only restriction below
+is historical and was superseded by the implementation request.
+
+The installable CPU core, exact-base SGLang patch, pre-initialization plan
+application, reject-only dispatch, real-call observation, and experiment
+entry points are implemented. Initial patched model requests and graph/padding/
+overflow paths have executed on the target laptop. Full calibration,
+correctness and paired performance evaluation are in progress. No improvement
+over the strong static baseline is established.
+
+The following text records the original design milestone.
+
+## Original design milestone
+
 状态日期：2026-10-26。范围：D0 文档阶段。
 
 | 字段 | 实际值 |

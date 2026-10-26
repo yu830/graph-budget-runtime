@@ -1,25 +1,53 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "repo": "https://github.com/sgl-project/sglang",
   "research_commit": "c00e7e12b64b587da336c4350b1d2484c7dffcd6",
   "design_date": "2026-10-25",
   "collected_at": "2026-10-26",
-  "purpose": "Design and source review only; not a reproducible runtime environment lock.",
-  "development_commit": null,
-  "runtime_dependencies": null,
+  "purpose": "Preserved research snapshot and actually executed development configuration. Acceptance is claim-specific in PROJECT_COMPLETION.json.",
+  "development_commit": "bbe9c7eeb520b0a67e92d133dfc137a3688dc7f2",
+  "runtime_dependencies": {
+    "torch": "2.9.1+cu128",
+    "triton": "3.5.1",
+    "sglang": "0.5.9",
+    "sgl-kernel": "0.3.21",
+    "flashinfer-python": "0.6.3",
+    "flashinfer-cubin": "0.6.3",
+    "transformers": "4.57.1",
+    "compressed-tensors": "0.15.0.1"
+  },
   "planned_model": {
     "id": "Qwen/Qwen2.5-0.5B-Instruct",
-    "weights_revision": null,
+    "weights_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
     "dtype": "bfloat16",
     "tensor_parallel_size": 1,
-    "attention_backend": null,
-    "downloaded": false,
-    "runtime_tested": false
+    "attention_backend": "triton",
+    "downloaded": true,
+    "runtime_tested": true,
+    "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "manifest_sha256": "74bf6dd08049d862b3bd56ac2a84a8e1980ae93acfad71612a9ea00548e887b7"
   },
   "target_device": "NVIDIA GeForce RTX 5070 Laptop GPU, 8 GB class; WSL Ubuntu",
-  "runtime_environment": null,
-  "gpu_validation": "NOT_RUN",
-  "benchmark_results": null,
+  "runtime_environment": {
+    "os": "WSL Ubuntu 24.04.4",
+    "python": "3.12.13",
+    "cuda_runtime": "12.8",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5070 Laptop GPU",
+      "compute_capability": [
+        12,
+        0
+      ],
+      "total_bytes": 8518041600,
+      "driver": "617.42",
+      "uuid_sha256": "fe652dace62bf04e1eec41e675a1f50e67a24b1d4af1183ae05cdc50cda68d46"
+    }
+  },
+  "gpu_validation": "IN_PROGRESS",
+  "benchmark_results": {
+    "status": "IN_PROGRESS",
+    "evidence_root": "work/core-deterministic"
+  },
   "source_files": [
     {
       "url": "https://github.com/sgl-project/sglang/blob/c00e7e12b64b587da336c4350b1d2484c7dffcd6/python/sglang/srt/model_executor/model_runner.py",
@@ -45,5 +73,42 @@
       "url": "https://github.com/sgl-project/sglang/blob/c00e7e12b64b587da336c4350b1d2484c7dffcd6/python/sglang/srt/arg_groups/overrides.py",
       "blob_sha": "d29583d12411fc3c5de54831add65b8ff1b95688"
     }
-  ]
+  ],
+  "runtime_config": {
+    "mem_fraction_static": 0.85,
+    "max_total_tokens": 4096,
+    "max_running_requests": 16,
+    "context_length": 4096,
+    "page_size": 1,
+    "disable_radix_cache": false,
+    "disable_overlap_schedule": true,
+    "disable_cuda_graph_padding": false,
+    "chunked_prefill_size": 2048,
+    "sampling_backend": "pytorch",
+    "random_seed": 0,
+    "kv_cache_dtype": "auto",
+    "enable_deterministic_inference": true,
+    "schedule_policy": "fcfs",
+    "max_prefill_tokens": 16384,
+    "stream_interval": 1,
+    "stream_output": true
+  },
+  "runtime_env": {
+    "OMP_NUM_THREADS": null,
+    "MKL_NUM_THREADS": null,
+    "CUDA_MODULE_LOADING": "AUTO",
+    "PYTORCH_CUDA_ALLOC_CONF": null,
+    "CUDA_VISIBLE_DEVICES": null,
+    "NVIDIA_TF32_OVERRIDE": null,
+    "SGLANG_ENABLE_DETERMINISTIC_INFERENCE": "1",
+    "SGLANG_BATCH_INVARIANT_OPS_ENABLE_MM_DEEPGEMM": "0",
+    "SGLANG_BATCH_INVARIANT_OPS_ENABLE_MM_FALLBACK_VARIANT": null
+  },
+  "runtime_fingerprint": "819a0ddbc7ff7e3c60e3d8cc4c8068b405d76af19dd2a846fd5fb25acc38a07b",
+  "development_patch": {
+    "file": "src/graphbudget/patches/sglang-v0.5.9.patch",
+    "sha256": "3146afe85bcd1e687dcdd3b1ba656a70687dabacfbed3301e4579205962fecec",
+    "runtime_tree_sha256": "74d0efae3315d7b19d645734f5244e3600d433a9441ee24617e5c9ce3977240f",
+    "kv_sizing": "pre_capture"
+  }
 }

@@ -1,0 +1,144 @@
+diff --git a/python/sglang/srt/managers/scheduler.py b/python/sglang/srt/managers/scheduler.py
+index a9ff0ac..aaeb5d8 100644
+--- a/python/sglang/srt/managers/scheduler.py
++++ b/python/sglang/srt/managers/scheduler.py
+@@ -2636,6 +2636,8 @@ class Scheduler(
+ 
+             # TODO: allow optional empty cache
+             torch.cuda.empty_cache()
++            if self.tp_worker.model_runner.graphbudget is not None:
++                self.tp_worker.model_runner.graphbudget.flush()
+             logger.info("Cache flushed successfully!")
+             success = True
+         else:
+diff --git a/python/sglang/srt/model_executor/cuda_graph_runner.py b/python/sglang/srt/model_executor/cuda_graph_runner.py
+index f1ea1de..d08cc78 100644
+--- a/python/sglang/srt/model_executor/cuda_graph_runner.py
++++ b/python/sglang/srt/model_executor/cuda_graph_runner.py
+@@ -864,6 +864,8 @@ class CudaGraphRunner:
+         else:
+             graph_key = self.bs
+         self.graphs[graph_key].replay()
++        if self.model_runner.graphbudget is not None:
++            self.model_runner.graphbudget.replayed(self.bs)
+         output = self.output_buffers[graph_key]
+ 
+         if isinstance(output, LogitsProcessorOutput):
+diff --git a/python/sglang/srt/model_executor/forward_batch_info.py b/python/sglang/srt/model_executor/forward_batch_info.py
+index 2345235..da2e993 100644
+--- a/python/sglang/srt/model_executor/forward_batch_info.py
++++ b/python/sglang/srt/model_executor/forward_batch_info.py
+@@ -263,6 +263,9 @@ class ForwardBatch(ForwardBatchDeepSeekMHAMixin):
+     # Optional seq_lens on cpu
+     seq_lens_cpu: Optional[torch.Tensor] = None
+ 
++    # CPU-only request attribution for opt-in GraphBudget diagnostic records.
++    graphbudget_request_ids: Optional[List[str]] = None
++
+     # For logprob
+     return_logprob: bool = False
+     top_logprobs_nums: Optional[List[int]] = None
+@@ -381,6 +384,13 @@ class ForwardBatch(ForwardBatchDeepSeekMHAMixin):
+     ):
+         ret = cls(
+             forward_mode=batch.forward_mode,
++            graphbudget_request_ids=(
++                [req.rid for req in batch.reqs]
++                if getattr(model_runner, "graphbudget", None) is not None
++                and model_runner.graphbudget.diagnostic
++                and batch.reqs is not None
++                else None
++            ),
+             batch_size=len(batch.seq_lens),
+             input_ids=batch.input_ids,
+             req_pool_indices=batch.req_pool_indices,
+diff --git a/python/sglang/srt/model_executor/model_runner.py b/python/sglang/srt/model_executor/model_runner.py
+index 275775a..83ad316 100644
+--- a/python/sglang/srt/model_executor/model_runner.py
++++ b/python/sglang/srt/model_executor/model_runner.py
+@@ -410,6 +410,11 @@ class ModelRunner(ModelRunnerKVCacheMixin):
+             deep_gemm_wrapper.update_deep_gemm_config(gpu_id, server_args)
+ 
+         # Initialize the model runner
++        self.graphbudget = None
++        if os.environ.get("GRAPHBUDGET_ACTIVE") == "1":
++            from graphbudget.runtime import RuntimeState
++
++            self.graphbudget = RuntimeState(self)
+         self.initialize(min_per_gpu_memory)
+         self.check_quantized_moe_compatibility()
+ 
+@@ -429,6 +434,8 @@ class ModelRunner(ModelRunnerKVCacheMixin):
+         # For weight updates
+         self._model_update_group = {}
+         self._weights_send_group = {}
++        if self.graphbudget is not None:
++            self.graphbudget.ready()
+ 
+     def init_mindspore_runner(self):
+         # Init the mindspore runner
+@@ -2153,7 +2160,11 @@ class ModelRunner(ModelRunnerKVCacheMixin):
+                 "npu": NPUGraphRunner,
+             },
+         )
++        if self.graphbudget is not None:
++            self.graphbudget.capture_begin()
+         self.graph_runner = graph_runners[self.device](self)
++        if self.graphbudget is not None:
++            self.graphbudget.capture_end()
+ 
+         after_mem = get_available_gpu_memory(self.device, self.gpu_id)
+         self.graph_mem_usage = before_mem - after_mem
+@@ -2458,6 +2469,10 @@ class ModelRunner(ModelRunnerKVCacheMixin):
+             and self.graph_runner
+             and self.graph_runner.can_run(forward_batch)
+         )
++        if self.graphbudget is not None:
++            can_run_graph = self.graphbudget.begin(
++                forward_batch, can_run_graph, skip_attn_backend_init
++            )
+ 
+         if can_run_graph:
+             ret = self.graph_runner.replay(
+@@ -2465,6 +2480,8 @@ class ModelRunner(ModelRunnerKVCacheMixin):
+                 skip_attn_backend_init=skip_attn_backend_init,
+                 pp_proxy_tensors=pp_proxy_tensors,
+             )
++            if self.graphbudget is not None:
++                self.graphbudget.finish()
+             return ModelRunnerOutput(logits_output=ret, can_run_graph=can_run_graph)
+ 
+         # For MLP sync
+@@ -2490,6 +2507,8 @@ class ModelRunner(ModelRunnerKVCacheMixin):
+                 skip_attn_backend_init=skip_attn_backend_init,
+                 pp_proxy_tensors=pp_proxy_tensors,
+             )
++            if self.graphbudget is not None:
++                self.graphbudget.eager_returned()
+         elif forward_batch.forward_mode.is_split_prefill():
+             ret = self.forward_split_prefill(
+                 forward_batch,
+@@ -2513,6 +2532,8 @@ class ModelRunner(ModelRunnerKVCacheMixin):
+         ):
+             forward_batch.post_forward_mlp_sync_batch(ret)
+ 
++        if self.graphbudget is not None:
++            self.graphbudget.finish()
+         return ModelRunnerOutput(logits_output=ret, can_run_graph=can_run_graph)
+ 
+     def _preprocess_logits(
+diff --git a/python/sglang/srt/server_args.py b/python/sglang/srt/server_args.py
+index b080aeb..25798be 100644
+--- a/python/sglang/srt/server_args.py
++++ b/python/sglang/srt/server_args.py
+@@ -704,6 +704,10 @@ class ServerArgs:
+         """
+         Orchestrates the handling of various server arguments, ensuring proper configuration and validation.
+         """
++        if os.environ.get("GRAPHBUDGET_ACTIVE") == "1":
++            from graphbudget.runtime import apply_before_init
++
++            apply_before_init(self)
+ 
+         # Normalize load balancing defaults early (before dummy-model short-circuit).
+         self._handle_load_balance_method()

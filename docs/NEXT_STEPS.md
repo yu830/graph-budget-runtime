@@ -1,5 +1,8 @@
 # 下一阶段入口
 
+> Historical design-phase checklist. Implementation started on 2026-10-26;
+> use README.md, STATUS.md, and the executable run_core.py phases to continue.
+
 当前只完成 D0 文档。此列表不自动启动实现、安装、下载模型或 GPU 实验。
 
 1. 刷新上游，选择并记录开发 commit；保留研究 commit，不能把旧观察移到新版本。

@@ -1,7 +1,12 @@
-# Local environments and transient experiment output
-.venv/
 __pycache__/
 *.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+work/
+.pytest_cache/
+.ruff_cache/
 .env
 .env.*
 !.env.example

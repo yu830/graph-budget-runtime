@@ -1,0 +1,575 @@
+{
+  "schema_version": 1,
+  "kind": "graphbudget_workload",
+  "workload_id": "calibration-tokenized-v1",
+  "purpose": "calibration",
+  "description": "Frozen real-tokenizer workload executed in the GraphBudget deterministic validation lane.",
+  "tokenizer": {
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "model_manifest_sha256": "74bf6dd08049d862b3bd56ac2a84a8e1980ae93acfad71612a9ea00548e887b7",
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct"
+  },
+  "token_ids_note": "Token IDs were produced by the local tokenizer at prepare time; no tiny literal placeholder IDs.",
+  "token_ids_validated_against_model": true,
+  "requests": [
+    {
+      "request_id": "cal-000",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 11, 1509, 220, 15, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 0.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 1,
+        "prompt_tokens": 31,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-001",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 17, 11, 1509, 220, 15, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 0.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 2,
+        "prompt_tokens": 39,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-002",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 17, 11, 1509, 220, 16, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 0.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 2,
+        "prompt_tokens": 47,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-003",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 19, 11, 1509, 220, 15, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 0.5,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 4,
+        "prompt_tokens": 47,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-004",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 19, 11, 1509, 220, 16, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 0.5,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 4,
+        "prompt_tokens": 55,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-005",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 19, 11, 1509, 220, 17, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 0.5,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 4,
+        "prompt_tokens": 63,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-006",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 19, 11, 1509, 220, 18, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 0.5,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 4,
+        "prompt_tokens": 31,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-007",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 23, 11, 1509, 220, 15, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 0.75,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 8,
+        "prompt_tokens": 55,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-008",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 23, 11, 1509, 220, 16, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 0.75,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 8,
+        "prompt_tokens": 63,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-009",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 23, 11, 1509, 220, 17, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 0.75,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 8,
+        "prompt_tokens": 31,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-010",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 23, 11, 1509, 220, 18, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 0.75,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 8,
+        "prompt_tokens": 39,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-011",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 23, 11, 1509, 220, 19, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 0.75,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 8,
+        "prompt_tokens": 47,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-012",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 23, 11, 1509, 220, 20, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 0.75,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 8,
+        "prompt_tokens": 55,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-013",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 23, 11, 1509, 220, 21, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 0.75,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 8,
+        "prompt_tokens": 63,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-014",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 23, 11, 1509, 220, 22, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 0.75,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 8,
+        "prompt_tokens": 31,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-015",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 15, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 64,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-016",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 16, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 32,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-017",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 17, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 40,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-018",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 18, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 48,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-019",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 19, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 56,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-020",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 20, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 64,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-021",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 21, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 32,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-022",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 22, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 40,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-023",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 23, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 48,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-024",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 24, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 56,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-025",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 16, 15, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 65,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-026",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 17, 11, 1509, 220, 16, 16, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 1.0,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 12,
+        "prompt_tokens": 33,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-027",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 15, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 32,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-028",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 16, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 40,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-029",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 17, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 48,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-030",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 18, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 56,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-031",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 19, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 64,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-032",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 20, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 32,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-033",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 21, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 40,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-034",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 22, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 48,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-035",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 23, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 56,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-036",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 24, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 64,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-037",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 16, 15, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 33,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-038",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 16, 16, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 41,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-039",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 16, 17, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 49,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-040",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 16, 18, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 8,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 57,
+        "target_output_tokens": 8,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-041",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 16, 19, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 12,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 65,
+        "target_output_tokens": 12,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    },
+    {
+      "request_id": "cal-042",
+      "input_ids": [11212, 62901, 37611, 1874, 220, 16, 21, 11, 1509, 220, 16, 20, 13, 60785, 279, 8356, 16895, 9342, 323, 2506, 279, 4226, 23560, 13, 576, 1852, 9934, 6083, 374, 36204, 11504, 13, 220],
+      "max_new_tokens": 16,
+      "planned_at_s": 1.25,
+      "metadata": {
+        "probe": "calibration_adjacent_capture_bucket",
+        "burst_size": 16,
+        "prompt_tokens": 33,
+        "target_output_tokens": 16,
+        "tokenizer_revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+      }
+    }
+  ]
+}
