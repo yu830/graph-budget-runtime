@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "repo": "https://github.com/sgl-project/sglang",
+  "research_commit": "c00e7e12b64b587da336c4350b1d2484c7dffcd6",
+  "design_date": "2026-10-25",
+  "collected_at": "2026-10-26",
+  "purpose": "Design and source review only; not a reproducible runtime environment lock.",
+  "development_commit": null,
+  "runtime_dependencies": null,
+  "planned_model": {
+    "id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "weights_revision": null,
+    "dtype": "bfloat16",
+    "tensor_parallel_size": 1,
+    "attention_backend": null,
+    "downloaded": false,
+    "runtime_tested": false
+  },
+  "target_device": "NVIDIA GeForce RTX 5070 Laptop GPU, 8 GB class; WSL Ubuntu",
+  "runtime_environment": null,
+  "gpu_validation": "NOT_RUN",
+  "benchmark_results": null,
+  "source_files": [
+    {
+      "url": "https://github.com/sgl-project/sglang/blob/c00e7e12b64b587da336c4350b1d2484c7dffcd6/python/sglang/srt/model_executor/model_runner.py",
+      "blob_sha": "65845934cf80847f1849843d5d755f9d522297ba"
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang/blob/c00e7e12b64b587da336c4350b1d2484c7dffcd6/python/sglang/srt/model_executor/runner/decode_cuda_graph_runner.py",
+      "blob_sha": "7154d900cd120bd06ca3ee810958e31df6ba5558"
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang/blob/c00e7e12b64b587da336c4350b1d2484c7dffcd6/python/sglang/srt/model_executor/model_runner_components/cuda_graph_setup.py",
+      "blob_sha": "6e4ad28ca70261d653914c8b70eadf073b43bf6f"
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang/blob/c00e7e12b64b587da336c4350b1d2484c7dffcd6/python/sglang/srt/model_executor/model_runner_components/kv_pool_runtime.py",
+      "blob_sha": "5e323621844d31e2925eb0e6782dc85ffa1edd46"
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang/blob/c00e7e12b64b587da336c4350b1d2484c7dffcd6/python/sglang/srt/arg_groups/memory_hook.py",
+      "blob_sha": "87e4634c16eea271ec59273eabb0b20b21606879"
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang/blob/c00e7e12b64b587da336c4350b1d2484c7dffcd6/python/sglang/srt/arg_groups/overrides.py",
+      "blob_sha": "d29583d12411fc3c5de54831add65b8ff1b95688"
+    }
+  ]
+}

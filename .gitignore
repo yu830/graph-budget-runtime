@@ -1,0 +1,14 @@
+# Local environments and transient experiment output
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+models/
+checkpoints/
+outputs/
+tmp/
+*.log
+.DS_Store
+Thumbs.db
