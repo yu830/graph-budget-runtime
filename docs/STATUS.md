@@ -1,5 +1,12 @@
 # Project status
 
+2026-10-27, experimental performance branch: trace-guided metadata and small-M
+GEMM candidates are being evaluated separately from the reliability release.
+Screening and exact output comparisons are preliminary; unprofiled paired
+acceptance is not yet complete. See the [protocol](METADATA_EXPERIMENT.md) and
+[walkthrough](PERFORMANCE_WALKTHROUGH_ZH.md). The retained v0.1.1 conclusion
+below still applies to the historical cost policy.
+
 2026-10-27: **v0.1.1 reliability fixes validated; keep native dispatch**.
 
 The current machine-readable result is
@@ -35,4 +42,5 @@ The original 21-case validation, 43/43 clean Git GPU replay and negative
 strong-static-baseline study remain in the [technical report](TECHNICAL_REPORT.md).
 Default-mode 2/43 mismatches are still failures. This repair does not establish
 VRAM savings, throughput gains, production-load acceptance, multi-GPU support or
-Compute Sanitizer coverage. No further optimization experiment is running.
+Compute Sanitizer coverage. The historical v0.1.1 report describes the state
+before the separate performance experiment above.

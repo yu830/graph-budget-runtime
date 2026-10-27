@@ -11,6 +11,7 @@ from bisect import bisect_left
 from collections import Counter
 import json
 import os
+import sys
 from pathlib import Path
 import time
 
@@ -112,6 +113,9 @@ class RuntimeState:
                 self.policy = None
                 self.policy_status = "native_fallback: " + str(error)
         self.calibrate = os.environ.get("GRAPHBUDGET_CALIBRATE") == "1"
+        self.metadata_diagnostic = os.environ.get("GRAPHBUDGET_METADATA_DIAGNOSTIC") == "1"
+        self.metadata_event_rows = []
+        self.metadata_events = None
         self.diagnostic = os.environ.get("GRAPHBUDGET_OBSERVE", "counts") == "diagnostic"
         if self.calibrate and not self.diagnostic:
             raise ValueError("Calibration requires diagnostic observation")
@@ -227,7 +231,17 @@ class RuntimeState:
         if self.calibrate:
             self.torch.cuda.synchronize(self.runner.gpu_id)
             self.step_started = time.perf_counter_ns()
+        if self.metadata_diagnostic:
+            self.metadata_events = []
+            self.metadata_mark("forward_begin")
         return decision["selected_path"] == "graph"
+
+    def metadata_mark(self, name):
+        """Diagnostic same-stream spans; values are read only at idle flush."""
+        if self.metadata_diagnostic and self.metadata_events is not None:
+            event = self.torch.cuda.Event(enable_timing=True)
+            event.record()
+            self.metadata_events.append((name, time.perf_counter_ns(), event))
 
     def replayed(self, size):
         # Called only immediately after self.graphs[graph_key].replay() returns.
@@ -243,6 +257,11 @@ class RuntimeState:
         if self.pending is None:
             return
         record = self.pending
+        if self.metadata_diagnostic:
+            self.metadata_mark("forward_end")
+            if len(self.metadata_event_rows) < 10000:
+                self.metadata_event_rows.append((dict(record), self.metadata_events))
+            self.metadata_events = None
         if self.calibrate:
             self.torch.cuda.synchronize(self.runner.gpu_id)
             record["complete_forward_ns"] = time.perf_counter_ns() - self.step_started
@@ -262,6 +281,26 @@ class RuntimeState:
 
     def flush(self):
         # Called synchronously from the scheduler's idle cache-flush barrier.
+        metadata = sys.modules.get("graphbudget.metadata")
+        if metadata is not None:
+            write_json(self.output / "metadata-paths.json", {
+                "run_id": self.run_id, "fingerprint": self.fingerprint, "pid": os.getpid(),
+                "provenance": "actual prepare return sites in patched TritonAttnBackend replay preparation",
+                "counts": [{"mode": mode, "used": used, "padded_batch": bs, "count": count}
+                           for (mode, used, bs), count in metadata.COUNTS.items()]})
+        if self.metadata_diagnostic and self.metadata_event_rows:
+            self.metadata_event_rows[-1][1][-1][2].synchronize()
+            rows = []
+            for record, events in self.metadata_event_rows:
+                first = events[0]
+                rows.append({**record, "marks": [
+                    {"name": name, "cpu_offset_us": (cpu-first[1])/1000,
+                     "device_offset_us": first[2].elapsed_time(event)*1000}
+                    for name, cpu, event in events]})
+            write_json(self.output / "metadata-events.json", {
+                "run_id": self.run_id, "fingerprint": self.fingerprint, "pid": os.getpid(),
+                "scope": "diagnostic same-stream event spans including possible host gaps; not kernel-active time",
+                "rows": rows})
         counts = [dict(zip(("eligible", "selected_path", "used_path", "batch_size",
                             "actual_capture_size", "reason"), key), count=value)
                   for key, value in self.counts.items()]

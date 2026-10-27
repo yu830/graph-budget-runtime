@@ -1,3 +1,78 @@
+diff --git a/python/sglang/srt/batch_invariant_ops/batch_invariant_ops.py b/python/sglang/srt/batch_invariant_ops/batch_invariant_ops.py
+index 80bb66e..e68f5c9 100644
+--- a/python/sglang/srt/batch_invariant_ops/batch_invariant_ops.py
++++ b/python/sglang/srt/batch_invariant_ops/batch_invariant_ops.py
+@@ -1,6 +1,7 @@
+ # Adapted from https://github.com/thinking-machines-lab/batch_invariant_ops/blob/main/batch_invariant_ops/batch_invariant_ops.py
+ 
+ import contextlib
++import os
+ from collections import namedtuple
+ from collections.abc import Callable
+ from typing import Any, Dict
+@@ -212,6 +213,21 @@ def _matmul_persistent_triton(
+             "num_warps": 8,
+         },
+     }
++    # Opt-in local specialization of the upstream kernel. Preserve the source
++    # K tile/traversal and fused FP32 bias; bitwise equivalence is tested.
++    # Related in-review SGLang #42145 uses M16/N64/K128 and one CTA per tile.
++    small_m_mode = os.environ.get("GRAPHBUDGET_SMALL_M_GEMM", "0")
++    if (small_m_mode in ("1", "upstream_42145")
++            and dtype == torch.bfloat16 and 0 < M <= 16
++            and K % 64 == 0 and N % 128 == 0
++            and a.stride(1) == 1 and b.stride(0) == 1):
++        configs[dtype] = {**configs[dtype], "BLOCK_SIZE_M": 16, "num_warps": 4}
++        if small_m_mode == "upstream_42145":
++            # Geometry control adapted to this pinned kernel's fused-bias contract,
++            # not a verbatim backport of that PR's different DeepGEMM bias route.
++            configs[dtype].update(BLOCK_SIZE_N=64, BLOCK_SIZE_K=128,
++                                  GROUP_SIZE_M=1, num_stages=4)
++            NUM_SMS = triton.cdiv(M, 16) * triton.cdiv(N, 64)
+     # print(a.device, b.device, c.device)
+     matmul_kernel_persistent[grid](
+         a,
+diff --git a/python/sglang/srt/layers/attention/triton_backend.py b/python/sglang/srt/layers/attention/triton_backend.py
+index 657777d..f21defc 100644
+--- a/python/sglang/srt/layers/attention/triton_backend.py
++++ b/python/sglang/srt/layers/attention/triton_backend.py
+@@ -179,6 +179,11 @@ class TritonAttnBackend(AttentionBackend):
+ 
+         self.cuda_graph_custom_mask = None
+ 
++        self.graphbudget_metadata_enabled = get_bool_env_var("GRAPHBUDGET_ACTIVE", "false")
++        if self.graphbudget_metadata_enabled:
++            from graphbudget.metadata import configure
++            configure(self, max_bs)
++
+     def get_num_kv_splits(
+         self,
+         num_kv_splits: torch.Tensor,
+@@ -676,8 +681,13 @@ class TritonAttnBackend(AttentionBackend):
+             kv_indptr = self.kv_indptr
+             kv_indices = self.cuda_graph_kv_indices
+             num_kv_splits = self.cuda_graph_num_kv_splits
++            prepared = 0
+             if spec_info is None:
+-                kv_indptr[1 : bs + 1] = torch.cumsum(seq_lens[:bs], dim=0)
++                if self.graphbudget_metadata_enabled:
++                    from graphbudget.metadata import prepare
++                    prepared = prepare(self, bs, seq_lens, kv_indptr, num_kv_splits)
++                if not prepared:
++                    kv_indptr[1 : bs + 1] = torch.cumsum(seq_lens[:bs], dim=0)
+                 kv_indptr = kv_indptr[: bs + 1]
+                 create_flashinfer_kv_indices_triton[(bs,)](
+                     self.req_to_token,
+@@ -711,7 +721,8 @@ class TritonAttnBackend(AttentionBackend):
+ 
+             else:
+                 assert False, "Multi-step cuda graph init is not done here."
+-            self.get_num_kv_splits(num_kv_splits[:num_token], seq_lens[:bs])
++            if prepared != 2:
++                self.get_num_kv_splits(num_kv_splits[:num_token], seq_lens[:bs])
+ 
+         elif forward_mode.is_target_verify():
+             # Update qo_indptr, kv_indptr, kv_indices, custom_mask, mask_indptr
 diff --git a/python/sglang/srt/managers/scheduler.py b/python/sglang/srt/managers/scheduler.py
 index a9ff0ac..aaeb5d8 100644
 --- a/python/sglang/srt/managers/scheduler.py
@@ -12,13 +87,45 @@ index a9ff0ac..aaeb5d8 100644
              success = True
          else:
 diff --git a/python/sglang/srt/model_executor/cuda_graph_runner.py b/python/sglang/srt/model_executor/cuda_graph_runner.py
-index f1ea1de..d08cc78 100644
+index f1ea1de..6cca2cf 100644
 --- a/python/sglang/srt/model_executor/cuda_graph_runner.py
 +++ b/python/sglang/srt/model_executor/cuda_graph_runner.py
-@@ -864,6 +864,8 @@ class CudaGraphRunner:
+@@ -798,6 +798,8 @@ class CudaGraphRunner:
+             index = bisect.bisect_left(self.capture_bs, raw_bs)
+         bs = self.capture_bs[index]
+ 
++        if self.model_runner.graphbudget is not None:
++            self.model_runner.graphbudget.metadata_mark("input_copy_begin")
+         seq_lens_cpu = buffers.populate_from_forward_batch(
+             forward_batch=forward_batch,
+             raw_bs=raw_bs,
+@@ -822,6 +824,8 @@ class CudaGraphRunner:
+         if forward_batch.forward_mode.is_idle() and forward_batch.spec_info is not None:
+             forward_batch.spec_info.custom_mask = buffers.custom_mask
+         # Attention backend
++        if self.model_runner.graphbudget is not None:
++            self.model_runner.graphbudget.metadata_mark("metadata_begin")
+         if self.enable_pdmux:
+             stream_idx = get_current_stream_idx()
+             attn_backend = self.model_runner.decode_attn_backend_group[stream_idx]
+@@ -838,6 +842,8 @@ class CudaGraphRunner:
+             seq_lens_cpu=seq_lens_cpu,
+         )
+ 
++        if self.model_runner.graphbudget is not None:
++            self.model_runner.graphbudget.metadata_mark("metadata_end")
+         # Store fields
+         self.raw_bs = raw_bs
+         self.raw_num_token = raw_num_token
+@@ -863,7 +869,13 @@ class CudaGraphRunner:
+             graph_key = f"{get_current_stream_idx()}_{self.bs}"
          else:
              graph_key = self.bs
++        if self.model_runner.graphbudget is not None:
++            self.model_runner.graphbudget.metadata_mark("graph_begin")
          self.graphs[graph_key].replay()
++        if self.model_runner.graphbudget is not None:
++            self.model_runner.graphbudget.metadata_mark("graph_end")
 +        if self.model_runner.graphbudget is not None:
 +            self.model_runner.graphbudget.replayed(self.bs)
          output = self.output_buffers[graph_key]

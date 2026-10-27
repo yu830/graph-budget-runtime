@@ -37,6 +37,9 @@ def state(policy=None, diagnostic=True):
     s.force_eager = False
     s.test_only = False
     s.calibrate = False
+    s.metadata_diagnostic = False
+    s.metadata_event_rows = []
+    s.metadata_events = None
     s.diagnostic = diagnostic
     s.counts = Counter()
     s.steps = []

@@ -13,6 +13,11 @@ changes the allocator nor recaptures/resizes graphs or KV during service.
 [technical report](docs/TECHNICAL_REPORT.md) for implementation, CPU checks,
 model correctness, native execution paths, and performance separately.
 
+**Experimental performance branch, 2026-10-27:** opt-in dense decode metadata
+preparation and small-batch BF16 GEMM geometries are under evaluation. The
+[experiment protocol](docs/METADATA_EXPERIMENT.md) separates screening from
+unprofiled paired acceptance; these candidates are not yet adopted.
+
 **2026-10-27 reliability update:** C1/C2/C3 from independent review are repaired.
 Source and isolated installed-package suites each pass 80 CPU tests; the bounded
 GPU startup/fallback smoke passes exact output checks. See
@@ -144,8 +149,9 @@ the adapter does not claim the research revision's post-capture sizing.
 SGLang already supplies graph sizes, ceil padding, graph-pool sharing and
 safe overflow fallback. GraphBudget adds measured planning, fingerprinted
 startup enforcement, a reject-only cost hook and reproducible evidence.
-No online recapture/eviction, admission scheduler, multi-GPU support or
-custom CUDA/Triton kernel is introduced.
+The original core introduced no online recapture/eviction, admission scheduler,
+multi-GPU support or custom CUDA/Triton kernel. This experimental branch adds an
+opt-in Triton metadata candidate and reuses an existing upstream GEMM kernel.
 
 Original project code is Apache-2.0. The SGLang patch retains upstream
 Apache-2.0 attribution. Model weights are obtained from the Apache-2.0 licensed
