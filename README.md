@@ -13,6 +13,12 @@ changes the allocator nor recaptures/resizes graphs or KV during service.
 [technical report](docs/TECHNICAL_REPORT.md) for implementation, CPU checks,
 model correctness, native execution paths, and performance separately.
 
+**2026-10-27 reliability update:** C1/C2/C3 from independent review are repaired.
+Source and isolated installed-package suites each pass 80 CPU tests; the bounded
+GPU startup/fallback smoke passes exact output checks. See
+[repair notes](docs/REVIEW_FIXES.md) for the new identity and limits. This update
+does not establish a performance gain.
+
 **Original 2026-10-26 snapshot:** 57 CPU checks passed; strict model validation
 and clean-source GPU replay using the existing pinned runtime passed in the
 pinned deterministic mode. This snapshot describes the measured version; see
