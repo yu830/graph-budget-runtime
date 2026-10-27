@@ -62,11 +62,13 @@ export SGLANG_BATCH_INVARIANT_OPS_ENABLE_MM_DEEPGEMM=0
 This selects the existing upstream Triton fallback because SM120 DeepGEMM is
 unsupported on this route. The deterministic probe is correctness-only: native
 graph versus forced eager matched exact tokens for 43/43 requests. An earlier
-default-mode comparison remains failed at 2/43 matches and is preserved as a
-separate result. Neither result is a throughput or replay-benefit claim.
+default-mode comparison remains failed with 2 mismatches and 41 matches out of
+43 requests and is preserved as a separate result. Neither result is a throughput or replay-benefit claim.
 
 The metadata lock itself is CPU/read-only: it requires the pinned Python
 environment, performs no install, does not import Torch, and does not use a
 GPU. The deterministic probe has different prerequisites: the immutable model,
 the pinned runtime, an SM120 GPU, and sufficient VRAM for the configured graph
-capture set. Full benchmarking remains pending.
+capture set. The later 2026-10-26 benchmarking results are recorded in the
+[technical report](../../docs/TECHNICAL_REPORT.md); consult
+[status](../../docs/STATUS.md) for subsequent repair verification.

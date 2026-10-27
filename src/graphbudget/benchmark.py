@@ -38,8 +38,9 @@ Metrics are intentionally conservative:
 The module also exposes exact-token comparison and paired-round summaries.  A
 paired summary reports an ``INSUFFICIENT_ROUNDS`` status below five rounds and
 does not turn a small sample into an adoption claim.  The JSON workloads in
-``examples/workloads`` use tiny literal IDs as safe request-shape examples;
-they explicitly remain unvalidated against a particular model tokenizer.
+``examples/workloads`` contain frozen input IDs produced by the pinned
+Qwen2.5-0.5B-Instruct tokenizer, with tokenizer revision recorded in each
+workload. These short inputs do not validate long-context behavior.
 """
 
 from __future__ import annotations

@@ -29,6 +29,9 @@ def write_json(path, value):
 
 def apply_before_init(args):
     """Called as the first statement of ServerArgs.__post_init__."""
+    # Also applies without a plan. Reject loader/override modes before upstream
+    # normalization, ModelConfig construction, distributed init or weight load.
+    identity.execution_config(args)
     plan_path = os.environ.get("GRAPHBUDGET_PLAN")
     if not plan_path:
         return
@@ -44,6 +47,7 @@ def apply_before_init(args):
 
 
 def check_supported(args, model_config):
+    identity.execution_config(args)
     unsupported = [key for key in (
         "enable_dp_attention", "enable_two_batch_overlap", "enable_pdmux",
         "enable_piecewise_cuda_graph", "enable_torch_compile", "enable_lora",
@@ -156,6 +160,8 @@ class RuntimeState:
                   "policy_mode": os.environ.get("GRAPHBUDGET_POLICY", "native"),
                   "calibration": self.calibrate, "diagnostic": self.diagnostic,
                   "status": "worker_initialized"}
+        record["worker_init_seconds"] = record["startup_seconds"]
+        record["startup_metric"] = "worker_initialized; HTTP deadline is enforced by lifecycle.json"
         self.ready_record = record
         if self.plan:
             budget = self.plan["budget"]

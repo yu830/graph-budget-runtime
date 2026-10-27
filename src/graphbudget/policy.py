@@ -51,8 +51,13 @@ def _positive_int(value: Any, name: str) -> int:
 def _finite(value: Any, name: str, *, positive: bool = False) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise InvalidPolicyError(f"{name} must be a finite number")
-    number = float(value)
-    if not math.isfinite(number) or (positive and number <= 0) or (not positive and number < 0):
+    try:
+        number = float(value)
+    except OverflowError as exc:
+        raise InvalidPolicyError(f"{name} must be a finite number") from exc
+    if not math.isfinite(number):
+        raise InvalidPolicyError(f"{name} must be a finite number")
+    if (positive and number <= 0) or (not positive and number < 0):
         qualifier = "greater than zero" if positive else "non-negative"
         raise InvalidPolicyError(f"{name} must be {qualifier}")
     return number
@@ -128,7 +133,8 @@ def _entry_reasons(
             _positive_int(entry["samples"], "samples")
         except InvalidPolicyError as exc:
             reasons.append(str(exc))
-    if entry.get("provenance") not in VALID_PROVENANCE:
+    provenance = entry.get("provenance")
+    if not isinstance(provenance, str) or provenance not in VALID_PROVENANCE:
         reasons.append("provenance must be measured or synthetic_cpu_fixture")
     return reasons
 

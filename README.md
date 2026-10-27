@@ -13,9 +13,11 @@ changes the allocator nor recaptures/resizes graphs or KV during service.
 [technical report](docs/TECHNICAL_REPORT.md) for implementation, CPU checks,
 model correctness, native execution paths, and performance separately.
 
-**2026-10-26 result:** 57 CPU checks passed; strict model validation and clean
-Git GPU replay passed in the pinned deterministic mode. Five paired rounds per
-held-out load established no benefit over the strong static plan. Keep native
+**Original 2026-10-26 snapshot:** 57 CPU checks passed; strict model validation
+and clean-source GPU replay using the existing pinned runtime passed in the
+pinned deterministic mode. This snapshot describes the measured version; see
+[status](docs/STATUS.md) for the current repair and verification status. Five
+paired rounds per held-out load established no benefit over the strong static plan. Keep native
 dispatch. The measured plan, profile and round data are in
 [results/2026-10-26](results/2026-10-26/README.md).
 
@@ -79,16 +81,24 @@ On SM120 this release's DeepGEMM deterministic path rejects the architecture,
 so the explicit deterministic option selects its supported Triton path for
 every baseline. These results must be kept separate from default-mode speed.
 
-To launch a frozen plan directly:
+To launch a frozen plan with the supervised Linux/WSL entry point:
 
 ~~~bash
 export SGLANG_BATCH_INVARIANT_OPS_ENABLE_MM_DEEPGEMM=0
 bash scripts/environment/with_runtime.sh -m graphbudget.cli launch \
-  --output work/serve-01 --plan /path/to/plan.json --policy native -- \
+  --output work/serve-01 --plan /path/to/plan.json --policy native \
+  --startup-timeout 600 -- \
   --model-path "$MODEL_PATH" --revision "$MODEL_REVISION" \
   --dtype bfloat16 --device cuda --attention-backend triton \
   --disable-overlap-schedule --stream-output --enable-deterministic-inference --random-seed 0
 ~~~
+
+The startup deadline defaults to 600 seconds and is the smaller of the supplied
+`--startup-timeout` and the plan's `max_startup_seconds`. `ready.json` records
+worker initialization; `lifecycle.json` records the supervised HTTP-ready
+result. The pinned upstream `/health` endpoint is gated by its Starting state;
+default startup includes general warmup. After startup, this supervisor does
+not act as an ongoing health watchdog. `_serve` is an internal child entry.
 
 Supply the same remaining server settings used for measurement; mismatches
 fail closed. Cost mode uses --policy cost --profile /path/to/profile.json.
@@ -109,9 +119,10 @@ requires --test-only and is solely a functional/calibration control.
 - Diagnostic calibration times complete forwards including preparation and
   copies. It synchronizes deliberately and is excluded from clean throughput
   results. Normal observation buffers events/counters; flushing is untimed.
-- T is the strongest static choice from the same candidates/calibration budget.
-  P applies the same choice automatically; their configuration equivalence is
-  explicit. C uses the same plan/KV/backend with the optional cost policy.
+- T is the static choice selected by this calibration within the same bounded
+  candidate set, not a global optimum. P applies the same choice automatically;
+  their configuration equivalence is explicit. C uses the same plan/KV/backend
+  with the optional cost policy.
 - Exact greedy token comparison, actual branch observations, A/A noise, and at
   least five paired strong-baseline rounds are required for an adoption claim.
   Chunked stream arrivals do not become per-token ITL.

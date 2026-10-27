@@ -1,5 +1,5 @@
 """Synthetic CPU integration checks for orchestration boundaries, never GPU evidence."""
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 import json
 from pathlib import Path
 import tempfile
@@ -34,7 +34,24 @@ class ExperimentTests(unittest.TestCase):
                 run_case([], load_workload(workload()), output, capture_sizes=[1])
             command = json.loads((output / "invocation.json").read_text())
             self.assertEqual(command["command"][-2:], ["--cuda-graph-bs", "1"])
+            self.assertEqual(command["command"][3], "_serve")
             self.assertEqual(len(command["workload_sha256"]), 64)
+
+    def test_case_passes_one_total_deadline_to_the_shared_supervisor(self):
+        @contextmanager
+        def supervisor(_command, output, run_id, **kwargs):
+            self.assertEqual(kwargs["timeout"], 2.5)
+            self.assertEqual(float(kwargs["env"]["GRAPHBUDGET_STARTED"]), kwargs["started"])
+            raise ReachedGPUBoundary
+            yield
+
+        with tempfile.TemporaryDirectory() as td:
+            with patch("graphbudget.experiment.gpu_lease", nullcontext), \
+                    patch("graphbudget.experiment.OwnedProcess"), \
+                    patch("graphbudget.experiment._stop"), \
+                    patch("graphbudget.experiment.http_server", supervisor):
+                result = run_case([], workload(), Path(td) / "case", startup_timeout=2.5)
+            self.assertIn("ReachedGPUBoundary", result["reason"])
 
     def test_failed_candidates_retained_in_precreated_empty_attempt(self):
         with tempfile.TemporaryDirectory() as td:

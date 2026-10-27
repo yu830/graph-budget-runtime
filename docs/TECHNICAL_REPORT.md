@@ -1,22 +1,24 @@
 # GraphBudget: executed core and strong-static-baseline evaluation
 
-GraphBudget now runs the complete planning/startup/dispatch/evidence chain on
-Qwen2.5-0.5B BF16 and an RTX 5070 Laptop GPU. The validated configuration uses
+The original 2026-10-26 measured version ran the planning/startup/dispatch/
+evidence chain on Qwen2.5-0.5B BF16 and an RTX 5070 Laptop GPU. The validated configuration uses
 upstream deterministic inference with Triton batch-invariant matmul. The cost
 policy found no useful eager switch; the recommended configuration is the
 selected plan with native dispatch. Incremental performance over the strong
-static baseline is not established.
+static baseline is not established. This report describes that frozen measured
+version; documentation was clarified on 2026-10-27. See [current status](STATUS.md)
+for subsequent repairs and their verification.
 
 ## Acceptance by claim
 
 | Claim | Observed result |
 |---|---|
-| Core code and clean installation | 57 CPU tests passed, zero skipped; exact-base patch application verified |
+| Core code and clean-source installation using the existing pinned runtime | 57 CPU tests passed, zero skipped; exact-base patch application verified |
 | Model correctness | 21 validation cases, 815 requests, 40 pairwise exact-token comparisons plus the overflow control passed |
 | Actual decode execution | Graph replay, batch 3 padded to 4, capture-ceiling eager fallback and test-forced eager observed |
 | Frozen cost profile | Seven matched batch-size-one/context keys; zero eager wins beyond the declared noise threshold |
-| End-to-end evaluation | Five A/A boundary pairs and five interleaved T/C pairs on each held-out workload; 2,078 requests, zero failures/timeouts |
-| Clean Git GPU replay | 43/43 exact outputs; loaded clean project/upstream checkouts, applied the exported plan, and used native fallback for a missing cost profile |
+| End-to-end evaluation | 2,078 requests: 1,060 formal T/C, 700 boundary A/A and 318 U/E/P exploratory; zero failures/timeouts |
+| Clean-source GPU replay using the existing pinned runtime | 43/43 exact outputs; loaded clean project/upstream checkouts, applied the exported plan, and used native fallback for a missing cost profile |
 | Adoption | Keep native dispatch; no strong-static-baseline performance gain established |
 
 The default non-deterministic mode failed strict token comparison for 2 of 43
@@ -44,8 +46,9 @@ online recapture, KV resize or custom kernel was added.
 
 The project applies a frozen plan at the beginning of ServerArgs normalization,
 then checks actual source/model/environment identity, capture set, KV capacity
-and device budget before service. A stale hard plan fails startup; bad cost data
-preserves native dispatch. The reject-only hook follows upstream eligibility
+and device budget before service. A stale hard plan fails startup; missing or stale cost data preserves native
+dispatch. The independent review later found malformed cost data could escape
+that fallback in this measured version. The reject-only hook follows upstream eligibility
 and precedes graph/eager-specific preparation. Actual replay/eager return sites
 produce separate eligibility, selection and usage evidence. Production lookup
 uses CPU metadata without GPU readback or synchronization.
@@ -74,14 +77,14 @@ cache installation was not timed. Shared pools are measured as complete sets;
 their memory is not modeled as a sum of individual graphs. The small and
 non-monotonic resource differences do not establish a memory-saving result.
 
-Ready usage is from CUDA total/free snapshots. The peak is conservative
-100-ms NVML whole-device sampling across startup, warmup and requests, including
-desktop activity. PyTorch allocated/reserved/peaks are recorded separately in
+Ready usage is from CUDA total/free snapshots. The peak is the observed sampled
+whole-device peak from 100-ms NVML sampling across startup, warmup and requests, including desktop activity; it is not an
+absolute peak bound. PyTorch allocated/reserved/peaks are recorded separately in
 the raw readiness receipts. Host RAM is not added to any VRAM number.
 
-T is the best frozen static configuration from the same candidate set and
-calibration data. P applies that exact configuration automatically; T and P have
-the same capture set, KV capacity and backend. All diagnostic calibration data
+T is the frozen static configuration selected by this calibration within the
+same bounded candidate set; it is not a global optimum. P applies that exact
+configuration automatically; T and P have the same capture set, KV capacity and backend. All diagnostic calibration data
 is retained for both comparisons. C adds only the frozen cost lookup to that
 same plan. Three additional graph/test-eager calibration pairs are an explicit
 setup cost. The seven usable keys cover homogeneous batch-one contexts of
@@ -93,6 +96,8 @@ Each row reports the median of five paired `(C-T)/T` differences. Positive
 throughput is better; positive latency is worse. Workload input IDs, request
 counts, sampling, offered schedules, backend and resource settings were frozen.
 All planned requests were sent; client scheduling delay and backlog were retained.
+The measured prompts were 14–45 tokens and outputs 8–16 tokens; the configured
+4,096-token context limit is not a 4K-context validation.
 
 | Held-out load | Tokens/s | P95 TTFT | P95 request TPOT | P95 token ITL |
 |---|---:|---:|---:|---:|
@@ -106,8 +111,9 @@ normal and mixed loads, so their deltas remain descriptive. Individual token
 arrival events were available for all formal paired requests; chunk intervals
 were not substituted for ITL. No P99 claim is made.
 
-There were zero cost-driven graph rejections in the measured C runs. The
-nominal boundary ITL reduction is smaller than the observed A/A ITL variation,
+The measured cost table covered 116 of 1,347 formal C decode steps (8.61%);
+boundary covered 0 of 395. There were zero cost-driven graph rejections in
+the measured C runs. The nominal boundary ITL reduction is smaller than the observed A/A ITL variation,
 accompanies worse throughput/TTFT, and has no intended dispatch change to
 support a cost-policy gain. Mixed-load tail latencies were also adverse. These
 results do not meet the adoption criterion. P's configuration equals T's, so

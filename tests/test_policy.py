@@ -108,6 +108,29 @@ class PolicyTests(unittest.TestCase):
             compiled = compile_policy(policy, self.digest)
             self.assertEqual(decide_policy(compiled, _context(), True, self.digest)["selected_path"],
                              PATH_NATIVE)
+
+    def test_invalid_optional_fields_disable_only_the_affected_row(self):
+        domains = {
+            "provenance": (True, None, [], {}, 1, "unknown"),
+            "graph_ns": (True, None, [], 10**400, float("inf"), float("nan"), 0, -1),
+            "eager_ns": (True, None, [], 10**400, float("inf"), float("nan"), 0, -1),
+            "noise_ns": (True, None, [], 10**400, float("inf"), float("nan"), -1),
+        }
+        for field, values in domains.items():
+            for value in values:
+                with self.subTest(field=field, value=value):
+                    bad = dict(self.policy["entries"][0], **{field: value})
+                    good = dict(self.policy["entries"][0], context_length=2048)
+                    compiled = compile_policy(
+                        _policy(self.identity, entries=[bad, good]), self.digest)
+                    self.assertEqual(compiled["status"], "loaded")
+                    decision = decide_policy(compiled, _context(), True, self.digest)
+                    self.assertEqual(decision["selected_path"], PATH_NATIVE)
+                    self.assertTrue(decision["reason"].startswith("profile_"))
+                    self.assertEqual(decide_policy(
+                        compiled, _context(context_length=2048), True, self.digest
+                    )["selected_path"], PATH_EAGER)
+
     def test_compile_rejects_stale_or_non_sha_fingerprint_to_native(self):
         stale = compile_policy(self.policy, "0" * 64)
         self.assertEqual(stale["status"], "native_fallback")

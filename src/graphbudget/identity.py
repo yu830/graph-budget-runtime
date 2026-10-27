@@ -24,6 +24,80 @@ CONFIG_KEYS = ("mem_fraction_static", "max_total_tokens", "max_running_requests"
                "max_prefill_tokens", "stream_interval", "stream_output")
 
 
+def execution_config(args):
+    """Validate the v1 loading boundary before upstream can interpret it.
+
+    Keep this allowlist small: ordinary local weights, native model code, no
+    config override, quantization, weight replacement or offloading. Normalize
+    representations only where the pinned upstream gives them the same meaning.
+    Ports and log paths are deliberately not part of execution identity.
+    """
+    result = {}
+    for key, allowed, default in (
+        ("load_format", ("auto", "safetensors"), "auto"),
+        ("model_impl", ("auto",), "auto"),
+    ):
+        value = getattr(args, key, default)
+        if not isinstance(value, str) or value.lower() not in allowed:
+            raise ValueError(f"Unsupported GraphBudget v1 {key}: requires {allowed}")
+        result[key] = value.lower()
+    for key in ("model_loader_extra_config", "json_model_override_args"):
+        value = getattr(args, key, "{}")
+        if key == "json_model_override_args" and not isinstance(value, str):
+            raise ValueError(f"Unsupported GraphBudget v1 {key}: requires empty JSON text")
+        if isinstance(value, str):
+            try:
+                value = json.loads(value)
+            except json.JSONDecodeError as error:
+                raise ValueError(f"Unsupported GraphBudget v1 {key}: requires an empty JSON object") from error
+        if not isinstance(value, dict) or value:
+            raise ValueError(f"Unsupported GraphBudget v1 {key}: requires an empty JSON object")
+        result[key] = {}
+    torchao = getattr(args, "torchao_config", "")
+    if torchao is not None and torchao != "":
+        raise ValueError("Unsupported GraphBudget v1 torchao_config: TorchAO is not supported")
+    result["torchao_config"] = ""
+    offload = getattr(args, "cpu_offload_gb", 0)
+    if type(offload) not in (int, float) or offload != 0:
+        raise ValueError("Unsupported GraphBudget v1 cpu_offload_gb: offloading is not supported")
+    result["cpu_offload_gb"] = 0
+    # Grouped offloading can be enabled even when cpu_offload_gb is zero.
+    group = getattr(args, "offload_group_size", -1)
+    if type(group) is not int or group not in (-1, 0):
+        raise ValueError("Unsupported GraphBudget v1 offload_group_size: offloading is not supported")
+    result["offload_group_size"] = -1
+    loaders = getattr(args, "custom_weight_loader", None)
+    if loaders is not None and (not isinstance(loaders, list) or loaders):
+        raise ValueError("Unsupported GraphBudget v1 custom_weight_loader")
+    result["custom_weight_loader"] = []
+    for key in (
+        "trust_remote_code", "enable_fp32_lm_head", "quantize_and_serve",
+        "enable_weights_cpu_backup", "enable_draft_weights_cpu_backup",
+        "delete_ckpt_after_loading", "checkpoint_engine_wait_weights_before_ready",
+        "remote_instance_weight_loader_start_seed_via_transfer_engine",
+    ):
+        if getattr(args, key, False) is not False:
+            raise ValueError(f"Unsupported GraphBudget v1 {key}")
+        result[key] = False
+    for key in (
+        "quantization", "quantization_param_path", "modelopt_quant",
+        "modelopt_checkpoint_restore_path", "modelopt_checkpoint_save_path",
+        "modelopt_export_path", "rl_quant_profile",
+        "remote_instance_weight_loader_seed_instance_ip",
+        "remote_instance_weight_loader_seed_instance_service_port",
+        "remote_instance_weight_loader_send_weights_group_ports",
+        "decrypted_config_file", "decrypted_draft_config_file", "forward_hooks",
+    ):
+        if getattr(args, key, None) is not None:
+            raise ValueError(f"Unsupported GraphBudget v1 {key}")
+        result[key] = None
+    mmap_disabled = getattr(args, "weight_loader_disable_mmap", False)
+    if type(mmap_disabled) is not bool:
+        raise ValueError("weight_loader_disable_mmap must be a boolean")
+    result["weight_loader_disable_mmap"] = mmap_disabled
+    return result
+
+
 def digest(value):
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"),
                                     allow_nan=False).encode()).hexdigest()
@@ -79,6 +153,7 @@ def model_identity(model_path, revision):
 
 
 def collect(server_args, gpu_id=0):
+    execution = execution_config(server_args)
     import sglang
     import torch
     props = torch.cuda.get_device_properties(gpu_id)
@@ -92,6 +167,7 @@ def collect(server_args, gpu_id=0):
         raise ValueError("v1 requires model and tokenizer from the same local snapshot")
     module_files = {p.name: code_digest(p) for p in sorted(Path(__file__).parent.glob("*.py"))}
     return {
+        "identity_schema_version": 2,
         "sglang": source_identity(sglang.__file__),
         "graphbudget_sha256": digest(module_files),
         "model": model_identity(server_args.model_path, server_args.revision),
@@ -104,6 +180,7 @@ def collect(server_args, gpu_id=0):
         "prefill_attention_backend": server_args.prefill_attention_backend,
         "tp_size": server_args.tp_size,
         "config": {key: getattr(server_args, key) for key in CONFIG_KEYS},
+        "execution": execution,
         "runtime_env": {key: os.environ.get(key) for key in (
             "OMP_NUM_THREADS", "MKL_NUM_THREADS", "CUDA_MODULE_LOADING",
             "PYTORCH_CUDA_ALLOC_CONF", "CUDA_VISIBLE_DEVICES", "NVIDIA_TF32_OVERRIDE",

@@ -4,7 +4,6 @@ from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
-import signal
 import statistics
 import subprocess
 import sys
@@ -14,6 +13,7 @@ import uuid
 
 from .benchmark import run_benchmark, compare_exact_tokens, load_workload, Workload
 from .identity import digest, file_digest
+from .lifecycle import OwnedProcess, http_server, startup_limit, stop_owned
 from .runtime import write_json
 
 
@@ -33,26 +33,7 @@ def gpu_lease():
             fcntl.flock(handle, fcntl.LOCK_UN)
 
 
-def _stop(process):
-    if process is None:
-        return
-    # The launcher may have exited while its own workers still occupy the GPU.
-    try:
-        os.killpg(process.pid, signal.SIGTERM)
-    except ProcessLookupError:
-        return
-    try:
-        process.wait(timeout=15)
-    except subprocess.TimeoutExpired:
-        os.killpg(process.pid, signal.SIGKILL)
-        process.wait(timeout=5)
-    except BaseException:
-        try:
-            os.killpg(process.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            pass
-        process.wait(timeout=5)
-        raise
+_stop = stop_owned
 
 
 def _flush(process, output, ready, url):
@@ -81,13 +62,14 @@ def run_case(server_args, workload, output, *, capture_sizes=None, plan=None,
              profile=None, policy="native", diagnostic=False, calibrate=False,
              startup_timeout=600, request_timeout=120, port=30150, warmup=True):
     """One server, one warmup, one workload, raw outputs, and no hidden retries."""
+    timeout = startup_limit(startup_timeout, plan)
     output = Path(output).resolve()
     workload = workload if isinstance(workload, Workload) else load_workload(workload)
     if output.exists():
         raise ValueError(f"Refusing to overwrite experiment: {output}")
     output.mkdir(parents=True)
     run_id = uuid.uuid4().hex
-    command = [sys.executable, "-m", "graphbudget.cli", "launch", "--output",
+    command = [sys.executable, "-m", "graphbudget.cli", "_serve", "--output",
                str(output / "runtime"), "--run-id", run_id, "--policy", policy,
                "--observe", "diagnostic" if diagnostic else "counts"]
     if policy == "test_eager":
@@ -103,73 +85,54 @@ def run_case(server_args, workload, output, *, capture_sizes=None, plan=None,
         command += ["--cuda-graph-bs", *map(str, capture_sizes)]
     write_json(output / "invocation.json", {"command": command, "run_id": run_id,
                                              "workload_sha256": digest(workload.to_dict())})
-    process = sampler = None
+    sampler = None
     result = {"run_id": run_id, "status": "failed", "reason": "incomplete"}
     with gpu_lease(), (output / "server.log").open("w") as log, (output / "device.csv").open("w") as telemetry:
         try:
             start = time.perf_counter()
-            sampler = subprocess.Popen(
+            sampler = OwnedProcess(
                 ["nvidia-smi", "--query-gpu=timestamp,memory.used,memory.total,temperature.gpu,power.draw",
                  "--format=csv,noheader,nounits", "-lms", "100"],
-                stdout=telemetry, stderr=subprocess.STDOUT, start_new_session=True)
-            process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
-            url = f"http://127.0.0.1:{port}"
-            deadline = time.monotonic() + startup_timeout
-            while time.monotonic() < deadline:
-                if process.poll() is not None:
-                    raise RuntimeError(f"Server exited {process.returncode}; see server.log")
-                try:
-                    with urllib.request.urlopen(url + "/health", timeout=2) as response:
-                        if response.status == 200:
-                            break
-                except (OSError, TimeoutError):
-                    pass
-                time.sleep(0.25)
-            else:
-                raise TimeoutError("Server startup deadline exceeded")
-            startup_seconds = time.perf_counter() - start
-            ready = json.loads((output / "runtime/ready.json").read_text())
-            if ready["run_id"] != run_id:
-                raise RuntimeError("Ready record belongs to another process")
-            if plan:
-                hard_budget = json.loads(Path(plan).read_text())["budget"]
-                if startup_seconds > hard_budget["max_startup_seconds"]:
-                    raise RuntimeError("HTTP-ready startup exceeds frozen budget")
-            if warmup:
-                warmed = run_benchmark(url, workload, output=output / "warmup.json",
-                                       timeout_s=request_timeout, run_id=run_id + "-warmup", reset_cache=True)
-                if warmed["summary"]["completed_requests"] != warmed["summary"]["planned_requests"]:
-                    raise RuntimeError("Warmup requests failed; do not measure an unwarmed server")
-            before = _flush(process, output, ready, url)
-            write_json(output / "paths_before.json", before)
-            bench = run_benchmark(url, workload, output=output / "requests.json",
-                                  timeout_s=request_timeout, run_id=run_id, reset_cache=True)
-            after = _flush(process, output, ready, url)
-            write_json(output / "paths_after.json", after)
-            fields = ("eligible", "selected_path", "used_path", "batch_size", "actual_capture_size", "reason")
-            previous = {tuple(row[k] for k in fields): row["count"] for row in before["counts"]}
-            timed_counts = []
-            for row in after["counts"]:
-                count = row["count"] - previous.get(tuple(row[k] for k in fields), 0)
-                if count < 0:
-                    raise RuntimeError("Runtime counters moved backwards")
-                if count:
-                    timed_counts.append({**row, "count": count})
-            write_json(output / "timed_paths.json", {"run_id": run_id, "fingerprint": ready["fingerprint"],
-                                                     "counts": timed_counts,
-                                                     "scope": "after-minus-before timed requests; excludes warmup"})
-            if bench["summary"]["completed_requests"] != bench["summary"]["planned_requests"]:
-                raise RuntimeError("Some planned requests failed or timed out")
-            result.update(status="ok", reason="", startup_seconds=startup_seconds,
-                          ready=ready, benchmark=bench, diagnostic=diagnostic, calibration=calibrate,
-                          timed_path_counts=timed_counts)
+                stdout=telemetry, stderr=subprocess.STDOUT)
+            env = {**os.environ, "GRAPHBUDGET_STARTED": str(start)}
+            with http_server(command, output / "runtime", run_id, timeout=timeout,
+                             started=start, stdout=log, env=env) as (process, lifecycle):
+                url = lifecycle["url"]
+                startup_seconds = lifecycle["startup_seconds"]
+                ready = json.loads((output / "runtime/ready.json").read_text())
+                if warmup:
+                    warmed = run_benchmark(url, workload, output=output / "warmup.json",
+                                           timeout_s=request_timeout, run_id=run_id + "-warmup", reset_cache=True)
+                    if warmed["summary"]["completed_requests"] != warmed["summary"]["planned_requests"]:
+                        raise RuntimeError("Warmup requests failed; do not measure an unwarmed server")
+                before = _flush(process, output, ready, url)
+                write_json(output / "paths_before.json", before)
+                bench = run_benchmark(url, workload, output=output / "requests.json",
+                                      timeout_s=request_timeout, run_id=run_id, reset_cache=True)
+                after = _flush(process, output, ready, url)
+                write_json(output / "paths_after.json", after)
+                fields = ("eligible", "selected_path", "used_path", "batch_size", "actual_capture_size", "reason")
+                previous = {tuple(row[k] for k in fields): row["count"] for row in before["counts"]}
+                timed_counts = []
+                for row in after["counts"]:
+                    count = row["count"] - previous.get(tuple(row[k] for k in fields), 0)
+                    if count < 0:
+                        raise RuntimeError("Runtime counters moved backwards")
+                    if count:
+                        timed_counts.append({**row, "count": count})
+                write_json(output / "timed_paths.json", {"run_id": run_id, "fingerprint": ready["fingerprint"],
+                                                         "counts": timed_counts,
+                                                         "scope": "after-minus-before timed requests; excludes warmup"})
+                if bench["summary"]["completed_requests"] != bench["summary"]["planned_requests"]:
+                    raise RuntimeError("Some planned requests failed or timed out")
+                result.update(status="ok", reason="", startup_seconds=startup_seconds,
+                              ready=ready, http_readiness=lifecycle, benchmark=bench,
+                              diagnostic=diagnostic, calibration=calibrate,
+                              timed_path_counts=timed_counts)
         except Exception as error:
             result.update(reason=f"{type(error).__name__}: {error}")
         finally:
-            try:
-                _stop(process)
-            finally:
-                _stop(sampler)
+            _stop(sampler)
     samples = []
     for line in (output / "device.csv").read_text().splitlines():
         parts = line.split(",")
