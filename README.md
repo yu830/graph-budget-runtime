@@ -20,6 +20,12 @@ and the metadata candidates did not establish a stable end-to-end gain.
 See [performance results](docs/PERFORMANCE_RESULTS_20261027.md) for exact
 conditions, attribution and limits; the candidates remain opt-in.
 
+**Decode v2 candidate:** an opt-in residual RMSNorm path retains the native
+variance reduction and has exact-output and actual graph-path smoke evidence.
+Its independent B→C performance is evaluated separately from the published
+v1 result. See [decode v2 evidence and reproduction](docs/DECODE_FAST_PATH_V2.md)
+and the [isolated runtime recipe](scripts/environment/README.md#isolated-v2-profile).
+
 **2026-10-27 reliability update:** C1/C2/C3 from independent review are repaired.
 Source and isolated installed-package suites each pass 80 CPU tests; the bounded
 GPU startup/fallback smoke passes exact output checks. See
@@ -153,7 +159,8 @@ safe overflow fallback. GraphBudget adds measured planning, fingerprinted
 startup enforcement, a reject-only cost hook and reproducible evidence.
 The original core introduced no online recapture/eviction, admission scheduler,
 multi-GPU support or custom CUDA/Triton kernel. This experimental branch adds an
-opt-in Triton metadata candidate and reuses an existing upstream GEMM kernel.
+opt-in Triton metadata candidate, reuses an existing upstream GEMM kernel,
+and adds the separately controlled residual RMSNorm path.
 
 Original project code is Apache-2.0. The SGLang patch retains upstream
 attribution. The patched batch-invariant file also traces to MIT-licensed

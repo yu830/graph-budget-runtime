@@ -16,16 +16,20 @@ from graphbudget.lifecycle import http_server
 from graphbudget.runtime import write_json
 
 ROOT = Path(__file__).resolve().parents[1]
-def server_args():
-    model = str(Path(os.environ['GRAPHBUDGET_MODEL_PATH']).resolve())
+def server_args(model_path=None, max_running_requests=16, max_total_tokens=4096, port=30277):
+    if not 1 <= max_running_requests <= 16 or max_total_tokens < 1:
+        raise ValueError("max running requests must be 1..16 and token capacity positive")
+    model = str(Path(model_path or os.environ['GRAPHBUDGET_MODEL_PATH']).resolve())
+    capture_sizes = sorted({n for n in (1, 2, 4, 8, 12, 16) if n <= max_running_requests}
+                           | {max_running_requests})
     return ['--model-path', model, '--tokenizer-path', model, '--revision', Path(model).name,
             '--dtype', 'bfloat16', '--device', 'cuda', '--tensor-parallel-size', '1',
             '--attention-backend', 'triton', '--disable-overlap-schedule', '--stream-output',
             '--random-seed', '0', '--enable-deterministic-inference',
             '--weight-loader-disable-mmap',
-            '--mem-fraction-static', '.85', '--max-total-tokens', '4096',
-            '--max-running-requests', '16', '--context-length', '4096',
-            '--cuda-graph-bs', '1', '2', '4', '8', '12', '16', '--host', '127.0.0.1', '--port', '30277']
+            '--mem-fraction-static', '.85', '--max-total-tokens', str(max_total_tokens),
+            '--max-running-requests', str(max_running_requests), '--context-length', '4096',
+            '--cuda-graph-bs', *map(str, capture_sizes), '--host', '127.0.0.1', '--port', str(port)]
 
 def post(url, obj=None):
     data = None if obj is None else json.dumps(obj).encode()

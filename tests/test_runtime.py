@@ -110,6 +110,38 @@ class RuntimeTests(unittest.TestCase):
             self.assertEqual(args.cuda_graph_bs, candidate["capture_sizes"])
             self.assertEqual(args.max_total_tokens, candidate["server_args"]["max_total_tokens"])
 
+    def test_gemm_configuration_requires_supported_mode(self):
+        with patch("graphbudget.runtime.identity.execution_config"), patch.dict(
+            os.environ, {"GRAPHBUDGET_SMALL_M_GEMM": "invalid"}, clear=True
+        ):
+            with self.assertRaisesRegex(ValueError, "Unknown GRAPHBUDGET_SMALL_M_GEMM"):
+                apply_before_init(NS(enable_deterministic_inference=True))
+        with patch("graphbudget.runtime.identity.execution_config"), patch.dict(
+            os.environ, {"GRAPHBUDGET_SMALL_M_GEMM": "upstream_42145"}, clear=True
+        ):
+            with self.assertRaisesRegex(ValueError, "requires deterministic"):
+                apply_before_init(NS(enable_deterministic_inference=False))
+            with self.assertRaisesRegex(ValueError, "DeepGEMM disabled"):
+                apply_before_init(NS(enable_deterministic_inference=True))
+        with patch("graphbudget.runtime.identity.execution_config"), patch.dict(
+            os.environ, {"GRAPHBUDGET_SMALL_M_GEMM": "upstream_42145",
+                         "SGLANG_BATCH_INVARIANT_OPS_ENABLE_MM_DEEPGEMM": "0"}, clear=True
+        ):
+            apply_before_init(NS(enable_deterministic_inference=True))
+
+    def test_residual_norm_configuration_is_explicit(self):
+        with patch("graphbudget.runtime.identity.execution_config"), patch.dict(
+            os.environ, {"GRAPHBUDGET_RESIDUAL_NORM": "invalid"}, clear=True
+        ):
+            with self.assertRaisesRegex(ValueError, "must be 0 or 1"):
+                apply_before_init(NS(enable_deterministic_inference=True))
+        with patch("graphbudget.runtime.identity.execution_config"), patch.dict(
+            os.environ, {"GRAPHBUDGET_RESIDUAL_NORM": "1"}, clear=True
+        ):
+            with self.assertRaisesRegex(ValueError, "requires deterministic"):
+                apply_before_init(NS(enable_deterministic_inference=False))
+            apply_before_init(NS(enable_deterministic_inference=True))
+
     def test_ready_hard_budget_fails_before_service(self):
         s = state()
         s.identity = _identity()

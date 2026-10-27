@@ -12,6 +12,12 @@ The small-M tile geometry was adapted from
 bill-h-lin. This project's implementation retains the pinned kernel's FP32
 fused-bias semantics and is not a verbatim backport or an upstream merge.
 
+Related prior work on residual normalization is [SGLang PR #46159](https://github.com/sgl-project/sglang/pull/46159)
+by Aarne Talman. It proposes a fully fused kernel with its own reduction;
+GraphBudget's separate implementation retains the PyTorch variance reduction
+and tests exact equality to the pinned native path. This is not an upstream
+merge or a claim that fused residual normalization is new.
+
 ## Thinking Machines Lab: MIT License
 
 MIT License

@@ -1,15 +1,16 @@
 {
   "base_commit": "bbe9c7eeb520b0a67e92d133dfc137a3688dc7f2",
-  "patch_sha256": "d14d6349aec82c82ee96b2d3ce1798ee5e319c337e26dff8dfa7b192afe410c5",
+  "patch_sha256": "957a8605e0ae2908588fcf8389cccf9ec90e358eec73a684a7f199110a7c6bed",
   "source_hash_semantics": "SHA256 after CRLF-to-LF normalization",
   "patched_files": {
-    "srt/batch_invariant_ops/batch_invariant_ops.py": "22d10e714e212fe673bffde66b24497fa182f49844ecb87b95fa14a4c666d44d",
+    "srt/batch_invariant_ops/batch_invariant_ops.py": "066bf5d8682259da7f959c4a1c66c96b0b73f92e71f7e393a4d9e51c75a58a2d",
     "srt/layers/attention/triton_backend.py": "5010ab8d841036c21dc8a0f6ab03b0820164e45c2d000279ab403d83733ee3af",
+    "srt/layers/layernorm.py": "54c008329f5f5ed8bf0afd95a6645c2a83bf80e79d76671f728c6754d2c506f0",
     "srt/managers/scheduler.py": "74beb3b407c31585978427441f360b17f5b27ff9b3448cf3f40ab9b62800087c",
     "srt/model_executor/cuda_graph_runner.py": "f6f99493ced7f8fe36d3deccbe0c06c3d3f5d1338f43d89703cf5496587bd33b",
     "srt/model_executor/forward_batch_info.py": "af598ab63b9053007b43314ecadd3531f32ff3492bbef4087f3f0b119f13a623",
     "srt/model_executor/model_runner.py": "5af6f2dc59d08e8ca385b046dbca006e65fa52b0f3d0d7531959eebeb648079f",
     "srt/server_args.py": "cc09a3d5c3c79804cbcf39ccce018d8777b8948c28b781b93a5bdd052603c212"
   },
-  "srt_tree_sha256": "b653df4c8fbe03b2908cba6f0ec3abd58af6d74d3bac68a29ba7bf9b3159cd03"
+  "srt_tree_sha256": "7b50e53824cd0d759d312961ebc9ae997798badb850e8269f853b7db85b08727"
 }

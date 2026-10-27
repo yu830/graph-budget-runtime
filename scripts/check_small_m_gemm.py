@@ -12,11 +12,13 @@ from graphbudget.experiment import gpu_lease
 from graphbudget.runtime import write_json
 from graphbudget.identity import file_digest
 import inspect
-from sglang.srt.batch_invariant_ops.batch_invariant_ops import _matmul_persistent_triton
+import sglang.srt.batch_invariant_ops.batch_invariant_ops as ops
+_matmul_persistent_triton = ops._matmul_persistent_triton
 
 SHAPES=((896,896),(896,1152),(896,9728),(4864,896),(896,151936))
 def call(a,b,bias,flag):
-    os.environ['GRAPHBUDGET_SMALL_M_GEMM']=str(flag)
+    # Test-only switching; real workers freeze the setting before capture.
+    ops._GRAPHBUDGET_SMALL_M_GEMM=str(flag)
     return _matmul_persistent_triton(a,b,bias)
 
 def main():

@@ -33,6 +33,19 @@ def apply_before_init(args):
     # Also applies without a plan. Reject loader/override modes before upstream
     # normalization, ModelConfig construction, distributed init or weight load.
     identity.execution_config(args)
+    gemm_mode = os.environ.get("GRAPHBUDGET_SMALL_M_GEMM", "0")
+    if gemm_mode not in ("0", "1", "upstream_42145"):
+        raise ValueError("Unknown GRAPHBUDGET_SMALL_M_GEMM mode")
+    if gemm_mode != "0":
+        if not getattr(args, "enable_deterministic_inference", False):
+            raise ValueError("GRAPHBUDGET_SMALL_M_GEMM requires deterministic inference")
+        if os.environ.get("SGLANG_BATCH_INVARIANT_OPS_ENABLE_MM_DEEPGEMM", "1") != "0":
+            raise ValueError("GRAPHBUDGET_SMALL_M_GEMM requires DeepGEMM disabled")
+    residual_mode = os.environ.get("GRAPHBUDGET_RESIDUAL_NORM", "0")
+    if residual_mode not in ("0", "1"):
+        raise ValueError("GRAPHBUDGET_RESIDUAL_NORM must be 0 or 1")
+    if residual_mode == "1" and not getattr(args, "enable_deterministic_inference", False):
+        raise ValueError("GRAPHBUDGET_RESIDUAL_NORM=1 requires deterministic inference")
     plan_path = os.environ.get("GRAPHBUDGET_PLAN")
     if not plan_path:
         return

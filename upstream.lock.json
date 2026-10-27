@@ -110,6 +110,7 @@
     "file": "src/graphbudget/patches/sglang-v0.5.9.patch",
     "sha256": "3146afe85bcd1e687dcdd3b1ba656a70687dabacfbed3301e4579205962fecec",
     "runtime_tree_sha256": "74d0efae3315d7b19d645734f5244e3600d433a9441ee24617e5c9ce3977240f",
-    "kv_sizing": "pre_capture"
+    "kv_sizing": "pre_capture",
+    "scope_note": "Historical 2026-10-26 measured patch; current checkout uses src/graphbudget/patches/manifest.json."
   }
 }

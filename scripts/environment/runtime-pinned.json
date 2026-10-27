@@ -261,5 +261,6 @@
       "purpose": "correctness-only native-graph versus forced-eager comparison"
     }
   },
-  "schema_version": 1
+  "schema_version": 1,
+  "scope_note": "Historical 2026-10-26 validation snapshot; current packaged patch is identified by src/graphbudget/patches/manifest.json."
 }
