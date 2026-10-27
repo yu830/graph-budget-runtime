@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="750" version="1.1" viewBox="0 0 1480 750" width="1480">
+  <defs/>
+  <rect fill="#FFFFFF" height="750" width="1480" x="0" y="0"/>
+  <rect fill="#225CA8" height="8" width="1480" x="0" y="0"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="62" y="49">VALIDATION WORKFLOW</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="36" font-weight="700" text-anchor="start" x="62" y="96">From a decode hotspot to a measured result</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start" x="62" y="119">A constrained, reversible optimization with separate correctness and performance gates.</text>
+  <line fill="none" stroke="#DCE5EC" stroke-linecap="round" stroke-width="1.5" x1="62" x2="1418" y1="148" y2="148"/>
+  <rect fill="#F7F9FC" height="222" rx="16" ry="16" stroke="#DCE5EC" stroke-width="1.4" width="211" x="63" y="226"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start" x="84" y="265">01</text>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="84" y="294">PIN</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="17.5" font-weight="700" text-anchor="start" x="84" y="336">Source &amp; workload</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="84" y="377">SGLang v0.5.9</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="84" y="402">Qwen2.5-0.5B BF16</text>
+  <line fill="none" stroke="#225CA8" stroke-linecap="round" stroke-width="2.5" x1="278" x2="293" y1="342" y2="342"/>
+  <polygon fill="#225CA8" points="293,342 280.0,337.0 280.0,347.0" stroke="none"/>
+  <rect fill="#F7F9FC" height="222" rx="16" ry="16" stroke="#DCE5EC" stroke-width="1.4" width="211" x="305" y="226"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start" x="326" y="265">02</text>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="326" y="294">MEASURE</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="17.5" font-weight="700" text-anchor="start" x="326" y="336">Native baseline</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="326" y="377">deterministic Triton</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="326" y="402">fixed requests</text>
+  <line fill="none" stroke="#225CA8" stroke-linecap="round" stroke-width="2.5" x1="520" x2="535" y1="342" y2="342"/>
+  <polygon fill="#225CA8" points="535,342 522.0,337.0 522.0,347.0" stroke="none"/>
+  <rect fill="#F7F9FC" height="222" rx="16" ry="16" stroke="#DCE5EC" stroke-width="1.4" width="211" x="547" y="226"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start" x="568" y="265">03</text>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="568" y="294">PROFILE</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="17.5" font-weight="700" text-anchor="start" x="568" y="336">Inspect path</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="568" y="377">Nsight Systems</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="568" y="402">matmul geometry</text>
+  <line fill="none" stroke="#225CA8" stroke-linecap="round" stroke-width="2.5" x1="762" x2="777" y1="342" y2="342"/>
+  <polygon fill="#225CA8" points="777,342 764.0,337.0 764.0,347.0" stroke="none"/>
+  <rect fill="#F7F9FC" height="222" rx="16" ry="16" stroke="#DCE5EC" stroke-width="1.4" width="211" x="789" y="226"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start" x="810" y="265">04</text>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="810" y="294">ADAPT</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="17.5" font-weight="700" text-anchor="start" x="810" y="336">Small-M route</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="810" y="377">opt-in / guarded</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="810" y="402">SGLang #42145</text>
+  <line fill="none" stroke="#225CA8" stroke-linecap="round" stroke-width="2.5" x1="1004" x2="1019" y1="342" y2="342"/>
+  <polygon fill="#225CA8" points="1019,342 1006.0,337.0 1006.0,347.0" stroke="none"/>
+  <rect fill="#F7F9FC" height="222" rx="16" ry="16" stroke="#DCE5EC" stroke-width="1.4" width="211" x="1031" y="226"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start" x="1052" y="265">05</text>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="1052" y="294">VERIFY</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="17.5" font-weight="700" text-anchor="start" x="1052" y="336">Exact outputs</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="1052" y="377">GEMM / reorder</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="1052" y="402">greedy token IDs</text>
+  <line fill="none" stroke="#225CA8" stroke-linecap="round" stroke-width="2.5" x1="1246" x2="1261" y1="342" y2="342"/>
+  <polygon fill="#225CA8" points="1261,342 1248.0,337.0 1248.0,347.0" stroke="none"/>
+  <rect fill="#E7F5F3" height="222" rx="16" ry="16" stroke="#B4D8D6" stroke-width="1.4" width="144" x="1273" y="226"/>
+  <text fill="#006D73" font-family="Inter, Lato, Arial, sans-serif" font-size="29" font-weight="700" text-anchor="start" x="1294" y="265">06</text>
+  <text fill="#006D73" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="1294" y="294">COMPARE</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="17.5" font-weight="700" text-anchor="start" x="1294" y="336">Serving A/B</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="1294" y="377">5 interleaved pairs</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14.5" font-weight="400" text-anchor="start" x="1294" y="402">paired +72.4%</text>
+  <line fill="none" stroke="#DCE5EC" stroke-linecap="round" stroke-width="1.5" x1="65" x2="1415" y1="498" y2="498"/>
+  <text fill="#6F8090" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="67" y="536">CONTROLLED COMPARISON</text>
+  <rect fill="#ECF3FC" height="105" rx="14" ry="14" stroke="#B8CCEA" stroke-width="1.2" width="666" x="65" y="562"/>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="start" x="87" y="594">Original and candidate use the same fixed workload</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start" x="87" y="621">256 requests × 128 output tokens per arm</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start" x="87" y="644">AB / BA / AB / BA / AB · paired relative gain</text>
+  <rect fill="#FAF3E7" height="105" rx="14" ry="14" stroke="#E8D0AE" stroke-width="1.2" width="662" x="754" y="562"/>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="start" x="776" y="594">Evidence layers remain independently checkable</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start" x="776" y="621">Exact oracle + recorded kernel launch path</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start" x="776" y="644">Paired serving results + ablation records</text>
+</svg>

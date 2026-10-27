@@ -1,0 +1,41 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gbstyle}[2026/10/28 GraphBudget research report style]
+\RequirePackage[a4paper,margin=21mm,headheight=15pt,footskip=13mm]{geometry}
+\RequirePackage{fontspec}
+\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]
+\setsansfont{lmsans10-regular.otf}[BoldFont=lmsans10-bold.otf]
+\setmonofont{lmmono10-regular.otf}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{graphicx}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\RequirePackage{xcolor}
+\RequirePackage{array}
+\RequirePackage{caption}
+\RequirePackage{enumitem}
+\RequirePackage{fancyhdr}\RequirePackage{float}\RequirePackage{needspace}
+\RequirePackage{titlesec}
+\RequirePackage{hyperref}
+\definecolor{GBNavy}{HTML}{162B40}
+\definecolor{GBBlue}{HTML}{235A9F}
+\definecolor{GBGray}{HTML}{596A77}
+\definecolor{GBLine}{HTML}{D8E1E8}
+\hypersetup{colorlinks=true,linkcolor=GBBlue,urlcolor=GBBlue,citecolor=GBBlue,pdfauthor={GraphBudget},pdfsubject={Deterministic BF16 decode performance}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.43em}
+\linespread{1.06}
+\titleformat{\section}{\sffamily\bfseries\Large\color{GBNavy}}{\thesection}{0.8em}{}[\vspace{1pt}\color{GBLine}\titlerule]
+\titleformat{\subsection}{\sffamily\bfseries\normalsize\color{GBNavy}}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.4em}{.65em}
+\titlespacing*{\subsection}{0pt}{1.0em}{.4em}
+\captionsetup{font=small,labelfont={bf,sf},textfont={rm},skip=5pt}
+\setlist[itemize]{leftmargin=1.6em,topsep=.3em,itemsep=.25em,parsep=0pt}
+\renewcommand{\arraystretch}{1.15}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\color{GBGray} GraphBudget}
+\fancyhead[R]{\sffamily\footnotesize\color{GBGray} Deterministic Decode Optimization}
+\fancyfoot[C]{\sffamily\footnotesize\color{GBGray}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\tabcolsep}{7pt}
+\newcommand{\GBmetric}[2]{\begin{tabular}{c}{\sffamily\Large\bfseries\textcolor{GBBlue}{#1}}\\[1pt]{\sffamily\footnotesize\textcolor{GBGray}{#2}}\end{tabular}}

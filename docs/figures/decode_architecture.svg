@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="870" version="1.1" viewBox="0 0 1480 870" width="1480">
+  <defs/>
+  <rect fill="#FFFFFF" height="870" width="1480" x="0" y="0"/>
+  <rect fill="#225CA8" height="8" width="1480" x="0" y="0"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="62" y="49">SYSTEM ARCHITECTURE / SGLANG V0.5.9</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="36" font-weight="700" text-anchor="start" x="62" y="96">Deterministic Decode: opt-in GEMM specialization</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start" x="62" y="119">The performance branch adapts the small-M GEMM path; native scheduling and CUDA Graph eligibility remain authoritative.</text>
+  <line fill="none" stroke="#DCE5EC" stroke-linecap="round" stroke-width="1.5" x1="62" x2="1418" y1="148" y2="148"/>
+  <text fill="#6F8090" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="66" y="190">SERVING PATH</text>
+  <rect fill="#F7F9FC" height="134" rx="14" ry="14" stroke="#DCE5EC" stroke-width="1.5" width="255" x="66" y="210"/>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="start" x="91" y="252">01   Request batching</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start" x="91" y="283">SGLang Scheduler</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start" x="91" y="306">fixed serving workload</text>
+  <rect fill="#F7F9FC" height="134" rx="14" ry="14" stroke="#DCE5EC" stroke-width="1.5" width="282" x="376" y="210"/>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="start" x="401" y="252">02   ModelRunner</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start" x="401" y="283">decode forward</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start" x="401" y="306">native eligibility check</text>
+  <rect fill="#F7F9FC" height="134" rx="14" ry="14" stroke="#DCE5EC" stroke-width="1.5" width="305" x="716" y="210"/>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="start" x="741" y="252">03   CUDA Graph path</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start" x="741" y="283">capture / replay</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start" x="741" y="306">no recapture introduced</text>
+  <rect fill="#E7F5F3" height="134" rx="14" ry="14" stroke="#B4D8D6" stroke-width="1.5" width="329" x="1085" y="210"/>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="20" font-weight="700" text-anchor="start" x="1111" y="252">04   Model outputs</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start" x="1111" y="283">greedy token stream</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start" x="1111" y="306">checked request by request</text>
+  <line fill="none" stroke="#225CA8" stroke-linecap="round" stroke-width="2.5" x1="321" x2="366" y1="278" y2="278"/>
+  <polygon fill="#225CA8" points="366,278 353.0,273.0 353.0,283.0" stroke="none"/>
+  <line fill="none" stroke="#225CA8" stroke-linecap="round" stroke-width="2.5" x1="658" x2="706" y1="278" y2="278"/>
+  <polygon fill="#225CA8" points="706,278 693.0,273.0 693.0,283.0" stroke="none"/>
+  <line fill="none" stroke="#225CA8" stroke-linecap="round" stroke-width="2.5" x1="1021" x2="1075" y1="278" y2="278"/>
+  <polygon fill="#225CA8" points="1075,278 1062.0,273.0 1062.0,283.0" stroke="none"/>
+  <text fill="#6F8090" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="66" y="408">INSIDE THE PERSISTENT TRITON MATMUL</text>
+  <rect fill="#FFFFFF" height="258" rx="18" ry="18" stroke="#B6C6D6" stroke-width="1.7" width="1348" x="66" y="434"/>
+  <rect fill="#ECF3FC" height="177" rx="14" ry="14" stroke="#B8CCEA" stroke-width="1.3" width="390" x="93" y="470"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="118" y="501">OPT-IN GATE</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="19" font-weight="700" text-anchor="start" x="118" y="538">dtype = BF16    M &lt;= 16</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start" x="118" y="565">K % 64 = 0    N % 128 = 0</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="15" font-weight="400" text-anchor="start" x="118" y="590">compatible strides / explicit switch</text>
+  <rect fill="#E7F5F3" height="78" rx="12" ry="12" stroke="#B4D8D6" stroke-width="1.3" width="374" x="558" y="464"/>
+  <text fill="#006D73" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="581" y="488">CANDIDATE</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="start" x="581" y="522">M16 / N64 / K128  ·  4 warps</text>
+  <rect fill="#F7F9FC" height="78" rx="12" ry="12" stroke="#DCE5EC" stroke-width="1.3" width="374" x="558" y="560"/>
+  <text fill="#6F8090" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="581" y="584">FALLBACK</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="18" font-weight="600" text-anchor="start" x="581" y="618">native persistent Triton GEMM</text>
+  <rect fill="#F7F9FC" height="167" rx="14" ry="14" stroke="#DCE5EC" stroke-width="1.3" width="380" x="1005" y="469"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="1030" y="501">SHARED NUMERICAL CONTRACT</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="19" font-weight="700" text-anchor="start" x="1030" y="539">FP32 accumulation and bias</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start" x="1030" y="571">output shape / dtype preserved</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start" x="1030" y="597">exact-output validation</text>
+  <line fill="none" stroke="#006D73" stroke-linecap="round" stroke-width="2.8" x1="485" x2="549" y1="532" y2="503"/>
+  <polygon fill="#006D73" points="549,503 535.0952559160075,503.8112286722493 539.2225596871006,512.9197611325923" stroke="none"/>
+  <line fill="none" stroke="#6F8090" stroke-linecap="round" stroke-width="2.8" x1="485" x2="549" y1="589" y2="600"/>
+  <polygon fill="#6F8090" points="549,600 537.0348204981199,592.8701697434099 535.3409083421266,602.7256586510075" stroke="none"/>
+  <line fill="none" stroke="#006D73" stroke-linecap="round" stroke-width="2.8" x1="932" x2="997" y1="502" y2="532"/>
+  <polygon fill="#006D73" points="997,532 987.2918188888028,522.0124467704951 983.1012371141854,531.0920406154995" stroke="none"/>
+  <line fill="none" stroke="#6F8090" stroke-linecap="round" stroke-width="2.8" x1="932" x2="997" y1="600" y2="583"/>
+  <polygon fill="#6F8090" points="997,583 983.1578939831777,581.4520655637102 985.688171427113,591.1266557905215" stroke="none"/>
+  <line fill="none" stroke="#225CA8" stroke-linecap="round" stroke-width="2.5" x1="868" x2="868" y1="345" y2="435"/>
+  <circle cx="868" cy="434" fill="#225CA8" r="5"/>
+  <text fill="#6F8090" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="66" y="734">VALIDATION EVIDENCE</text>
+  <rect fill="#F7F9FC" height="83" rx="12" ry="12" stroke="#DCE5EC" stroke-width="1" width="430" x="66" y="754"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="84" y="777">TRACE</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="19" font-weight="600" text-anchor="start" x="84" y="804">Execution-path identity</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14" font-weight="400" text-anchor="start" x="84" y="824">63 CUDA Graph launches / arm</text>
+  <rect fill="#F7F9FC" height="83" rx="12" ry="12" stroke="#DCE5EC" stroke-width="1" width="428" x="519" y="754"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="537" y="777">NUMERICS</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="19" font-weight="600" text-anchor="start" x="537" y="804">Output equivalence</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14" font-weight="400" text-anchor="start" x="537" y="824">340 GEMM + 255 reorder checks</text>
+  <rect fill="#F7F9FC" height="83" rx="12" ry="12" stroke="#DCE5EC" stroke-width="1" width="445" x="969" y="754"/>
+  <text fill="#225CA8" font-family="Inter, Lato, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing=".9px" text-anchor="start" x="987" y="777">PERFORMANCE</text>
+  <text fill="#12263A" font-family="Inter, Lato, Arial, sans-serif" font-size="19" font-weight="600" text-anchor="start" x="987" y="804">Paired serving A/B</text>
+  <text fill="#4D6074" font-family="Inter, Lato, Arial, sans-serif" font-size="14" font-weight="400" text-anchor="start" x="987" y="824">5 pairs · median +72.4%</text>
+</svg>
