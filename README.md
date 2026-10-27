@@ -156,5 +156,8 @@ multi-GPU support or custom CUDA/Triton kernel. This experimental branch adds an
 opt-in Triton metadata candidate and reuses an existing upstream GEMM kernel.
 
 Original project code is Apache-2.0. The SGLang patch retains upstream
-Apache-2.0 attribution. Model weights are obtained from the Apache-2.0 licensed
-Qwen repository and are not redistributed here.
+attribution. The patched batch-invariant file also traces to MIT-licensed
+Thinking Machines Lab code; see [third-party notices](THIRD_PARTY_NOTICES.md).
+Model weights are obtained from the Apache-2.0 licensed Qwen repository and
+are not redistributed here. AI tools assisted implementation and documentation;
+the linked reports preserve the measurement conditions and limitations.
