@@ -1,7 +1,7 @@
 # GraphBudget: executed core and strong-static-baseline evaluation
 
 The later experimental performance branch is described separately in
-[METADATA_EXPERIMENT.md](METADATA_EXPERIMENT.md); this report retains the
+[PERFORMANCE_RESULTS_20261027.md](PERFORMANCE_RESULTS_20261027.md); this report retains the
 2026-10-26 measured results and their original performance conclusion.
 
 The original 2026-10-26 measured version ran the planning/startup/dispatch/

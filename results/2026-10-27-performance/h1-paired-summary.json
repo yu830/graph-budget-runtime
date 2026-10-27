@@ -1,0 +1,94 @@
+{
+  "scope": "two balanced blocks; exploratory, not an adoption or tail claim",
+  "blocks": [
+    {
+      "block": 1,
+      "modes": {
+        "original": {
+          "primary_tokens_per_s": 1188.5662158164964,
+          "holdout_ttft_p50_s": 0.0886947910003073,
+          "holdout_ttft_p95_s": 0.11082635574998675,
+          "exact_reference": true,
+          "primary_relative_to_original": 0.0
+        },
+        "native": {
+          "primary_tokens_per_s": 594.8918804254397,
+          "holdout_ttft_p50_s": 0.08974876949969257,
+          "holdout_ttft_p95_s": 0.13541469820015664,
+          "exact_reference": true,
+          "primary_relative_to_original": -0.49948780933776304
+        },
+        "prealloc": {
+          "primary_tokens_per_s": 1197.9167958879734,
+          "holdout_ttft_p50_s": 0.06990335899990896,
+          "holdout_ttft_p95_s": 0.10293469634980285,
+          "exact_reference": true,
+          "primary_relative_to_original": 0.007867109082394297
+        },
+        "fused": {
+          "primary_tokens_per_s": 1148.6550612857143,
+          "holdout_ttft_p50_s": 0.06423599899972032,
+          "holdout_ttft_p95_s": 0.14431223164951917,
+          "exact_reference": true,
+          "primary_relative_to_original": -0.03357924362957332
+        },
+        "prefix_only": {
+          "primary_tokens_per_s": 1115.3044954757584,
+          "holdout_ttft_p50_s": 0.08965815349984041,
+          "holdout_ttft_p95_s": 0.18121869840001636,
+          "exact_reference": true,
+          "primary_relative_to_original": -0.06163873696377131
+        }
+      }
+    },
+    {
+      "block": 2,
+      "modes": {
+        "original": {
+          "primary_tokens_per_s": 1190.1874519564321,
+          "holdout_ttft_p50_s": 0.07191991149920796,
+          "holdout_ttft_p95_s": 0.09217668304963808,
+          "exact_reference": true,
+          "primary_relative_to_original": 0.0
+        },
+        "native": {
+          "primary_tokens_per_s": 1106.4307284090296,
+          "holdout_ttft_p50_s": 0.08528645399928791,
+          "holdout_ttft_p95_s": 0.14513026940030613,
+          "exact_reference": true,
+          "primary_relative_to_original": -0.0703727160034523
+        },
+        "prealloc": {
+          "primary_tokens_per_s": 1178.1946551423202,
+          "holdout_ttft_p50_s": 0.10504662950006605,
+          "holdout_ttft_p95_s": 0.24736988544982522,
+          "exact_reference": true,
+          "primary_relative_to_original": -0.01007639325586751
+        },
+        "fused": {
+          "primary_tokens_per_s": 1117.658248128416,
+          "holdout_ttft_p50_s": 0.09113826999964658,
+          "holdout_ttft_p95_s": 0.12078865844950995,
+          "exact_reference": true,
+          "primary_relative_to_original": -0.06093931145786524
+        },
+        "prefix_only": {
+          "primary_tokens_per_s": 1176.6178856475337,
+          "holdout_ttft_p50_s": 0.07191209050006364,
+          "holdout_ttft_p95_s": 0.1023196678505883,
+          "exact_reference": true,
+          "primary_relative_to_original": -0.011401200950818868
+        }
+      }
+    }
+  ],
+  "all_exact": true,
+  "failed_requests": 0,
+  "timed_out_requests": 0,
+  "retained_slow_case": {
+    "run": "h1-block01-native",
+    "request": "primary-159",
+    "ttft_s": 35.72863369299921,
+    "cause": "UNKNOWN; the successful request was retained"
+  }
+}

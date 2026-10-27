@@ -13,10 +13,12 @@ changes the allocator nor recaptures/resizes graphs or KV during service.
 [technical report](docs/TECHNICAL_REPORT.md) for implementation, CPU checks,
 model correctness, native execution paths, and performance separately.
 
-**Experimental performance branch, 2026-10-27:** opt-in dense decode metadata
-preparation and small-batch BF16 GEMM geometries are under evaluation. The
-[experiment protocol](docs/METADATA_EXPERIMENT.md) separates screening from
-unprofiled paired acceptance; these candidates are not yet adopted.
+**Experimental performance branch, 2026-10-27:** an opt-in small-batch BF16
+GEMM adaptation achieved a +72.4% median paired throughput change on one
+fixed 0.5B workload, beyond the measured A/A range. Holdout TTFT is mixed,
+and the metadata candidates did not establish a stable end-to-end gain.
+See [performance results](docs/PERFORMANCE_RESULTS_20261027.md) for exact
+conditions, attribution and limits; the candidates remain opt-in.
 
 **2026-10-27 reliability update:** C1/C2/C3 from independent review are repaired.
 Source and isolated installed-package suites each pass 80 CPU tests; the bounded

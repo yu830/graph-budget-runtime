@@ -1,9 +1,11 @@
 # Project status
 
-2026-10-27, experimental performance branch: trace-guided metadata and small-M
-GEMM candidates are being evaluated separately from the reliability release.
-Screening and exact output comparisons are preliminary; unprofiled paired
-acceptance is not yet complete. See the [protocol](METADATA_EXPERIMENT.md) and
+2026-10-27, experimental performance branch: the small-M GEMM adaptation met
+the predeclared primary-load rule in five unprofiled pairs (+72.4% median
+throughput, max A/A 8.8%, exact output). Holdout TTFT is mixed; metadata
+candidates did not establish a stable end-to-end gain. See the
+[results](PERFORMANCE_RESULTS_20261027.md),
+[protocol](METADATA_EXPERIMENT.md) and
 [walkthrough](PERFORMANCE_WALKTHROUGH_ZH.md). The retained v0.1.1 conclusion
 below still applies to the historical cost policy.
 
