@@ -29,6 +29,8 @@ mismatches remain unchanged in [TECHNICAL_REPORT.md](TECHNICAL_REPORT.md).
   all 340 matched the native output bit for bit. Another 255 checks reused
   rows across M=1–17, reordered them and used random bias. These checks do not
   establish correctness for arbitrary shapes or devices.
+- The final source CPU suite passed 81 tests; a fresh SGLang base worktree
+  accepted the patch and matched the full runtime source-tree identity.
 - All measured arms used the same hash-verified model copy, task-local Triton
   cache and disabled-mmap loading. The model and dependency identities match;
   failures before these common conditions are retained as diagnosis.
@@ -57,6 +59,13 @@ so the observed median exceeds the predeclared max(5%, A/A) threshold.
 The range of original paired throughput was 1,096.61–1,164.15 tokens/s.
 The A/A endpoints ranged from 1,049.50 to 1,274.96 tokens/s; the two A/A
 pairs are a limited noise estimate.
+
+An earlier formal original arm completed its primary requests but its
+executor disappeared before holdout and did not write an exit receipt. The
+boot ID had not changed and the termination cause remains unknown. That
+incomplete arm is retained separately and was not counted as a complete pair;
+the original arm was then rerun in a new directory under the same conditions.
+No completed slow round was discarded.
 
 | Metric | Median original | Median candidate | Median paired change |
 |---|---:|---:|---:|
