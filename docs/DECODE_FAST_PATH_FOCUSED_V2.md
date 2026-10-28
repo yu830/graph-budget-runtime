@@ -70,3 +70,40 @@ as well as `CUDA_LAUNCH_BLOCKING`. The actual experimental protocol records
 the source identity and input hashes before execution. A separate prior
 exploratory B/C driver proceeded after an 8.31% B/B change and is not treated
 as satisfying this protocol's 5% gate.
+
+## Focused attempt and decision
+
+The one frozen `bc-focused-v1` attempt used source commit
+`c7e831ad9e5896f347ee251048bf5ce31a8f1802` on the same WSL boot.
+Its independent B controls completed all requests and exact comparisons:
+
+| B case | Primary tokens/s | Full makespan | Maximum TTFT |
+|---|---:|---:|---:|
+| 1 | 2,617.71 | 12.518 s | 1.038 s |
+| 2 | 2,845.27 | 11.517 s | 0.985 s |
+
+The +8.69% B/B change exceeded the fixed 5% limit. The runner stopped before
+the five B/C pairs and post-control; neither was run. All 512 primary SSE
+streams were independently reconstructed as 128-token exact outputs.
+Both primary runs recorded 2,032 batch-16/capture-16 graph replays.
+Median server-reported e2e duration was 1.372 s and 1.236 s. Sampled
+whole-device median SM clocks were 2,632 and 2,887 MHz respectively. The
+clock observation is correlated with, but does not establish the cause of,
+the service-time difference.
+
+The earlier separate exploratory driver completed five B/C pairs with a
+14.07% median paired change and five positive directions, but it continued
+after a pre-control of +8.31% and also flagged an acceptance TTFT regression.
+It is retained as exploratory evidence and is not a focused-protocol
+acceptance result.
+
+Decision: **BLOCKED_BY_MEASUREMENT_ENVIRONMENT**. The specific blocker is
+same-code service variability above the declared gate, not a proven defect
+in C or a proven hardware root cause. The actual B-to-C end-to-end gain and
+resource cost remain UNKNOWN; B stays recommended and C stays opt-in.
+The prior A CUDA failure remains separate and unresolved. The temporary clean
+checkout passed 34 affected CPU checks; a repeated GPU run after the failed
+gate was intentionally not performed.
+
+[Machine-readable results](../results/2026-10-28-v2-focused/summary.json)
+retain the model, source, exact counts, controls and limits.

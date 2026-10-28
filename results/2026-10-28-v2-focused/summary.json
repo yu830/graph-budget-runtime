@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "decision": "BLOCKED_BY_MEASUREMENT_ENVIRONMENT",
+  "measurement_source_commit": "c7e831ad9e5896f347ee251048bf5ce31a8f1802",
+  "candidate_implementation_commit": "480fd796b6bb457352b9ac4b80b1f6c4ce22a322",
+  "model": "Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "device": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "post_error_B_model_health": {
+    "status": "PASS_SCOPED_EXECUTION",
+    "source_commit": "916d0dd23cc5874fed6a05b7345b526603637c1d",
+    "exact_requests_vs_prior_B": 365,
+    "primary_graph_replays": 2032,
+    "primary_graph_batch_and_capture": 16,
+    "prefill_decode_sampling_and_output": "observed",
+    "prior_A_cuda_error_cause": "UNKNOWN"
+  },
+  "operator_chain": {
+    "status": "SUPPORTED_FOR_SERVICE_TEST",
+    "scope": "same-process complete residual RMSNorm chain, independent CUDA graphs; not serving throughput",
+    "script_sha256": "958d92f025b7c572b5646386cf0213e86532bb7ebdd1b3de12a93cceca9ddd75",
+    "all_six_shapes_bitwise_after_changed_input_replay": true,
+    "primary_shape": {"rows": 16, "hidden": 896},
+    "B_median_event_us_per_replay": 16.13327980041504,
+    "C_median_event_us_per_replay": 9.22432005405426,
+    "median_paired_latency_change": -0.4656389792059289,
+    "positive_blocks": 7,
+    "blocks": 7,
+    "max_BB_control_change": 0.012914415828324755,
+    "other_shape_control_limit": "896x1 maximum B/B change was 25.58%; do not generalize stable noise to all shapes"
+  },
+  "focused_serving": {
+    "protocol": "bc-focused-v1",
+    "primary_workload": "256 requests x 128 output tokens; 32 client workers, 16 running, KV 4096, full makespan",
+    "equal_warmup": "4x64, 43 calibration, then one 256x128 primary-shaped workload per arm, outside primary timing",
+    "independent_BB_tokens_per_second": [2617.712886152364, 2845.2731964552313],
+    "independent_BB_makespan_seconds": [12.517797567999878, 11.51664453199919],
+    "independent_BB_relative_change": 0.08693096615242113,
+    "predeclared_absolute_BB_limit": 0.05,
+    "gate": "CONTROL_FAILED",
+    "primary_request_reconstruction": "512/512 SSE streams reconstructed, each 128 tokens, exact across B cases",
+    "primary_graph_replays_per_case": 2032,
+    "primary_max_ttft_seconds": [1.0378785530010646, 0.9852013780000561],
+    "server_e2e_median_seconds": [1.37224543094635, 1.2355831861495972],
+    "sampled_SM_clock_median_MHz": [2632, 2887],
+    "clock_note": "whole-device samples differ; correlation does not establish cause",
+    "formal_BC_pairs": "NOT_RUN",
+    "post_BB": "NOT_RUN",
+    "C_incremental_throughput": "UNKNOWN",
+    "C_incremental_resource_cost": "UNKNOWN"
+  },
+  "earlier_exploratory_BC": {
+    "scope": "separate prior driver, not bc-focused-v1; continued despite a failed 5% precontrol",
+    "pre_BB_relative_change": 0.08305438447124636,
+    "positive_pairs": 5,
+    "median_paired_gain": 0.14072406203361343,
+    "review_flag": "acceptance:ttft_s.p50:CONSISTENT_REGRESSION_REVIEW",
+    "adoption": "NOT_SUPPORTED: pre-BB gate exceeded 5%"
+  },
+  "validation": {
+    "clean_checkout_affected_cpu_tests": 34,
+    "formal_gpu_reproduction_after_failed_gate": "NOT_RUN",
+    "new_1p5b_service_performance": "NOT_RUN",
+    "recommended_path": "B",
+    "C_default": "off"
+  }
+}

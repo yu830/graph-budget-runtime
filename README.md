@@ -28,6 +28,9 @@ and the [isolated runtime recipe](scripts/environment/README.md#isolated-v2-prof
 The [measurement repair](docs/MEASUREMENT_REPAIR_V2.md) adds explicit local
 transport and an independent B/B gate; the latest control failed, so no new
 B→C performance result is claimed.
+The [focused B/C follow-up](docs/DECODE_FAST_PATH_FOCUSED_V2.md) found a
+bounded operator-chain signal, but its independent serving control exceeded
+the 5% gate, so C is still not recommended.
 
 **2026-10-27 reliability update:** C1/C2/C3 from independent review are repaired.
 Source and isolated installed-package suites each pass 80 CPU tests; the bounded
