@@ -44,6 +44,7 @@ def main():
     p.add_argument('--port',type=int,default=30277)
     p.add_argument('--transport',choices=('auto','direct','inherit'),default='auto')
     p.add_argument('--request-diagnostics',action='store_true')
+    p.add_argument('--primary-shaped-warmup',action='store_true')
     p.add_argument('--extra-workload',action='append',nargs=3,default=[],metavar=('LABEL','PATH','WORKERS'))
     a=p.parse_args()
     if a.max_workers < 1: raise ValueError('max-workers must be positive')
@@ -94,7 +95,8 @@ def main():
                'pythonpath':env.get('PYTHONPATH',''),
                'workloads':[{'label':label,'workers':workers,'requests':len(w['requests'])} for label,w,workers in workloads],
                'settings':{k:env.get(k) for k in ('GRAPHBUDGET_METADATA_MODE','GRAPHBUDGET_SMALL_M_GEMM','GRAPHBUDGET_RESIDUAL_NORM','GRAPHBUDGET_METADATA_DIAGNOSTIC')},
-               'transport':a.transport,'request_diagnostics':a.request_diagnostics})
+               'transport':a.transport,'request_diagnostics':a.request_diagnostics,
+               'primary_shaped_warmup':a.primary_shaped_warmup})
     results=[];telemetry=None
     with open(os.environ['GRAPHBUDGET_SHARED_GPU_LOCK'],'a') as lock,gpu_lease(),(out/'server.log').open('w') as log,(out/'device.csv').open('w') as device:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
@@ -116,6 +118,16 @@ def main():
                     comparison=compare_exact_tokens(json.loads(Path(reference_path).read_text()),check)
                     write_json(out/'exact-reference.json',comparison)
                     assert comparison['equivalent'],comparison
+                if a.primary_shaped_warmup:
+                    warm_primary=run_benchmark(url,primary,output=out/'primary-warmup.json',
+                        run_id=run+'-primary-warmup',reset_cache=True,max_workers=a.max_workers,
+                        timeout_s=240,transport_mode=a.transport,request_diagnostics=a.request_diagnostics)
+                    assert warm_primary['summary']['completed_requests']==len(primary['requests']),warm_primary['summary']
+                    if a.reference_dir:
+                        reference_warmup=json.loads((Path(a.reference_dir)/'primary-warmup.json').read_text())
+                        comparison=compare_exact_tokens(reference_warmup,warm_primary)
+                        write_json(out/'primary-warmup-exact-reference.json',comparison)
+                        assert comparison['equivalent'],comparison
                 for r in range(a.rounds):
                     for label,w,workers in workloads:
                         post(url+'/flush_cache',transport_mode=a.transport)
