@@ -25,6 +25,9 @@ variance reduction and has exact-output and actual graph-path smoke evidence.
 Its formal B→C throughput result is inconclusive and does not meet the
 predeclared adoption rule. See [decode v2 evidence and reproduction](docs/DECODE_FAST_PATH_V2.md)
 and the [isolated runtime recipe](scripts/environment/README.md#isolated-v2-profile).
+The [measurement repair](docs/MEASUREMENT_REPAIR_V2.md) adds explicit local
+transport and an independent B/B gate; the latest control failed, so no new
+B→C performance result is claimed.
 
 **2026-10-27 reliability update:** C1/C2/C3 from independent review are repaired.
 Source and isolated installed-package suites each pass 80 CPU tests; the bounded

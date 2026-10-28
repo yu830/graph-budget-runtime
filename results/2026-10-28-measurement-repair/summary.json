@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "CONTROL_FAILED_NO_BC_ADOPTION",
+  "measurement_source_commit": "5d70f9af6d1bd5237d9417452d028d2943992f15",
+  "candidate_source_commit": "480fd796b6bb457352b9ac4b80b1f6c4ce22a322",
+  "device": "NVIDIA GeForce RTX 5070 Laptop GPU",
+  "model": "Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "primary_workload": "256 requests x 128 output tokens; full makespan",
+  "transport": {
+    "mode": "direct",
+    "real_target_and_proxy_sentinel_test": "PASS",
+    "actual_primary_peers": "target_loopback_port for every completed B request in both controls",
+    "historical_proxy_causation": "UNKNOWN"
+  },
+  "diagnostic": {
+    "scope": "short B run, diagnostic instrumentation enabled",
+    "source_identity": "precommit working tree; loaded graphbudget_sha256 dfb35c1628aa5da5c458a9d19d45db4ec1e0d63fcfeb559a0d9cd1696570c220",
+    "request_counts": {"warmup": 4, "calibration": 43, "primary": 64, "holdout": 34},
+    "calibration_exact_tokens_vs_prior_B": true,
+    "historical_35_to_68_second_wait_reproduced": false,
+    "shorter_wait": "Five calibration requests waited about 3.18 seconds between ASGI complete body and response start; the underlying cause is UNKNOWN.",
+    "scheduler_queue_admission": "UNKNOWN; only tokenizer-to-scheduler dispatch was observed"
+  },
+  "attempt_1": {
+    "independent_BB_tokens_per_second": [2038.026146385984, 2002.4809063992145],
+    "independent_BB_relative_change": -0.017441012741569395,
+    "BB_gate": "PASS",
+    "result": "FAILED",
+    "failure": "Second A scheduler reported CUDA error unknown; 144 of 256 primary requests completed and 112 failed.",
+    "cuda_error_cause": "UNKNOWN",
+    "gpu_recovery_smoke": "20 BF16 CUDA 512x512 matrix multiplications and synchronization passed on the same boot"
+  },
+  "attempt_2": {
+    "independent_BB_tokens_per_second": [2267.091527561552, 2085.276159823674],
+    "primary_makespan_seconds": [14.453761394999674, 15.71398581700123],
+    "independent_BB_relative_change": -0.08019763010337566,
+    "BB_gate": "CONTROL_FAILED",
+    "threshold_absolute_relative_change": 0.05,
+    "requests_completed_per_B": 365,
+    "exact_token_comparison": "PASS across calibration, primary, holdout, interactive and acceptance workloads",
+    "max_primary_ttft_seconds": [1.0151, 1.083],
+    "primary_server_reported_e2e_p50_seconds": [1.7861, 1.9374],
+    "five_formal_BC_pairs": "NOT_RUN",
+    "note": "Second B slowed across the workload; neither slow requests nor failed samples were discarded."
+  },
+  "validation": {
+    "clean_checkout_affected_cpu_tests": 36,
+    "clean_checkout_BC_gpu_reproduction": "NOT_RUN: independent BB gate failed",
+    "new_1p5b_performance": "NOT_RUN",
+    "candidate_B_to_C_gain": "UNKNOWN",
+    "candidate_adoption": "NOT_SUPPORTED"
+  }
+}

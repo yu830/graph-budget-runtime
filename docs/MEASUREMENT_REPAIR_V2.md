@@ -56,3 +56,52 @@ verified model snapshot and an existing shared GPU lock:
 The runner requires a clean source tree and saves the protocol before running.
 If the independent B/B control fails, preserve its data and investigate;
 do not present the unstarted B/C pairs as results.
+
+## Observed results on 2026-10-28
+
+The local target/proxy-sentinel tests exercised both actual HTTP endpoints.
+The opt-in model diagnostic completed 145 requests, with all observed peers
+classified as the target loopback port; its 43 calibration outputs matched
+the prior B reference exactly. That diagnostic used the precommit working tree
+(loaded GraphBudget fingerprint `dfb35c1628aa5da5c458a9d19d45db4ec1e0d63fcfeb559a0d9cd1696570c220`),
+not the later frozen measurement commit. Subsequent edits recorded cache-reset
+peers and omitted an unused timing call when diagnostics were disabled.
+It did not reproduce the historical 35–68 s
+wait. Five calibration requests spent approximately 3.18 s between the ASGI
+body-complete and response-start markers, before TokenizerManager entry. This
+locates those shorter waits, but does not establish their cause or the cause of
+the historical waits.
+
+Two independent B/B controls were attempted on the same WSL boot:
+
+| Attempt | First B tokens/s | Second B tokens/s | Change | Result |
+|---|---:|---:|---:|---|
+| Initial | 2,038.03 | 2,002.48 | −1.74% | Gate passed |
+| After CUDA recovery smoke | 2,267.09 | 2,085.28 | −8.02% | Gate failed |
+
+After the first gate passed, the first A case completed. The second A case
+failed when the scheduler reported `CUDA error: unknown error`: 144 of 256
+primary requests completed and 112 failed. A subsequent bounded CUDA matrix
+smoke passed; the cause of the earlier error remains UNKNOWN. The recovery
+plan allowed one fresh attempt with another independent B/B, rather than
+carrying a pre-error control into a post-error comparison.
+
+In the second B/B, all 365 requests per B completed and their token sequences
+matched across calibration, primary, holdout, interactive and acceptance
+workloads. No 35–68 s outlier appeared: the maximum primary TTFT was about
+1.02 s and 1.08 s. Median server-reported request duration rose from 1.786 s
+to 1.937 s; sampled whole-device clocks and utilization also differed, but
+those samples do not prove a cause. The second gate therefore stopped the run
+before A/A and all five B/C pairs.
+
+The change provides a controlled local transport and preserves complete failure
+evidence, but does **not** establish an incremental B-to-C performance gain.
+C remains opt-in; B remains the recommendation. No new 1.5B performance result
+was run. The earlier inconclusive v2 data remains unchanged. A clean checkout
+of the measured source passed 36 affected CPU checks and exposed the paired
+runner; the clean-checkout B/C GPU run was not executed after the control
+failed. The measured code revision is
+`5d70f9af6d1bd5237d9417452d028d2943992f15`; a later documentation commit
+may record these results without changing the measured code.
+
+See the [machine-readable summary](../results/2026-10-28-measurement-repair/summary.json).
