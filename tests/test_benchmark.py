@@ -10,9 +10,11 @@ from __future__ import annotations
 import copy
 import io
 import json
+import os
 import threading
 import time
 import unittest
+from unittest import mock
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
@@ -27,6 +29,7 @@ from graphbudget.benchmark import (
     run_benchmark,
     summarize_paired_rounds,
 )
+from graphbudget.transport import HTTPTransport
 
 
 class _SyntheticSSEHandler(BaseHTTPRequestHandler):
@@ -63,6 +66,15 @@ class _SyntheticSSEHandler(BaseHTTPRequestHandler):
         with self.lock:
             self.requests.append(body)
         rid = str(body["rid"])
+        if "http-error" in rid:
+            self._send_text(503, "fixture unavailable")
+            return
+        if "early-eof" in rid:
+            event = {"output_ids": [123],
+                     "meta_info": {"id": rid, "completion_tokens": 1,
+                                   "finish_reason": {"type": "length", "length": 1}}}
+            self._send_text(200, "data: " + json.dumps(event) + chr(10) + chr(10))
+            return
         if "slow" in rid:
             time.sleep(0.15)
         base = 100 + (sum(body["input_ids"]) % 10)
@@ -122,6 +134,19 @@ class _SyntheticSSEHandler(BaseHTTPRequestHandler):
             self.wfile.flush()
         except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
             return
+
+
+class _ProxySentinel(BaseHTTPRequestHandler):
+    hits = []
+
+    def log_message(self, *_args):
+        return
+
+    def do_POST(self):
+        self.hits.append(self.path)
+        self.send_response(502)
+        self.send_header("Content-Length", "0")
+        self.end_headers()
 
 
 class BenchmarkHarnessTests(unittest.TestCase):
@@ -342,6 +367,69 @@ class BenchmarkHarnessTests(unittest.TestCase):
         self.assertEqual(sent_payload["sampling_params"]["temperature"], 0.0)
         self.assertTrue(sent_payload["sampling_params"]["ignore_eos"])
         self.assertTrue(sent_payload["stream"])
+
+    def test_explicit_transport_uses_real_target_and_proxy_endpoints(self) -> None:
+        sentinel = ThreadingHTTPServer(("127.0.0.1", 0), _ProxySentinel)
+        thread = threading.Thread(target=sentinel.serve_forever, daemon=True)
+        _ProxySentinel.hits = []
+        thread.start()
+        proxy = f"http://127.0.0.1:{sentinel.server_port}"
+        env = {name: "" for name in ("http_proxy", "https_proxy", "HTTP_PROXY", "HTTPS_PROXY",
+                                      "all_proxy", "ALL_PROXY", "no_proxy", "NO_PROXY")}
+        env["http_proxy"] = proxy
+        try:
+            with mock.patch.dict(os.environ, env):
+                direct = run_benchmark(self.url, self.workload(), run_id="direct", timeout_s=2,
+                                       transport_mode="direct", request_diagnostics=True,
+                                       reset_cache=True)
+                self.assertEqual(direct["summary"]["completed_requests"], 2)
+                self.assertEqual(direct["cache_reset"]["status"], "success")
+                self.assertEqual(direct["cache_reset"]["transport_peer"], "target_loopback_port")
+                self.assertEqual(_ProxySentinel.hits, [])
+                self.assertEqual(direct["run"]["transport"]["effective_mode"], "direct")
+                for row in direct["requests"]:
+                    self.assertEqual(row["transport_peer"], "target_loopback_port")
+                    stages = row["request_phases"]
+                    keys = ("client_call_begin_ns", "dns_begin_ns", "dns_end_ns",
+                            "connect_begin_ns", "connect_end_ns", "request_write_complete_ns",
+                            "response_headers_complete_ns", "first_sse_ns", "first_token_ns",
+                            "last_token_ns", "last_sse_ns", "eof_ns")
+                    self.assertEqual([stages[k] for k in keys], sorted(stages[k] for k in keys))
+                inherited = run_benchmark(self.url, self.workload(), run_id="inherit", timeout_s=2,
+                                          transport_mode="inherit")
+                self.assertEqual(inherited["summary"]["failed_requests"], 2)
+                self.assertEqual(len(_ProxySentinel.hits), 2)
+                self.assertTrue(all(path.startswith(self.url) for path in _ProxySentinel.hits))
+                self.assertTrue(inherited["run"]["transport"]["proxy_configured_for_scheme"])
+                self.assertFalse(inherited["run"]["transport"]["loopback_bypass"])
+                self.assertNotIn(proxy, json.dumps(inherited["run"]["transport"]))
+        finally:
+            sentinel.shutdown()
+            sentinel.server_close()
+            thread.join(timeout=2)
+
+    def test_auto_direct_is_limited_to_explicit_loopback_hosts(self):
+        for url in ("http://127.0.0.1:80", "http://localhost:80", "http://[::1]:80"):
+            self.assertEqual(HTTPTransport(url).mode, "direct")
+        for url in ("http://127.0.0.2:80", "http://example.com:80"):
+            self.assertEqual(HTTPTransport(url).mode, "inherit")
+
+    def test_diagnostic_mode_preserves_http_error_early_eof_and_timeout(self):
+        workload = self.workload()
+        workload["requests"] = [
+            {"request_id": name, "input_ids": [1], "max_new_tokens": 1, "planned_at_s": 0}
+            for name in ("http-error", "early-eof", "slow")
+        ]
+        run = run_benchmark(self.url, workload, run_id="failure", timeout_s=0.04,
+                            request_diagnostics=True, max_workers=3)
+        rows = {row["workload_request_id"]: row for row in run["requests"]}
+        self.assertEqual(rows["http-error"]["http_status"], 503)
+        self.assertEqual(rows["http-error"]["status"], "error")
+        self.assertEqual(rows["early-eof"]["status"], "error")
+        self.assertIn("[DONE]", rows["early-eof"]["error"])
+        self.assertIn("eof_ns", rows["early-eof"]["request_phases"])
+        self.assertEqual(rows["slow"]["status"], "timeout")
+        self.assertIn("request_write_complete_ns", rows["slow"]["request_phases"])
 
     def test_exact_comparison_uses_stable_identity(self) -> None:
         baseline = run_benchmark(self.url, self.workload(), run_id="base", timeout_s=2.0)

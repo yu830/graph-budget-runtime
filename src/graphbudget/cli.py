@@ -74,6 +74,9 @@ def _serve(args):
         probe_host = f"[{probe_host}]"
     write_json(output / "endpoint.json", {"run_id": os.environ["GRAPHBUDGET_RUN_ID"],
                                           "url": f"http://{probe_host}:{server_args.port}"})
+    if diagnostic_path := os.environ.get("GRAPHBUDGET_REQUEST_DIAGNOSTICS"):
+        from .request_diagnostics import install
+        install(diagnostic_path)
     try:
         run_server(server_args)
     finally:

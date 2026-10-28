@@ -42,6 +42,8 @@ def main():
     p.add_argument('--model-path');p.add_argument('--max-running-requests',type=int,default=16)
     p.add_argument('--max-total-tokens',type=int,default=4096);p.add_argument('--max-workers',type=int,default=32)
     p.add_argument('--port',type=int,default=30277)
+    p.add_argument('--transport',choices=('auto','direct','inherit'),default='auto')
+    p.add_argument('--request-diagnostics',action='store_true')
     p.add_argument('--extra-workload',action='append',nargs=3,default=[],metavar=('LABEL','PATH','WORKERS'))
     a=p.parse_args()
     if a.max_workers < 1: raise ValueError('max-workers must be positive')
@@ -65,6 +67,9 @@ def main():
         workloads.append((label,workload_data,workers));used.add(label)
     env=dict(os.environ)
     env.pop('GRAPHBUDGET_METADATA_DIAGNOSTIC',None)
+    env.pop('GRAPHBUDGET_REQUEST_DIAGNOSTICS',None)
+    if a.request_diagnostics:
+        env['GRAPHBUDGET_REQUEST_DIAGNOSTICS']=str(out/'server-request-phases.jsonl')
     env['GRAPHBUDGET_METADATA_MODE']=a.mode if a.mode in ('prealloc','fused','prefix_only') else 'native'
     env['GRAPHBUDGET_SMALL_M_GEMM']={'gemm':'1','upstream_gemm':'upstream_42145','v2_residual':'upstream_42145'}.get(a.mode,'0')
     env['GRAPHBUDGET_RESIDUAL_NORM']='1' if a.mode == 'v2_residual' else '0'
@@ -88,22 +93,23 @@ def main():
     write_json(out/'invocation.json',{'command':cmd,'mode':a.mode,'run_id':run,
                'pythonpath':env.get('PYTHONPATH',''),
                'workloads':[{'label':label,'workers':workers,'requests':len(w['requests'])} for label,w,workers in workloads],
-               'settings':{k:env.get(k) for k in ('GRAPHBUDGET_METADATA_MODE','GRAPHBUDGET_SMALL_M_GEMM','GRAPHBUDGET_RESIDUAL_NORM','GRAPHBUDGET_METADATA_DIAGNOSTIC')}})
+               'settings':{k:env.get(k) for k in ('GRAPHBUDGET_METADATA_MODE','GRAPHBUDGET_SMALL_M_GEMM','GRAPHBUDGET_RESIDUAL_NORM','GRAPHBUDGET_METADATA_DIAGNOSTIC')},
+               'transport':a.transport,'request_diagnostics':a.request_diagnostics})
     results=[];telemetry=None
     with open(os.environ['GRAPHBUDGET_SHARED_GPU_LOCK'],'a') as lock,gpu_lease(),(out/'server.log').open('w') as log,(out/'device.csv').open('w') as device:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         try:
             telemetry=OwnedProcess(['nvidia-smi','--query-gpu=timestamp,memory.used,temperature.gpu,power.draw,clocks.sm,clocks.mem,utilization.gpu','--format=csv,noheader,nounits','-lms','250'],stdout=device,stderr=subprocess.STDOUT)
-            with http_server(cmd,out/'runtime',run,timeout=600,stdout=log,env=env) as (_,life):
+            with http_server(cmd,out/'runtime',run,timeout=600,stdout=log,env=env,transport_mode=a.transport) as (_,life):
                 url=life['url'];ready=json.loads((out/'runtime/ready.json').read_text())
                 expected_capture=sorted({n for n in (1,2,4,8,12,16) if n<=a.max_running_requests}|{a.max_running_requests})
                 assert ready['kv_tokens']==a.max_total_tokens and ready['capture_sizes']==expected_capture
                 assert ready['identity']['config']['max_running_requests']==a.max_running_requests
                 assert ready['identity']['attention_backend']=='triton'
-                warmed=run_benchmark(url,workload(4,64),output=out/'warmup.json',run_id=run+'-warm',reset_cache=True)
+                warmed=run_benchmark(url,workload(4,64),output=out/'warmup.json',run_id=run+'-warm',reset_cache=True,transport_mode=a.transport,request_diagnostics=a.request_diagnostics)
                 assert warmed['summary']['completed_requests']==4
                 reference=json.loads((ROOT/'examples/workloads/calibration.json').read_text())
-                check=run_benchmark(url,reference,output=out/'correctness.json',run_id=run+'-correctness',reset_cache=True)
+                check=run_benchmark(url,reference,output=out/'correctness.json',run_id=run+'-correctness',reset_cache=True,transport_mode=a.transport,request_diagnostics=a.request_diagnostics)
                 assert check['summary']['completed_requests']==43
                 reference_path=Path(a.reference_dir)/'correctness.json' if a.reference_dir else a.reference
                 if reference_path:
@@ -112,17 +118,17 @@ def main():
                     assert comparison['equivalent'],comparison
                 for r in range(a.rounds):
                     for label,w,workers in workloads:
-                        post(url+'/flush_cache')
+                        post(url+'/flush_cache',transport_mode=a.transport)
                         paths=json.loads((out/'runtime/paths.json').read_text())
                         write_json(out/f'{label}-{r}-paths-before.json',paths)
-                        bench=run_benchmark(url,w,output=out/f'{label}-{r}.json',run_id=f'{run}-{label}-{r}',reset_cache=True,max_workers=workers,timeout_s=240)
+                        bench=run_benchmark(url,w,output=out/f'{label}-{r}.json',run_id=f'{run}-{label}-{r}',reset_cache=True,max_workers=workers,timeout_s=240,transport_mode=a.transport,request_diagnostics=a.request_diagnostics)
                         assert bench['summary']['completed_requests']==len(w['requests']),bench['summary']
                         if a.reference_dir:
                             reference_run=json.loads((Path(a.reference_dir)/f'{label}-{r}.json').read_text())
                             comparison=compare_exact_tokens(reference_run,bench)
                             write_json(out/f'{label}-{r}-exact-reference.json',comparison)
                             assert comparison['equivalent'],comparison
-                        post(url+'/flush_cache')
+                        post(url+'/flush_cache',transport_mode=a.transport)
                         paths=json.loads((out/'runtime/paths.json').read_text())
                         write_json(out/f'{label}-{r}-paths-after.json',paths)
                         results.append({'label':label,'round':r,'summary':bench['summary']})

@@ -21,6 +21,7 @@ import time
 from graphbudget.benchmark import compare_exact_tokens, load_workload
 from graphbudget.identity import code_digest, digest, file_digest, model_identity
 from graphbudget.runtime import write_json
+from graphbudget.transport import HTTPTransport, boot_id
 
 ROOT = Path(__file__).resolve().parents[1]
 ARMS = {"A": "native", "B": "upstream_gemm", "C": "v2_residual"}
@@ -38,7 +39,7 @@ def read_json(path):
 
 def schedule(smoke=False):
     groups = [("smoke", 0, "BC")] if smoke else [
-        ("aa_before", 0, "AA"), ("bb_before", 0, "BB"),
+        ("bb_before", 0, "BB"), ("aa_before", 0, "AA"),
         *(("paired", i + 1, order) for i, order in enumerate(("BC", "CB", "BC", "CB", "BC"))),
         ("bb_after", 0, "BB"),
     ]
@@ -63,6 +64,8 @@ def git_snapshot():
 
 
 def assert_frozen(protocol):
+    if protocol.get("boot_id") is not None and boot_id() != protocol["boot_id"]:
+        raise ValueError("WSL boot changed after protocol freeze")
     current = git_snapshot()
     if current["head"] != protocol["git"]["head"]:
         raise ValueError("Git HEAD changed after protocol freeze")
@@ -117,6 +120,7 @@ def prepare_protocol(args, output, snapshot):
         case_paths.extend(str(Path(entry or ".").resolve()) for entry in inherited_paths.split(os.pathsep))
     return {
         "schema_version": 1, "kind": "graphbudget_frozen_paired_decode_protocol",
+        "boot_id": boot_id(),
         "smoke": args.smoke, "git": snapshot, "python_executable": sys.executable,
         "python_version": sys.version, "model_path": str(model),
         "model_identity": model_identity(model, model.name),
@@ -134,6 +138,11 @@ def prepare_protocol(args, output, snapshot):
                      "ld_library_path": os.environ.get("LD_LIBRARY_PATH", "")},
         "allowed_identity_differences": list(SWITCHES["A"]), "arm_switches": SWITCHES,
         "primary_metric": METRIC,
+        "transport": HTTPTransport(f"http://127.0.0.1:{args.port}",
+                                   getattr(args, "transport", "direct")).metadata,
+        "bb_gate": {"max_absolute_relative_change": 0.05,
+                    "independent_of_formal_pairs": True,
+                    "rule": "stop before A/A and B/C if independent B/B exceeds 5%"},
         "candidate_rule": {"paired_rounds": 5, "minimum_positive_pairs": 4,
                            "median_gain_must_exceed": "max(0.05, max(abs(A/A relative change)))",
                            "minimum_relative_gain": 0.05},
@@ -162,6 +171,7 @@ def case_command(case, output, protocol, reference_dir):
                "--max-running-requests", str(settings["max_running_requests"]),
                "--max-total-tokens", str(settings["max_total_tokens"]),
                "--port", str(settings["port"])]
+    command += ["--transport", protocol["transport"]["effective_mode"]]
     if protocol["smoke"]:
         command.append("--screen")
     if reference_dir is not None:
@@ -193,6 +203,21 @@ def verify_case(case, case_dir, protocol, reference_dir, reference_identity):
     for label, workload in protocol["workloads"].items():
         name = "correctness.json" if label == "correctness" else f"{label}-0.json"
         run = read_json(case_dir / name)
+        if "transport" in protocol:
+            if run["run"]["transport"] != protocol["transport"]:
+                raise ValueError(f"Actual {label} transport differs from frozen protocol")
+            if run["protocol"]["request_diagnostics"]:
+                raise ValueError("Diagnostic instrumentation is forbidden in formal timing")
+            if run["run"]["boot_id"] != protocol["boot_id"]:
+                raise ValueError("Case boot differs from frozen protocol")
+            if run["run"]["reset_cache_requested"] and run["cache_reset"]["status"] != "success":
+                raise ValueError(f"{label} cache reset failed")
+            if protocol["transport"]["effective_mode"] == "direct":
+                peers = {request["transport_peer"] for request in run["requests"]}
+                if run["run"]["reset_cache_requested"]:
+                    peers.add(run["cache_reset"]["transport_peer"])
+                if peers - {"target_loopback_port", "UNKNOWN"}:
+                    raise ValueError(f"Direct transport observed an unexpected peer: {peers}")
         if digest(run["workload"]) != workload["workload_sha256"]:
             raise ValueError(f"Actual {label} inputs differ from the frozen workload")
         if run["run"]["max_workers"] != workload["workers"]:
@@ -253,6 +278,20 @@ def execute_schedule(protocol, output):
         print(f"END {case['id']} status={record['status']} elapsed={record['elapsed_seconds']:.1f}s", flush=True)
         if record["status"] != "PASS":
             break
+        if case["stage"] == "bb_before" and case["position"] == 1 and not protocol["smoke"]:
+            first, second = records[-2:]
+            left = positive_metric(first["workloads"]["primary"], METRIC)
+            right = positive_metric(second["workloads"]["primary"], METRIC)
+            change = right / left - 1
+            gate = {"status": "PASS" if abs(change) <= 0.05 else "CONTROL_FAILED",
+                    "case_ids": [first["id"], second["id"]],
+                    "throughput": [left, right], "relative_change": change,
+                    "max_absolute_relative_change": 0.05,
+                    "scope": "same boot, independent B/B; all requests retained"}
+            write_json(output / "bb-gate.json", gate)
+            print(f"INDEPENDENT B/B gate={gate['status']} change={change:+.2%}", flush=True)
+            if gate["status"] != "PASS":
+                break
     return records
 
 
@@ -357,13 +396,17 @@ def summarize(protocol, records):
     failure_counts = request_failure_counts(protocol, records)
     if failure_counts["missing_or_invalid_run_files"]:
         flags.append("INCOMPLETE_RAW_REQUEST_EVIDENCE")
-    status = ("FAILED" if not complete else "SMOKE_ONLY" if protocol["smoke"] else
+    directory = records[0].get("directory") if records else None
+    gate_path = Path(directory).parents[1] / "bb-gate.json" if directory else None
+    gate = read_json(gate_path) if gate_path and gate_path.exists() else None
+    status = ("CONTROL_FAILED" if gate and gate["status"] == "CONTROL_FAILED" else
+              "FAILED" if not complete else "SMOKE_ONLY" if protocol["smoke"] else
               "NEEDS_REVIEW" if flags else "PRIMARY_RULE_MET" if rule["candidate_rule_met"] else "PRIMARY_RULE_NOT_MET")
     return {"schema_version": 1, "status": status, "overall_acceptance": "NOT_ASSESSED",
             "smoke": protocol["smoke"], "planned_cases": len(protocol["cases"]),
             "completed_cases": len(passed), "failed_case_count": len(failed), "failed_cases": failed,
             "unstarted_cases": len(protocol["cases"]) - len(records), "pairs": paired,
-            "controls": controls, "bb_before_to_after_relative_drift": drift,
+            "controls": controls, "bb_gate": gate, "bb_before_to_after_relative_drift": drift,
             "primary_rule": rule, "workloads": summaries, "review_flags": flags,
             "request_failure_counts": failure_counts,
             "failure_count_scope": "Includes retained raw files from failed cases; missing files are counted explicitly.",
@@ -378,6 +421,7 @@ def main(argv=None):
     parser.add_argument("--max-total-tokens", type=int, default=4096)
     parser.add_argument("--port", type=int, default=30277)
     parser.add_argument("--smoke", action="store_true")
+    parser.add_argument("--transport", choices=("direct", "inherit"), default="direct")
     parser.add_argument("--gpu-lock", default=os.environ.get(
         "GRAPHBUDGET_SHARED_GPU_LOCK",
         str(Path(os.environ.get("XDG_RUNTIME_DIR", "/tmp")) / f"graphbudget-shared-gpu-{os.getuid()}.lock")))
@@ -385,6 +429,8 @@ def main(argv=None):
     if not 1 <= args.max_running_requests <= 16 or args.max_total_tokens < 1 or not 1 <= args.port <= 65535:
         parser.error("max-running-requests must be 1..16, tokens positive, and port 1..65535")
     output = Path(args.output).resolve()
+    if not boot_id():
+        parser.error("Same-boot measurement requires a readable Linux boot ID")
     if output.is_relative_to(ROOT):
         ignored = subprocess.run(["git", "-C", str(ROOT), "check-ignore", "--quiet", str(output)]).returncode == 0
         if not ignored:
@@ -400,7 +446,7 @@ def main(argv=None):
     write_json(output / "summary.json", result)
     print(json.dumps({"status": result["status"], "output": str(output),
                       "failed_case_count": result["failed_case_count"]}))
-    return 0 if result["status"] != "FAILED" else 1
+    return 0 if result["status"] not in {"FAILED", "CONTROL_FAILED"} else 1
 
 
 if __name__ == "__main__":

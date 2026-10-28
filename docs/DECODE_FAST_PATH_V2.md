@@ -102,7 +102,10 @@ sample is also pair 1's B; those observations are not independent samples.
 | New mixed acceptance | 276.00 | 282.86 | 84.3 / 71.3 ms | 7.21 / 5.95 ms |
 
 The median paired relative change need not equal the ratio of the two arm
-medians. TTFT starts at actual client send and excludes client queue delay;
+medians. Historical TTFT starts at worker-side client processing (the legacy
+field is named `actual_send_at_s`), before payload creation and the HTTP call.
+It excludes the earlier client queue delay and does not establish when request
+bytes were sent.
 client ITL is the interval between received single-token events and can include
 transport and buffering, not only GPU decode. Arrival-limited workloads are not
 saturated capacity measurements. Interactive TTFT p95 had a

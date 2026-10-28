@@ -15,6 +15,10 @@ request result keeps four distinct times, relative to the benchmark start:
 ``completion_at_s``.  A stable workload request ID is kept separately from a
 run-scoped client request ID and the server's ``meta_info.id``.
 
+``actual_send_at_s`` is a legacy name for worker-side client processing
+start, before payload construction and the HTTP call. It does not establish
+that any request bytes have been sent.
+
 The cache reset option is explicit.  It calls SGLang's ``/flush_cache`` once
 before a run and records the response; it only clears the server's radix/KV
 prefix cache when the server accepts that request.  It does not recreate the
@@ -50,6 +54,7 @@ import concurrent.futures
 import datetime as _datetime
 import json
 import math
+import os
 import socket
 import threading
 import time
@@ -60,6 +65,8 @@ import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Optional, Sequence
+
+from .transport import HTTPTransport, boot_id, peer_category
 
 
 SCHEMA_VERSION = 1
@@ -434,6 +441,8 @@ class RequestResult:
     done_seen: bool = False
     finish_seen: bool = False
     request_metadata: dict[str, Any] = field(default_factory=dict)
+    transport_peer: str = "UNKNOWN"
+    request_phases: Optional[dict[str, Any]] = None
 
     def metrics(self) -> dict[str, Any]:
         ttft_s: Optional[float] = None
@@ -493,6 +502,8 @@ class RequestResult:
             "done_seen": self.done_seen,
             "finish_seen": self.finish_seen,
             "request_metadata": dict(self.request_metadata),
+            "transport_peer": self.transport_peer,
+            "request_phases": self.request_phases,
             "metrics": metrics,
             "events": [event.to_dict() for event in self.events],
         }
@@ -656,6 +667,8 @@ class BenchmarkClient:
         *,
         endpoint: str = DEFAULT_ENDPOINT,
         headers: Optional[Mapping[str, str]] = None,
+        transport_mode: str = "auto",
+        request_diagnostics: bool = False,
     ) -> None:
         if not isinstance(url, str) or not url.strip():
             raise BenchmarkError("url must be non-empty")
@@ -663,6 +676,8 @@ class BenchmarkClient:
         if parsed.scheme not in {"http", "https"} or not parsed.netloc:
             raise BenchmarkError("url must include an http:// or https:// scheme and host")
         self.base_url = url.rstrip("/")
+        self.transport = HTTPTransport(self.base_url, transport_mode)
+        self.request_diagnostics = request_diagnostics
         self.endpoint = endpoint if endpoint.startswith("/") else "/" + endpoint
         if urllib.parse.urlparse(self.base_url).path.rstrip("/").endswith(
             self.endpoint.rstrip("/")
@@ -706,13 +721,15 @@ class BenchmarkClient:
         request = urllib.request.Request(url, method="POST", headers=self.headers)
         started = time.perf_counter()
         try:
-            with urllib.request.urlopen(request, timeout=timeout_s) as response:
+            with self.transport.open(request, timeout=timeout_s) as response:
+                peer = peer_category(response, url)
                 body = response.read(4096).decode("utf-8", errors="replace")
                 return {
                     "status": "success" if 200 <= response.status < 300 else "error",
                     "http_status": response.status,
                     "body": body,
                     "elapsed_s": time.perf_counter() - started,
+                    "transport_peer": peer,
                     "scope": "SGLang radix/KV prefix cache only; no process/graph/allocator reset",
                 }
         except Exception as exc:  # preserve the exact operation failure in output
@@ -730,23 +747,32 @@ class BenchmarkClient:
         *,
         timeout_s: float,
         time_origin: float,
-    ) -> tuple[Optional[int], list[SSEEvent], Optional[str]]:
+    ) -> tuple[Optional[int], list[SSEEvent], Optional[str], dict[str, Any]]:
         if timeout_s <= 0 or not math.isfinite(timeout_s):
             raise BenchmarkError("timeout_s must be finite and > 0")
         encoded = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode(
             "utf-8"
         )
+        trace: Optional[dict[str, Any]] = {} if self.request_diagnostics else None
+        headers = dict(self.headers)
+        if trace is not None:
+            headers["X-GraphBudget-Request-ID"] = str(payload.get("rid", ""))
         request = urllib.request.Request(
             self.generate_url,
             data=encoded,
             method="POST",
-            headers=self.headers,
+            headers=headers,
         )
         deadline = time.perf_counter() + timeout_s
         events: list[SSEEvent] = []
+        observation: dict[str, Any] = {"peer_category": "UNKNOWN", "request_phases": trace}
         try:
-            with urllib.request.urlopen(request, timeout=timeout_s) as response:
+            with self.transport.open(request, timeout=timeout_s, trace=trace) as response:
                 http_status = getattr(response, "status", None)
+                observation["peer_category"] = (
+                    trace.get("peer_category", "UNKNOWN") if trace is not None
+                    else peer_category(response, self.generate_url)
+                )
                 remaining = deadline - time.perf_counter()
                 if remaining <= 0:
                     raise BenchmarkTimeout(f"request exceeded timeout_s={timeout_s}")
@@ -760,7 +786,10 @@ class BenchmarkClient:
                                 f"request exceeded timeout_s={timeout_s}"
                             )
                         client._set_socket_timeout(response, remaining_inner)
-                        return response.readline()
+                        line = response.readline()
+                        if trace is not None and line in (b"", ""):
+                            trace["eof_ns"] = time.perf_counter_ns()
+                        return line
 
                 # parse_sse_stream reads to EOF; the wrapper bounds every idle
                 # read and the checks below bound the complete request.
@@ -769,11 +798,18 @@ class BenchmarkClient:
                 )
                 for event in event_iter:
                     events.append(event)
+                    if trace is not None and event.kind == "response":
+                        now_ns = time.perf_counter_ns()
+                        trace.setdefault("first_sse_ns", now_ns)
+                        trace["last_sse_ns"] = now_ns
+                        if isinstance(event.payload, Mapping) and event.payload.get("output_ids"):
+                            trace.setdefault("first_token_ns", now_ns)
+                            trace["last_token_ns"] = now_ns
                     if time.perf_counter() > deadline:
                         raise BenchmarkTimeout(f"request exceeded timeout_s={timeout_s}")
                 if time.perf_counter() > deadline:
                     raise BenchmarkTimeout(f"request exceeded timeout_s={timeout_s}")
-                return http_status, events, None
+                return http_status, events, None, observation
         except urllib.error.HTTPError as exc:
             body = ""
             try:
@@ -783,13 +819,13 @@ class BenchmarkClient:
             detail = f"HTTP {exc.code}"
             if body:
                 detail += f": {body[:1000]}"
-            return exc.code, events, detail
+            return exc.code, events, detail, observation
         except (socket.timeout, TimeoutError, BenchmarkTimeout) as exc:
-            return None, events, f"timeout: {exc or 'request deadline exceeded'}"
+            return None, events, f"timeout: {exc or 'request deadline exceeded'}", observation
         except urllib.error.URLError as exc:
-            return None, events, f"URL error: {exc.reason}"
+            return None, events, f"URL error: {exc.reason}", observation
         except Exception as exc:
-            return None, events, f"{type(exc).__name__}: {exc}"
+            return None, events, f"{type(exc).__name__}: {exc}", observation
 
 
 def _request_id(run_id: str, workload_request_id: str) -> str:
@@ -828,6 +864,7 @@ def _run_one_request(
         # queue depth, which makes a delayed worker visible in the artifact.
         backlog = max(0, state["planned_due"] - state["actual_started"])
         state["actual_started"] += 1
+    client_call_begin_ns = time.perf_counter_ns() if client.request_diagnostics else None
     actual_send_at_s = time.perf_counter() - time_origin
     result = RequestResult(
         workload_request_id=spec.request_id,
@@ -842,9 +879,13 @@ def _run_one_request(
         request_metadata=dict(spec.metadata),
     )
     payload = _request_payload(spec, client_request_id)
-    http_status, events, error = client.stream_request(
+    http_status, events, error, observation = client.stream_request(
         payload, timeout_s=timeout_s, time_origin=time_origin
     )
+    result.transport_peer = observation["peer_category"]
+    result.request_phases = observation["request_phases"]
+    if result.request_phases is not None:
+        result.request_phases["client_call_begin_ns"] = client_call_begin_ns
     result.http_status = http_status
     result.events = events
     if error is not None:
@@ -982,6 +1023,8 @@ def run_benchmark(
     max_workers: Optional[int] = None,
     reset_cache: bool = False,
     headers: Optional[Mapping[str, str]] = None,
+    transport_mode: str = "auto",
+    request_diagnostics: bool = False,
 ) -> dict[str, Any]:
     """Run every planned request against a real native SGLang server.
 
@@ -995,7 +1038,8 @@ def run_benchmark(
     if timeout_s <= 0 or not math.isfinite(timeout_s):
         raise BenchmarkError("timeout_s must be finite and > 0")
     loaded = load_workload(workload) if not isinstance(workload, Workload) else workload
-    client = BenchmarkClient(url, headers=headers)
+    client = BenchmarkClient(url, headers=headers, transport_mode=transport_mode,
+                             request_diagnostics=request_diagnostics)
     run_id = (run_id or uuid.uuid4().hex).strip()
     if not run_id:
         raise BenchmarkError("run_id must be non-empty")
@@ -1075,6 +1119,8 @@ def run_benchmark(
             "sampling": {"temperature": 0.0, "ignore_eos": True},
             "request_id_scope": "graphbudget/<run_id>/<stable workload request_id>",
             "backlog_definition": "due requests not yet marked actual at worker start; includes current request",
+            "actual_send_at_s_definition": "worker begins client processing before payload construction and HTTP call; not bytes sent",
+            "request_diagnostics": request_diagnostics,
             "cache_reset_scope": "SGLang radix/KV prefix cache only; no process/graph/allocator reset",
             "itl_rule": "reported only when every token event contributes exactly one token",
             "p99_min_samples": P99_MIN_SAMPLES,
@@ -1088,6 +1134,12 @@ def run_benchmark(
             "schedule_mode": "fixed_work" if fixed_work else "open_loop",
             "max_workers": workers,
             "reset_cache_requested": reset_cache,
+            "transport": client.transport.metadata,
+            "boot_id": boot_id(),
+            "clock": {"name": "perf_counter",
+                      "implementation": time.get_clock_info("perf_counter").implementation,
+                      "monotonic": time.get_clock_info("perf_counter").monotonic},
+            "process_id": os.getpid(),
         },
         "workload": loaded.to_dict(),
         "cache_reset": cache_result,
@@ -1418,6 +1470,8 @@ def _run_cli(args: argparse.Namespace) -> int:
         max_workers=args.max_workers,
         reset_cache=args.reset_cache,
         headers=_parse_headers(args.header),
+        transport_mode=args.transport,
+        request_diagnostics=args.request_diagnostics,
     )
     print(json.dumps(result["summary"], ensure_ascii=False, indent=2))
     return 0
@@ -1466,6 +1520,8 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--max-workers", type=int)
     run.add_argument("--reset-cache", action="store_true")
     run.add_argument("--header", action="append", help="HTTP header, repeatable: Name: value")
+    run.add_argument("--transport", choices=("auto", "direct", "inherit"), default="auto")
+    run.add_argument("--request-diagnostics", action="store_true")
     run.set_defaults(handler=_run_cli)
 
     compare = subparsers.add_parser("compare", help="compare exact output token IDs")

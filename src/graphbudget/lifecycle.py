@@ -14,10 +14,10 @@ import socket
 import subprocess
 import threading
 import time
-import urllib.request
 
 from .plan import load_plan
 from .runtime import write_json
+from .transport import HTTPTransport, peer_category
 
 
 class StartupFailure(RuntimeError):
@@ -97,7 +97,8 @@ def check_port_available(host, port):
         probe.bind(address[4])
 
 
-def wait_http_ready(process, output, run_id, *, started, timeout, poll_seconds=0.05):
+def wait_http_ready(process, output, run_id, *, started, timeout, poll_seconds=0.05,
+                    transport_mode="direct"):
     """Require the owned worker record plus pinned SGLang's warmup-gated /health.
 
     A successful probe must finish within the deadline; a late HTTP 200 cannot
@@ -105,7 +106,6 @@ def wait_http_ready(process, output, run_id, *, started, timeout, poll_seconds=0
     """
     output = Path(output)
     deadline = started + timeout
-    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     while True:
         child_code = process.poll()
         if child_code is not None:
@@ -141,21 +141,25 @@ def wait_http_ready(process, output, run_id, *, started, timeout, poll_seconds=0
             if not isinstance(url, str) or not url.startswith("http://"):
                 raise StartupFailure("invalid_readiness", "Readiness endpoint URL is invalid", 126)
             try:
-                with opener.open(url + "/health", timeout=min(2, remaining)) as response:
+                transport = HTTPTransport(url, transport_mode)
+                with transport.open(url + "/health", timeout=min(2, remaining)) as response:
                     healthy = response.status == 200
+                    peer = peer_category(response, url)
                 elapsed = time.perf_counter() - started
                 if healthy and elapsed <= timeout and process.poll() is None:
                     return {"schema_version": 1, "run_id": run_id, "status": "http_ready",
                             "startup_seconds": elapsed, "startup_metric": "http_health_after_upstream_startup",
                             "startup_timeout_seconds": timeout, "server_pid": process.pid,
-                            "worker_pid": pid, "url": url, "exit_code": 0}
+                            "worker_pid": pid, "url": url, "exit_code": 0,
+                            "transport": transport.metadata, "transport_peer": peer}
             except (OSError, TimeoutError):
                 pass
         time.sleep(min(poll_seconds, max(0, deadline - time.perf_counter())))
 
 
 @contextmanager
-def http_server(command, output, run_id, *, timeout, started=None, stdout=None, env=None):
+def http_server(command, output, run_id, *, timeout, started=None, stdout=None, env=None,
+                transport_mode="direct"):
     """Shared launch/wait/cleanup only; never performs benchmark requests."""
     started = time.perf_counter() if started is None else started
     process = None
@@ -170,7 +174,8 @@ def http_server(command, output, run_id, *, timeout, started=None, stdout=None, 
             process = OwnedProcess(command, stdout=stdout, stderr=subprocess.STDOUT, env=env)
         except OSError as error:
             raise StartupFailure("start_failed", f"Cannot start server: {error}", 125) from error
-        record = wait_http_ready(process, output, run_id, started=started, timeout=timeout)
+        record = wait_http_ready(process, output, run_id, started=started, timeout=timeout,
+                                transport_mode=transport_mode)
         write_json(Path(output) / "lifecycle.json", record)
         yield process, record
     except StartupFailure as error:

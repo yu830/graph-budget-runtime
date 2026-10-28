@@ -14,6 +14,7 @@ from graphbudget.benchmark import run_benchmark
 from graphbudget.experiment import gpu_lease
 from graphbudget.lifecycle import http_server
 from graphbudget.runtime import write_json
+from graphbudget.transport import HTTPTransport
 
 ROOT = Path(__file__).resolve().parents[1]
 def server_args(model_path=None, max_running_requests=16, max_total_tokens=4096, port=30277):
@@ -31,10 +32,11 @@ def server_args(model_path=None, max_running_requests=16, max_total_tokens=4096,
             '--max-running-requests', str(max_running_requests), '--context-length', '4096',
             '--cuda-graph-bs', *map(str, capture_sizes), '--host', '127.0.0.1', '--port', str(port)]
 
-def post(url, obj=None):
+def post(url, obj=None, transport_mode="auto"):
     data = None if obj is None else json.dumps(obj).encode()
-    with urllib.request.urlopen(urllib.request.Request(url, data=data, method='POST',
-                                headers={'Content-Type':'application/json'}), timeout=120) as r:
+    transport = HTTPTransport(url, transport_mode)
+    with transport.open(urllib.request.Request(url, data=data, method='POST',
+                        headers={'Content-Type':'application/json'}), timeout=120) as r:
         return r.read().decode()
 
 def workload(n=4, length=64):

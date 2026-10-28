@@ -17,7 +17,7 @@ SPEC.loader.exec_module(paired)
 class PairedDecodeTests(unittest.TestCase):
     def test_fixed_order_and_smoke_boundary(self):
         cases = paired.schedule()
-        self.assertEqual("".join(c["arm"] for c in cases), "AABB BCCBBCCBBC BB".replace(" ", ""))
+        self.assertEqual("".join(c["arm"] for c in cases), "BBAA BCCBBCCBBC BB".replace(" ", ""))
         self.assertEqual([c["pair"] for c in cases if c["stage"] == "paired"],
                          [1, 1, 2, 2, 3, 3, 4, 4, 5, 5])
         self.assertEqual([c["mode"] for c in paired.schedule(True)],
@@ -84,6 +84,28 @@ class PairedDecodeTests(unittest.TestCase):
             self.assertEqual(report["status"], "FAILED")
             self.assertEqual(report["failed_case_count"], 1)
             self.assertEqual(report["unstarted_cases"], 1)
+
+    def test_independent_bb_gate_stops_before_formal_pairs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            cases = paired.schedule()
+            protocol = {"cases": cases, "smoke": False, "workloads": {"primary": {}},
+                        "settings": {"gpu_lock": str(output / "gpu.lock"),
+                                     "triton_cache_dir": str(output / "cache"), "case_pythonpath": ""}}
+            summaries = [({}, {"primary": {paired.METRIC: 100.0}}),
+                         ({}, {"primary": {paired.METRIC: 89.0}})]
+            with mock.patch.object(paired, "assert_frozen"), \
+                 mock.patch.object(paired, "case_command", return_value=[sys.executable, "-c", "pass"]), \
+                 mock.patch.object(paired, "verify_case", side_effect=summaries):
+                records = paired.execute_schedule(protocol, output)
+            gate = paired.read_json(output / "bb-gate.json")
+            self.assertEqual(gate["status"], "CONTROL_FAILED")
+            self.assertAlmostEqual(gate["relative_change"], -0.11)
+            self.assertEqual([r["stage"] for r in records], ["bb_before", "bb_before"])
+            self.assertEqual(len(list((output / "executions").glob("*.json"))), 2)
+            with mock.patch.object(paired, "request_failure_counts",
+                                   return_value={"missing_or_invalid_run_files": 0}):
+                self.assertEqual(paired.summarize(protocol, records)["status"], "CONTROL_FAILED")
 
     def test_frozen_workloads_include_all_requests_and_explicit_workers(self):
         with tempfile.TemporaryDirectory() as directory:
