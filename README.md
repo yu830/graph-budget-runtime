@@ -22,8 +22,8 @@ conditions, attribution and limits; the candidates remain opt-in.
 
 **Decode v2 candidate:** an opt-in residual RMSNorm path retains the native
 variance reduction and has exact-output and actual graph-path smoke evidence.
-Its independent B→C performance is evaluated separately from the published
-v1 result. See [decode v2 evidence and reproduction](docs/DECODE_FAST_PATH_V2.md)
+Its formal B→C throughput result is inconclusive and does not meet the
+predeclared adoption rule. See [decode v2 evidence and reproduction](docs/DECODE_FAST_PATH_V2.md)
 and the [isolated runtime recipe](scripts/environment/README.md#isolated-v2-profile).
 
 **2026-10-27 reliability update:** C1/C2/C3 from independent review are repaired.

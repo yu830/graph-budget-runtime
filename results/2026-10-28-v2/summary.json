@@ -1,0 +1,601 @@
+{
+  "schema_version": 1,
+  "status": "INCONCLUSIVE_NO_PERFORMANCE_ADOPTION",
+  "source": {
+    "implementation_commit": "480fd796b6bb457352b9ac4b80b1f6c4ce22a322",
+    "published_v1_commit": "1f1984147608ee6c5dd8b3423e6f41877aaadeb4",
+    "sglang_commit": "bbe9c7eeb520b0a67e92d133dfc137a3688dc7f2",
+    "sglang_patch_sha256": "957a8605e0ae2908588fcf8389cccf9ec90e358eec73a684a7f199110a7c6bed"
+  },
+  "environment": {
+    "gpu": "NVIDIA GeForce RTX 5070 Laptop GPU",
+    "compute_capability": "12.0",
+    "driver": "617.42",
+    "os": "WSL Ubuntu 24.04",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu128",
+    "triton": "3.5.1",
+    "sglang": "0.5.9",
+    "dtype": "bfloat16",
+    "attention_backend": "triton",
+    "tensor_parallel_size": 1,
+    "overlap": false
+  },
+  "arms": {
+    "A": "same source, native metadata/policy, v1 small-M GEMM off",
+    "B": "same source, native metadata/policy, v1 small-M GEMM on",
+    "C": "B plus residual RMSNorm fast path"
+  },
+  "same_source_ab_short_control": {
+    "scope": "64 requests x 128 output tokens; diagnostic, not formal v2 benefit",
+    "aa_change": 0.0365717076694454,
+    "ab_change": 1.28444420522948,
+    "ba_change": 0.954901084815881
+  },
+  "formal_0p5b": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "kv_tokens": 4096,
+    "max_running_requests": 16,
+    "capture_sizes": [
+      1,
+      2,
+      4,
+      8,
+      12,
+      16
+    ],
+    "primary": "256 requests x 128 output tokens; effective throughput = 32768 / complete makespan",
+    "planned_cases": 16,
+    "completed_cases": 16,
+    "failure_counts": {
+      "failed_requests": 0,
+      "timed_out_requests": 0,
+      "not_started_requests": 0,
+      "missing_or_invalid_run_files": 0
+    },
+    "primary_rule": {
+      "relative_gains": [
+        4.655540634397365,
+        -0.05701250364646748,
+        1.920325658948224,
+        -0.7944237507349599,
+        0.1847131125496484
+      ],
+      "median_relative_gain": 0.1847131125496484,
+      "positive_pairs": 3,
+      "aa_max_absolute_change": 0.04462141091747518,
+      "required_relative_gain": 0.05,
+      "candidate_rule_met": false,
+      "review_flags": [
+        "NOISE_OR_DRIFT_AT_LEAST_CANDIDATE_EFFECT"
+      ]
+    },
+    "controls": {
+      "aa_before": {
+        "case_ids": [
+          "01-aa_before-0-A",
+          "02-aa_before-0-A"
+        ],
+        "throughput": [
+          706.2637129863464,
+          674.7492296330809
+        ],
+        "relative_change": -0.04462141091747518
+      },
+      "bb_before": {
+        "case_ids": [
+          "04-bb_before-0-B-resume",
+          "05-paired-1-B"
+        ],
+        "throughput": [
+          2078.8567485052818,
+          399.74368846053255
+        ],
+        "relative_change": -0.807709844005388,
+        "note": "The first B of pair 1 is also the second same-boot B/B control."
+      },
+      "bb_after": {
+        "case_ids": [
+          "15-bb_after-0-B",
+          "16-bb_after-0-B"
+        ],
+        "throughput": [
+          2081.540630577719,
+          2234.433225537792
+        ],
+        "relative_change": 0.07345165052946312
+      },
+      "bb_before_cross_boot": {
+        "case_ids": [
+          "03-bb_before-0-B",
+          "04-bb_before-0-B-resume"
+        ],
+        "throughput": [
+          1296.3906594684984,
+          2078.8567485052818
+        ],
+        "relative_change": 0.6035727605115446
+      }
+    },
+    "prior_boot_primary_bb": {
+      "cases": [
+        "03-bb_before-0-B",
+        "04-bb_before-0-B (partial case)"
+      ],
+      "throughput": [
+        1296.3906594684984,
+        824.9979501496974
+      ],
+      "relative_change": -0.3636193348632003,
+      "scope": "Both primary workloads completed all 256 requests with exact output and zero failures/timeouts; second case later interrupted without exit receipt."
+    },
+    "review_flags": [
+      "NOISE_OR_DRIFT_AT_LEAST_CANDIDATE_EFFECT",
+      "PRIOR_BOOT_PARTIAL_BB_NOISE_EXCEEDS_EFFECT"
+    ],
+    "missing_required_metrics": [],
+    "pairs": [
+      {
+        "pair": 1,
+        "B_case": "05-paired-1-B",
+        "C_case": "06-paired-1-C",
+        "B": 399.74368846053255,
+        "C": 2260.766673432423,
+        "relative_gain": 4.655540634397365
+      },
+      {
+        "pair": 2,
+        "B_case": "08-paired-2-B",
+        "C_case": "07-paired-2-C",
+        "B": 744.369654165439,
+        "C": 701.9312765430121,
+        "relative_gain": -0.05701250364646748
+      },
+      {
+        "pair": 3,
+        "B_case": "09-paired-3-B",
+        "C_case": "10-paired-3-C",
+        "B": 814.4733946684119,
+        "C": 2378.527552980827,
+        "relative_gain": 1.920325658948224
+      },
+      {
+        "pair": 4,
+        "B_case": "12-paired-4-B",
+        "C_case": "11-paired-4-C",
+        "B": 2094.8899186933377,
+        "C": 430.6596121081213,
+        "relative_gain": -0.7944237507349599
+      },
+      {
+        "pair": 5,
+        "B_case": "13-paired-5-B",
+        "C_case": "14-paired-5-C",
+        "B": 2066.7255766458297,
+        "C": 2448.476890694048,
+        "relative_gain": 0.1847131125496484
+      }
+    ],
+    "workloads": {
+      "primary": {
+        "median_throughput_relative_change": 0.1847131125496484,
+        "median_latency_relative_changes": {
+          "ttft_s.p50": -0.14691035550856346,
+          "ttft_s.p95": -0.13236983786072365,
+          "token_itl_s.p50": -0.14790350412497177,
+          "token_itl_s.p95": -0.13060086184894293,
+          "request_tpot_s.p50": -0.15284965318394583,
+          "makespan_s": -0.15591379093637547
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "B_tokens_s": 399.74368846053255,
+            "C_tokens_s": 2260.766673432423,
+            "B_makespan_s": 81.97252626099998,
+            "C_makespan_s": 14.494198090000054,
+            "B_ttft_p50_s": 0.9566042250000919,
+            "C_ttft_p50_s": 0.9411514209999723,
+            "B_ttft_p95_s": 1.1553583067500313,
+            "C_ttft_p95_s": 1.0931627752499935,
+            "B_client_itl_p50_s": 0.006998792000104004,
+            "C_client_itl_p50_s": 0.006623359000059281
+          },
+          {
+            "pair": 2,
+            "B_tokens_s": 744.369654165439,
+            "C_tokens_s": 701.9312765430121,
+            "B_makespan_s": 44.02113898199991,
+            "C_makespan_s": 46.68263275200002,
+            "B_ttft_p50_s": 1.0752569830000311,
+            "C_ttft_p50_s": 0.8845242844998893,
+            "B_ttft_p95_s": 1.2005406867500028,
+            "C_ttft_p95_s": 1.0870354337500316,
+            "B_client_itl_p50_s": 0.007478005500047402,
+            "C_client_itl_p50_s": 0.006458985499989467
+          },
+          {
+            "pair": 3,
+            "B_tokens_s": 814.4733946684119,
+            "C_tokens_s": 2378.527552980827,
+            "B_makespan_s": 40.232130619000145,
+            "C_makespan_s": 13.776590462000058,
+            "B_ttft_p50_s": 1.1592907064999736,
+            "C_ttft_p50_s": 0.9078293970000004,
+            "B_ttft_p95_s": 1.3050682372499978,
+            "C_ttft_p95_s": 1.0842608342499602,
+            "B_client_itl_p50_s": 0.007945501499989405,
+            "C_client_itl_p50_s": 0.006335908499863763
+          },
+          {
+            "pair": 4,
+            "B_tokens_s": 2094.8899186933377,
+            "C_tokens_s": 430.6596121081213,
+            "B_makespan_s": 15.641872018000186,
+            "C_makespan_s": 76.087933669,
+            "B_ttft_p50_s": 0.9861975900000743,
+            "C_ttft_p50_s": 0.8568499504999636,
+            "B_ttft_p95_s": 1.1480498159999115,
+            "C_ttft_p95_s": 0.9960826479999696,
+            "B_client_itl_p50_s": 0.007229778000237275,
+            "C_client_itl_p50_s": 0.006160468499956551
+          },
+          {
+            "pair": 5,
+            "B_tokens_s": 2066.7255766458297,
+            "C_tokens_s": 2448.476890694048,
+            "B_makespan_s": 15.85503192599981,
+            "C_makespan_s": 13.383013792999918,
+            "B_ttft_p50_s": 1.0162094324998634,
+            "C_ttft_p50_s": 0.8669177435001529,
+            "B_ttft_p95_s": 1.181603617500059,
+            "C_ttft_p95_s": 0.9488591067503194,
+            "B_client_itl_p50_s": 0.007276195500026006,
+            "C_client_itl_p50_s": 0.0061772849999215396
+          }
+        ]
+      },
+      "holdout": {
+        "median_throughput_relative_change": 0.0048758884261213,
+        "median_latency_relative_changes": {
+          "ttft_s.p50": -0.1719948381607448,
+          "ttft_s.p95": -0.16326860477404592,
+          "token_itl_s.p50": -0.1479253536259446,
+          "token_itl_s.p95": -0.11119486664182254,
+          "request_tpot_s.p50": -0.15274980936245053,
+          "makespan_s": -0.004852229496478566
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "B_tokens_s": 178.3514030224089,
+            "C_tokens_s": 178.11145628899726,
+            "B_makespan_s": 15.789054373999988,
+            "C_makespan_s": 15.810324943000069,
+            "B_ttft_p50_s": 0.09339654949997112,
+            "C_ttft_p50_s": 0.07162050600004477,
+            "B_ttft_p95_s": 0.13321683349996646,
+            "C_ttft_p95_s": 0.213364748399988,
+            "B_client_itl_p50_s": 0.007246283000085896,
+            "C_client_itl_p50_s": 0.005945951000057903
+          },
+          {
+            "pair": 2,
+            "B_tokens_s": 178.54441756906851,
+            "C_tokens_s": 179.61898269588517,
+            "B_makespan_s": 15.771985696000002,
+            "C_makespan_s": 15.67763026900002,
+            "B_ttft_p50_s": 0.06916277750008248,
+            "C_ttft_p50_s": 0.09127550799996698,
+            "B_ttft_p95_s": 0.13011076510001657,
+            "C_ttft_p95_s": 0.10137008200003947,
+            "B_client_itl_p50_s": 0.0071872400001211645,
+            "C_client_itl_p50_s": 0.006285755500016421
+          },
+          {
+            "pair": 3,
+            "B_tokens_s": 178.50952522943822,
+            "C_tokens_s": 179.37991775745684,
+            "B_makespan_s": 15.775068565000083,
+            "C_makespan_s": 15.698524312000018,
+            "B_ttft_p50_s": 0.10021001899997373,
+            "C_ttft_p50_s": 0.08297441299998809,
+            "B_ttft_p95_s": 0.2894669761999921,
+            "C_ttft_p95_s": 0.19923143235004093,
+            "B_client_itl_p50_s": 0.0074980235000339235,
+            "C_client_itl_p50_s": 0.006043284500037771
+          },
+          {
+            "pair": 4,
+            "B_tokens_s": 178.73456279268498,
+            "C_tokens_s": 179.06986788398524,
+            "B_makespan_s": 15.755206804999943,
+            "C_makespan_s": 15.725705464999919,
+            "B_ttft_p50_s": 0.09276898250004706,
+            "C_ttft_p50_s": 0.07046232100003635,
+            "B_ttft_p95_s": 0.1460970446996953,
+            "C_ttft_p95_s": 0.12224398404996464,
+            "B_client_itl_p50_s": 0.006668160499884834,
+            "C_client_itl_p50_s": 0.005681770499904815
+          },
+          {
+            "pair": 5,
+            "B_tokens_s": 34.98102247841412,
+            "C_tokens_s": 179.4668644685716,
+            "B_makespan_s": 80.5007915860001,
+            "C_makespan_s": 15.690918812999826,
+            "B_ttft_p50_s": 0.0849516109999513,
+            "C_ttft_p50_s": 0.0890809205000096,
+            "B_ttft_p95_s": 0.1365413159999889,
+            "C_ttft_p95_s": 0.22517787134984246,
+            "B_client_itl_p50_s": 0.007034348499701082,
+            "C_client_itl_p50_s": 0.006268823500022336
+          }
+        ]
+      },
+      "interactive": {
+        "median_throughput_relative_change": 0.0072868986172698325,
+        "median_latency_relative_changes": {
+          "ttft_s.p50": 0.04529303767663562,
+          "ttft_s.p95": 0.2893382914431053,
+          "token_itl_s.p50": -0.134310584945601,
+          "token_itl_s.p95": -0.12349903427899256,
+          "request_tpot_s.p50": -0.12736830767899399,
+          "makespan_s": -0.00723418385295449
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "B_tokens_s": 55.4538424618915,
+            "C_tokens_s": 55.249141759103516,
+            "B_makespan_s": 9.23290393000002,
+            "C_makespan_s": 9.267112279000003,
+            "B_ttft_p50_s": 0.03172110050002175,
+            "C_ttft_p50_s": 0.03315784550011358,
+            "B_ttft_p95_s": 0.061651566099931165,
+            "C_ttft_p95_s": 0.07948972490007691,
+            "B_client_itl_p50_s": 0.006808295500036365,
+            "C_client_itl_p50_s": 0.005620876499961014
+          },
+          {
+            "pair": 2,
+            "B_tokens_s": 54.92380200233854,
+            "C_tokens_s": 55.966601831540665,
+            "B_makespan_s": 9.322005785000101,
+            "C_makespan_s": 9.148313159000054,
+            "B_ttft_p50_s": 0.03033623650003392,
+            "C_ttft_p50_s": 0.031284748500070236,
+            "B_ttft_p95_s": 0.06788094575007333,
+            "C_ttft_p95_s": 0.04654438870002194,
+            "B_client_itl_p50_s": 0.006466882500035354,
+            "C_client_itl_p50_s": 0.0059137934999853314
+          },
+          {
+            "pair": 3,
+            "B_tokens_s": 54.979458690616354,
+            "C_tokens_s": 55.94706131969017,
+            "B_makespan_s": 9.312568951999992,
+            "C_makespan_s": 9.15150837100009,
+            "B_ttft_p50_s": 0.04393618899996454,
+            "C_ttft_p50_s": 0.03680728949996137,
+            "B_ttft_p95_s": 0.08052226825005845,
+            "C_ttft_p95_s": 0.07464845544994884,
+            "B_client_itl_p50_s": 0.007283542500090334,
+            "C_client_itl_p50_s": 0.0062500500000624015
+          },
+          {
+            "pair": 4,
+            "B_tokens_s": 55.749064733166534,
+            "C_tokens_s": 56.15530251588473,
+            "B_makespan_s": 9.184010573999785,
+            "C_makespan_s": 9.117571752999993,
+            "B_ttft_p50_s": 0.0302562649999345,
+            "C_ttft_p50_s": 0.03240406300005816,
+            "B_ttft_p95_s": 0.03347926099988854,
+            "C_ttft_p95_s": 0.07458079919995271,
+            "B_client_itl_p50_s": 0.006654307999951925,
+            "C_client_itl_p50_s": 0.00576056400007019
+          },
+          {
+            "pair": 5,
+            "B_tokens_s": 55.78971847318538,
+            "C_tokens_s": 55.932251244420144,
+            "B_makespan_s": 9.17731822299993,
+            "C_makespan_s": 9.153931561999798,
+            "B_ttft_p50_s": 0.03109673449989714,
+            "C_ttft_p50_s": 0.03927579150013116,
+            "B_ttft_p95_s": 0.06341324144993903,
+            "C_ttft_p95_s": 0.19186067880002602,
+            "B_client_itl_p50_s": 0.00665699649994167,
+            "C_client_itl_p50_s": 0.005903966000005312
+          }
+        ]
+      },
+      "acceptance": {
+        "median_throughput_relative_change": 0.023846206833822325,
+        "median_latency_relative_changes": {
+          "ttft_s.p50": -0.17315892471328465,
+          "ttft_s.p95": -0.021442769815498086,
+          "token_itl_s.p50": -0.12718526202822333,
+          "token_itl_s.p95": -0.11177001059357161,
+          "request_tpot_s.p50": -0.11088593831892268,
+          "makespan_s": -0.023290809376112387
+        },
+        "pairs": [
+          {
+            "pair": 1,
+            "B_tokens_s": 132.43236971161346,
+            "C_tokens_s": 283.03033696187583,
+            "B_makespan_s": 13.531434979999858,
+            "C_makespan_s": 6.3314767570000186,
+            "B_ttft_p50_s": 0.07740423000007013,
+            "C_ttft_p50_s": 0.08444653250001011,
+            "B_ttft_p95_s": 0.08179661234993318,
+            "C_ttft_p95_s": 0.12309648129999004,
+            "B_client_itl_p50_s": 0.0066436934999956065,
+            "C_client_itl_p50_s": 0.006331242999976894
+          },
+          {
+            "pair": 2,
+            "B_tokens_s": 274.71563162068713,
+            "C_tokens_s": 276.60255303344906,
+            "B_makespan_s": 6.523108967000098,
+            "C_makespan_s": 6.478609760999916,
+            "B_ttft_p50_s": 0.0964558335001584,
+            "C_ttft_p50_s": 0.07130811400008952,
+            "B_ttft_p95_s": 0.13511313019998852,
+            "C_ttft_p95_s": 0.13221593045005875,
+            "B_client_itl_p50_s": 0.007262315499929173,
+            "C_client_itl_p50_s": 0.0063386560001390535
+          },
+          {
+            "pair": 3,
+            "B_tokens_s": 276.2762460585606,
+            "C_tokens_s": 282.86438656534506,
+            "B_makespan_s": 6.486261579000029,
+            "C_makespan_s": 6.3351912969999375,
+            "B_ttft_p50_s": 0.08642228049995992,
+            "C_ttft_p50_s": 0.0698720324999158,
+            "B_ttft_p95_s": 0.13626976775012736,
+            "C_ttft_p95_s": 0.08980503515003875,
+            "B_client_itl_p50_s": 0.007345028000145248,
+            "C_client_itl_p50_s": 0.005952910000019074
+          },
+          {
+            "pair": 4,
+            "B_tokens_s": 278.7137461214818,
+            "C_tokens_s": 279.0606346813685,
+            "B_makespan_s": 6.429535768999813,
+            "C_makespan_s": 6.42154348300005,
+            "B_ttft_p50_s": 0.08426227249992735,
+            "C_ttft_p50_s": 0.06967150799994215,
+            "B_ttft_p95_s": 0.09460147429997505,
+            "C_ttft_p95_s": 0.11279202594997742,
+            "B_client_itl_p50_s": 0.006687948500029961,
+            "C_client_itl_p50_s": 0.005950512500021432
+          },
+          {
+            "pair": 5,
+            "B_tokens_s": 275.9975886250998,
+            "C_tokens_s": 284.5742368567004,
+            "B_makespan_s": 6.492810349999672,
+            "C_makespan_s": 6.297126612000284,
+            "B_ttft_p50_s": 0.0835995490001551,
+            "C_ttft_p50_s": 0.07682866999994076,
+            "B_ttft_p95_s": 0.13261945970000397,
+            "C_ttft_p95_s": 0.08551693784979761,
+            "B_client_itl_p50_s": 0.007208024999954432,
+            "C_client_itl_p50_s": 0.0057920680001188884
+          }
+        ]
+      }
+    },
+    "resources": {
+      "B": {
+        "median_worker_ready_whole_device_used_MiB": 2242.4375,
+        "median_worker_ready_torch_allocated_MiB": 1023.205078125,
+        "median_sampled_whole_device_peak_MiB": 2742.0,
+        "peak_scope": "250 ms whole-device samples across startup, warmup and workloads; not absolute allocation peak"
+      },
+      "C": {
+        "median_worker_ready_whole_device_used_MiB": 2234.4375,
+        "median_worker_ready_torch_allocated_MiB": 1023.205078125,
+        "median_sampled_whole_device_peak_MiB": 2607.0,
+        "peak_scope": "250 ms whole-device samples across startup, warmup and workloads; not absolute allocation peak"
+      }
+    },
+    "sampled_environment": {
+      "temperature_C_range": [
+        43.0,
+        54.0
+      ],
+      "power_W_range": [
+        5.24,
+        63.52
+      ],
+      "sm_clock_MHz_range": [
+        277.0,
+        2902.0
+      ],
+      "scope": "whole-device samples spanning startup/warmup/workloads, not a hardware counter"
+    },
+    "restart_boundary": "Initial A/A and historical B were before WSL reboot; all five B/C pairs and same-boot B/B controls after. The first paired B is shared with the new pre B/B control. The interrupted prior B primary was completed and retained separately; its case lacked final receipt.",
+    "decision": "INCONCLUSIVE: only 3/5 pairs positive and measured B/B noise/drift exceeds median effect; do not adopt a throughput claim."
+  },
+  "model_1p5b": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "kv_tokens": 2048,
+    "max_running_requests": 4,
+    "capture_sizes": [
+      1,
+      2,
+      4
+    ],
+    "scope": "one B/C smoke pair; not formal performance",
+    "failure_counts": {
+      "failed_requests": 0,
+      "timed_out_requests": 0,
+      "not_started_requests": 0,
+      "missing_or_invalid_run_files": 0
+    },
+    "exact_requests_per_arm": {
+      "calibration": 43,
+      "primary": 64,
+      "regression": 34,
+      "interactive": 8
+    },
+    "arms": [
+      {
+        "arm": "B",
+        "primary_tokens_s": 285.8653697397053,
+        "primary_makespan_s": 28.65684642899987,
+        "primary_ttft_p50_s": 11.125114851000035,
+        "primary_ttft_p95_s": 15.044135784699753,
+        "primary_client_itl_p50_s": 0.013044155000216051,
+        "worker_ready_whole_device_used_MiB": 4292.4375,
+        "worker_ready_torch_allocated_MiB": 3057.71484375
+      },
+      {
+        "arm": "C",
+        "primary_tokens_s": 304.9725723721141,
+        "primary_makespan_s": 26.861431952000203,
+        "primary_ttft_p50_s": 10.821843175999902,
+        "primary_ttft_p95_s": 13.669993876449825,
+        "primary_client_itl_p50_s": 0.013086722500020187,
+        "worker_ready_whole_device_used_MiB": 4290.4375,
+        "worker_ready_torch_allocated_MiB": 3057.71484375
+      }
+    ],
+    "graph_node_trace": {
+      "add_count": 3528,
+      "finish_count": 3528,
+      "diagnostic_only": true,
+      "cuda_graph_launches_in_profile": 63,
+      "runtime_graph_calls_including_warmup": 133,
+      "runtime_count_scope": "Counts span warmup and profile, whereas 63 graph launches occurred inside the captured trace."
+    }
+  },
+  "correctness": {
+    "cpu_tests": 96,
+    "gpu_contract_checks": 20,
+    "clean_checkout_installed_gpu_smoke": "PASS 43+64+34 exact tokens against B and graph replay",
+    "graph_vs_forced_eager": "PASS 43/43 exact tokens with observed eager calls",
+    "c2_0p5b_graph_node_trace": {
+      "add_count": 3024,
+      "finish_count": 3024,
+      "diagnostic_only": true
+    },
+    "nondeterministic_N": "NOT_RUN"
+  },
+  "diagnosis": {
+    "long_tail": "Both arms have successful requests with 35\u201368s before first token; first-token-to-completion intervals are much shorter. Root cause UNKNOWN.",
+    "proxy": "Current localhost urllib routing traversed a configured proxy; one synthetic and one real B diagnostic per route did not reproduce 35\u201368s tails. Historical formal proxy settings were not recorded; no causal attribution."
+  },
+  "upstream": {
+    "related_norm_pr": "https://github.com/sgl-project/sglang/pull/46159",
+    "related_gemm_pr": "https://github.com/sgl-project/sglang/pull/42145",
+    "independent_upstream_pr": "NOT_PREPARED: related upstream work exists and no distinct supported slice was established."
+  }
+}
