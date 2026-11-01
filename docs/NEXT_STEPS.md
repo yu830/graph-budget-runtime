@@ -1,4 +1,10 @@
-# 下一阶段入口
+# Current engineering entry
+
+> **2026-11-01:** The next evidence-led development plan is [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md). No new GPU or code stage has been run by this documentation update. The original D0 checklist below is archival, not a fresh implementation request.
+
+---
+
+## Archived D0 development checklist (2026-10-26)
 
 当前只完成 D0 文档。此列表不自动启动实现、安装、下载模型或 GPU 实验。
 

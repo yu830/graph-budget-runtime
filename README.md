@@ -12,6 +12,8 @@ GraphBudget investigates low-latency, reproducible LLM decoding at the SGLang ru
 
 ![GraphBudget: SGLang decode architecture](docs/figures/decode_architecture.svg)
 
+**Current development (2026-11-01):** [Evidence-led development plan](docs/DEVELOPMENT_PLAN.md) and [current status](docs/STATUS.md). The v2 incremental serving result remains unadopted because its same-code controls failed; no new GPU result is claimed by this documentation update.
+
 ## The optimization
 
 Deterministic decoding at small batch sizes exposes GEMM calls with few output rows. In the pinned SGLang runtime, the opt-in path checks the supported BF16 shape and stride conditions before selecting a more suitable persistent Triton GEMM tile. Unsupported cases retain the native route.

@@ -12,6 +12,8 @@ GraphBudget 针对大语言模型确定性解码中的低延迟计算路径开�
 
 ![GraphBudget：SGLang 解码执行架构](docs/figures/decode_architecture.svg)
 
+**当前研发（2026-11-01）：** [下一轮技术开发计划](docs/DEVELOPMENT_PLAN.md) · [项目当前状态](docs/STATUS.md)。v2 因同代码服务对照波动超限尚未采用新增端到端收益；本次仅更新文档，未开展新的 GPU 性能验证。
+
 ## 核心优化
 
 小 Batch 解码时，部分 BF16 GEMM 只有很少的输出行。项目在固定版本的 SGLang Runtime 中根据 dtype、形状和 Stride 条件，选择适合小 $M$ 的 persistent Triton GEMM 配置。未满足条件的调用继续使用原生路径。
