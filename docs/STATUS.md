@@ -1,20 +1,5 @@
 # Project status
 
-> **Current update (2026-11-01):** The prior design-only D0 status below is retained as a historical snapshot, not the latest project state. See [the next development plan](DEVELOPMENT_PLAN.md) before starting engineering.
-
-| Track | Evidence-grounded status |
-| --- | --- |
-| Original CUDA Graph cost/budget policy | Implemented and measured in the core branch; no stable gain over the matched static baseline; keep native dispatch |
-| Small-M BF16 GEMM | 2026-10-27 pinned fixed-workload: five positive A/B pairs, median +72.4%; scoped result, using a geometry adapted from SGLang #42145; independent same-source revalidation pending |
-| v2 residual RMSNorm | Local operator-chain signal exists; same-code serving controls exceeded the frozen threshold, so incremental end-to-end gain was **NOT ADOPTED** |
-| Current development | Planning/documentation only in this update; no new GPU experiments or changes to frozen results |
-
-Frozen evidence: [v1 results](https://github.com/yu830/graph-budget-runtime/blob/1f1984147608ee6c5dd8b3423e6f41877aaadeb4/docs/PERFORMANCE_RESULTS_20261027.md) · [v2 focused results](https://github.com/yu830/graph-budget-runtime/blob/6cd092bf0cbfaa8c63e2e6ce6eb0bedee6cd86a3/docs/DECODE_FAST_PATH_FOCUSED_V2.md).
-
----
-
-## Archived D0 design-only status (2026-10-26)
-
 状态日期：2026-10-26。范围：D0 文档阶段。
 
 | 字段 | 实际值 |

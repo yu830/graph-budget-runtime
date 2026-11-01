@@ -1,5 +1,3 @@
-> **Historical research snapshot (D0, 2026-10-25/26).** The implementation and GPU NOT_RUN statements in this original document describe that earlier snapshot, not the project's current state. See [current status](STATUS.md), [next development plan](DEVELOPMENT_PLAN.md), and the pinned [v1 performance evidence](https://github.com/yu830/graph-budget-runtime/blob/1f1984147608ee6c5dd8b3423e6f41877aaadeb4/docs/PERFORMANCE_RESULTS_20261027.md). The underlying historical design/protocol has not been retroactively rewritten.
-
 # Benchmark protocol
 
 状态：协议已制定，实验未运行。规范版本：2026-10-26。主设计见 [DESIGN.md](DESIGN.md)。
